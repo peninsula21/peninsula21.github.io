@@ -1,0 +1,17 @@
+<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="48" cy="48" r="44" fill="#4A90E2"></circle>
+
+  <!-- Open book -->
+  <path d="M28 34
+           Q48 28 68 34
+           V60
+           Q48 54 28 60
+           Z" fill="#FFFFFF"></path>
+
+  <!-- Book spine -->
+  <line x1="48" y1="32" x2="48" y2="62" stroke="#4A90E2" stroke-width="2"></line>
+
+  <!-- Rising sun -->
+  <circle cx="48" cy="30" r="5" fill="#FFD166"></circle>
+</svg>
