@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peninsula21 | Future-Ready Education on the Mornington Peninsula</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.5rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e5e5;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0066cc;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0066cc;
+        }
+
+        .hero {
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #1a1a1a;
+        }
+
+        .hero .highlight {
+            color: #0066cc;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #0066cc;
+            color: #0066cc;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f7ff;
+        }
+
+        .section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 4rem;
+        }
+
+        .commitments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .commitment-card {
+            background: #ffffff;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 2px solid #e5e5e5;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .commitment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #0066cc;
+        }
+
+        .commitment-card:hover {
+            transform: translateY(-10px);
+            border-color: #0066cc;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .commitment-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .commitment-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #0066cc;
+        }
+
+        .commitment-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .feature-box {
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid #e5e5e5;
+        }
+
+        .feature-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0066cc;
+        }
+
+        .feature-box p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .testimonials {
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #0066cc;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial .student-name {
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        .location-section {
+            background: #f8f9fa;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            border: 2px solid #e5e5e5;
+        }
+
+        .location-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .location-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .location-section p {
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .address {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0066cc;
+            margin: 2rem 0;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .info-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e5e5e5;
+        }
+
+        .info-item h4 {
+            color: #0066cc;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 3rem 5%;
+            text-align: center;
+            color: #555;
+            margin-top: 5rem;
+            border-top: 2px solid #e5e5e5;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Peninsula21</div>
+            <ul class="nav-links">
+                <li><a href="#program">The Program</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">Opening Soon | K-6 Independent School</div>
+        <h1>
+            Where students <span class="highlight">thrive academically</span>, build essential life skills, and develop into confident, capable learners.
+        </h1>
+        <p>
+            Coming to Mount Martha, Mornington Peninsula — combining innovative learning technology with rigorous academic standards to deliver exceptional educational outcomes.
+        </p>
+        <div class="cta-buttons">
+            <a href="#contact" class="btn btn-primary">Register Your Interest</a>
+            <a href="#program" class="btn btn-secondary">Explore Our Program</a>
+        </div>
+    </section>
+
+    <section class="section" id="program">
+        <h2 class="section-title">Peninsula21's Educational Philosophy</h2>
+        <p class="section-subtitle">Excellence through innovation and proven educational practice</p>
+        
+        <div class="commitments">
+            <div class="commitment-card">
+                <div class="commitment-icon">❤️</div>
+                <h3>Engage & Inspire</h3>
+                <p>Students develop a genuine love of learning through engaging, personalised instruction that meets Victorian Curriculum standards while adapting to individual needs.</p>
+            </div>
+            
+            <div class="commitment-card">
+                <div class="commitment-icon">🚀</div>
+                <h3>Accelerate Learning</h3>
+                <p>Advanced learning technology enables students to progress at their optimal pace through the curriculum, ensuring mastery of core concepts and strong academic foundations.</p>
+            </div>
+            
+            <div class="commitment-card">
+                <div class="commitment-icon">🌟</div>
+                <h3>Develop the Whole Child</h3>
+                <p>Beyond academics, students build critical life skills, explore creative pursuits, and develop social-emotional competencies essential for future success.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">How Peninsula21 Works</h2>
+        
+        <div class="two-column">
+            <div class="feature-box">
+                <h3>Personalised Learning at the Right Pace</h3>
+                <p>Our AI-powered learning platform provides each student with 1:1 personalised education, delivering coursework at their individual pace and appropriate level.</p>
+                <p>Students progress with concept-based mastery, ensuring no knowledge gaps while accelerating through content they grasp quickly.</p>
+            </div>
+            
+            <div class="feature-box">
+                <h3>Motivation Through Purpose</h3>
+                <p>We motivate students by giving them time back to pursue what they're passionate about and develop essential life skills.</p>
+                <p>Expert guides support motivated learners, fostering growth mindsets and cultivating independent, self-directed learning habits.</p>
+            </div>
+        </div>
+
+        <div class="two-column" style="margin-top: 3rem;">
+            <div class="feature-box">
+                <h3>Morning: 2-Hour Academic Mastery</h3>
+                <p>Students complete their core academic learning in just 2 hours each morning using adaptive technology that provides truly personalised education.</p>
+                <p>This efficient approach means students accomplish more in less time, without the frustration of being held back or the stress of falling behind.</p>
+            </div>
+            
+            <div class="feature-box">
+                <h3>Afternoon: Real-World Skills</h3>
+                <p>With academics complete, students spend afternoons developing life skills through hands-on workshops covering entrepreneurship, creative arts, coding, outdoor education, and more.</p>
+                <p>They explore interests, work on passion projects, and gain practical skills that prepare them for the real world.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">The Peninsula21 Approach</h2>
+        <p class="section-subtitle">Reimagining the role of educators</p>
+        
+        <div class="feature-box">
+            <h3>Expert Guides, Not Traditional Teachers</h3>
+            <p>At Peninsula21, educators shift from traditional roles of lecturing and grading to becoming mentors and guides who support students' emotional growth, motivation, and life skill development.</p>
+            <p>This transformation allows our guides to focus on what matters most: inspiring students, fostering self-driven learning, and teaching critical real-world skills that will serve them for life.</p>
+            <p><strong>Our guides provide:</strong> Motivational and emotional support • Guidance on AI-powered learning • Life skills instruction • Passion project mentorship</p>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="testimonials">
+            <h2 class="section-title">Why Independent K-6 Education?</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>📚 Foundation Years</h4>
+                    <p>Kindergarten through Year 6 are critical foundation years. Our model ensures students build strong fundamentals while developing a genuine love of learning.</p>
+                </div>
+                
+                <div class="info-item">
+                    <h4>🎯 Independent & Innovative</h4>
+                    <p>As an independent school, we have the freedom to implement cutting-edge educational approaches without the constraints of traditional systems.</p>
+                </div>
+                
+                <div class="info-item">
+                    <h4>👨‍👩‍👧‍👦 Small Community</h4>
+                    <p>Our K-6 focus creates a close-knit community where every child is known, valued, and supported throughout their primary education journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="location">
+        <div class="location-section">
+            <div class="location-content">
+                <h3>Visit Our Campus</h3>
+                <p>Peninsula21 will be located in the heart of the Mornington Peninsula</p>
+                <div class="address">
+                    📍 370 Craigie Road, Mount Martha VIC 3934
+                </div>
+                <p style="margin-top: 1rem;">Beautiful Mount Martha location with easy access from across the Peninsula</p>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.8729542865934!2d145.01637431531556!3d-38.28056797968976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad5f3c5b5e5e5e5%3A0x5e5e5e5e5e5e5e5e!2s370%20Craigie%20Rd%2C%20Mount%20Martha%20VIC%203934!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="location-section">
+            <h2 class="section-title">Opening Soon</h2>
+            <p>Be among the first families to join Peninsula21. Register your interest today to stay informed about our opening date, enrollment opportunities, and information sessions.</p>
+            <div class="cta-buttons" style="margin-top: 2rem;">
+                <a href="#" class="btn btn-primary">Register Interest</a>
+                <a href="#" class="btn btn-secondary">Schedule a Call</a>
+                <a href="#" class="btn btn-secondary">Download Prospectus</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Peninsula21</strong> | Independent K-6 School</p>
+        <p style="margin-top: 0.5rem;">370 Craigie Road, Mount Martha VIC 3934</p>
+        <p style="margin-top: 1.5rem;">&copy; 2026 Peninsula21. All rights reserved.</p>
+    </footer>
+</body>
+</html>
