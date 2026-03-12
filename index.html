@@ -449,6 +449,92 @@
                 padding: 2rem 1.5rem;
             }
         }
+
+        html { scroll-behavior: smooth; }
+
+        /* Bouncing scroll-down arrow */
+        .scroll-down {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .scroll-down span {
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-right: 3px solid rgba(255,255,255,0.8);
+            border-bottom: 3px solid rgba(255,255,255,0.8);
+            transform: rotate(45deg);
+            animation: bounce-arrow 1.4s infinite;
+        }
+
+        .scroll-down span:nth-child(2) { animation-delay: 0.2s; }
+        .scroll-down span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce-arrow {
+            0%   { opacity: 0; transform: rotate(45deg) translate(-4px, -4px); }
+            50%  { opacity: 1; }
+            100% { opacity: 0; transform: rotate(45deg) translate(4px, 4px); }
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,102,204,0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s, background 0.2s;
+            z-index: 998;
+            pointer-events: none;
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        #back-to-top:hover {
+            background: #0052a3;
+            transform: translateY(-3px);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
     </style>
 </head>
 
@@ -478,29 +564,33 @@
             Coming to Mount Martha, Mornington Peninsula - blending the Victorian Digital Technologies Curriculum with
             engaging, hands-on STEM education to deliver exceptional outcomes.
         </p>
-        
+        <a href="#programme" class="scroll-down" aria-label="Scroll down">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
     </section>
 
     <section class="section" id="programme">
-        <h2 class="section-title">Peninsula21's Digital Curriculum</h2>
+        <h2 class="section-title reveal">Peninsula21's Digital Curriculum</h2>
         <p class="section-subtitle">Excellence through innovation, coding, and logical systems thinking</p>
 
         <div class="commitments">
-            <div class="commitment-card">
+            <div class="commitment-card reveal reveal-delay-1">
                 <div class="commitment-icon">💻</div>
                 <h3>Digital Systems</h3>
                 <p>Students examine the core components of digital systems and networks. From understanding hardware to
                     how systems transmit data, we build foundational tech knowledge.</p>
             </div>
 
-            <div class="commitment-card">
+            <div class="commitment-card reveal reveal-delay-2">
                 <div class="commitment-icon">📊</div>
                 <h3>Data & Information</h3>
                 <p>Focused on acquiring, storing, and validating data. Students learn to interpret and visualise
                     information while maintaining ethical and social protocols in online collaboration.</p>
             </div>
 
-            <div class="commitment-card">
+            <div class="commitment-card reveal">
                 <div class="commitment-icon">🚀</div>
                 <h3>Creating Digital Solutions</h3>
                 <p>We empower students to define problems, design user interfaces, and build visual and text-based
@@ -510,10 +600,10 @@
     </section>
 
     <section class="section">
-        <h2 class="section-title">How Peninsula21 Fosters Innovators</h2>
+        <h2 class="section-title reveal">How Peninsula21 Fosters Innovators</h2>
 
         <div class="two-column">
-            <div class="feature-box">
+            <div class="feature-box reveal reveal-delay-1">
                 <h3>Standards-Based STEM Learning</h3>
                 <p>Our curriculum delivers the full Victorian K-6 Digital Technologies curriculum, ensuring deep
                     understanding of data representation, networks, and problem-solving strategies.</p>
@@ -521,7 +611,7 @@
                     excel well beyond grade-level expectations in computer science.</p>
             </div>
 
-            <div class="feature-box">
+            <div class="feature-box reveal reveal-delay-2">
                 <h3>Hands-on Tech Environment</h3>
                 <p>Industry-experienced educators guide students through real-world tech projects, fostering growth
                     mindsets and helping them build strong algorithmic habits.</p>
@@ -531,7 +621,7 @@
         </div>
 
         <div class="two-column" style="margin-top: 3rem;">
-            <div class="feature-box">
+            <div class="feature-box reveal">
                 <h3>Core Algorithmic Excellence</h3>
                 <p>Students engage rigorously with core sequences, branching, and iteration. We teach both visual blocks
                     (like Scratch) and typed languages suitable for senior levels.</p>
@@ -539,7 +629,7 @@
                     K-6 digital curriculum standards at every level.</p>
             </div>
 
-            <div class="feature-box">
+            <div class="feature-box reveal reveal-delay-1">
                 <h3>Sustainability & Ethics</h3>
                 <p>Developing digital solutions isn't just about code. We emphasise how systems meet current and future
                     community needs while evaluating sustainability impacts.</p>
@@ -550,10 +640,10 @@
     </section>
 
     <section class="section">
-        <h2 class="section-title">A Specialised STEM Approach</h2>
+        <h2 class="section-title reveal">A Specialised STEM Approach</h2>
         <p class="section-subtitle">Dedicated tech educators building future leaders</p>
 
-        <div class="feature-box">
+        <div class="feature-box reveal reveal-delay-2">
             <h3>Bridging Code and Community</h3>
             <p>Peninsula21 employs fully qualified tech-focused teachers who leverage advanced systems to ensure
                 world-class conceptual understanding of programming and digital ecosystems.</p>
@@ -567,39 +657,39 @@
 
     <section class="section" id="about">
         <div class="testimonials">
-            <h2 class="section-title">Why Peninsula21?</h2>
+            <h2 class="section-title reveal">Why Peninsula21?</h2>
             <div class="info-grid">
-                <div class="info-item">
+                <div class="info-item reveal reveal-delay-1">
                     <h4>📚 Victorian Tech Curriculum</h4>
                     <p>Full implementation of the Victorian K-6 Digital Technologies curriculum, from binary numbers to
                         advanced algorithmic coding.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="info-item reveal reveal-delay-2">
                     <h4>🎯 STEM Specialised</h4>
                     <p>As a specialised independent school, we pour our resources into modern labs, dev boards, and
                         industry-standard creative software.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="info-item reveal">
                     <h4>👨‍👩‍👧‍👦 Future-Ready Cohort</h4>
                     <p>Our K-6 focus creates a tech-forward community where like-minded students collaboratively build
                         networks, apps, and robots.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="info-item reveal reveal-delay-1">
                     <h4>💻 Algorithm Driven</h4>
                     <p>Beyond simple usage, we teach the logic of creating digital solutions—empowering students to
                         become creators, not just consumers.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="info-item reveal reveal-delay-2">
                     <h4>📊 Assessment & Reporting</h4>
                     <p>Comprehensive assessment practices and regular reporting keep families informed of student
                         progress against Victorian Curriculum achievement standards.</p>
                 </div>
 
-                <div class="info-item">
+                <div class="info-item reveal">
                     <h4>🌱 Sustainable Design</h4>
                     <p>We train students to examine how system architectures impact current and future sustainability
                         efforts globally.</p>
@@ -631,7 +721,7 @@
 
     <section class="section" id="contact">
         <div class="location-section">
-            <h2 class="section-title">Opening Soon</h2>
+            <h2 class="section-title reveal">Opening Soon</h2>
             <p>Be among the first families to join Peninsula21. Register your interest today to stay informed about our
                 opening date, enrolment opportunities, and information sessions.</p>
             <div class="cta-buttons" style="margin-top: 2rem;">
@@ -803,6 +893,35 @@
         </p>
         <p style="margin-top: 1rem;">&copy; 2026 Peninsula21. All rights reserved.</p>
     </footer>
+    <!-- Back to top button -->
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+        &#8679;
+    </button>
+
+    <script>
+        // Back to top visibility
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 400) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(function(el) { observer.observe(el); });
+    </script>
 
 </body>
 
