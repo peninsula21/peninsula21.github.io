@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constitution — Consensus 21 Education Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sidebar-width: 280px;
+    --header-height: 56px;
+    --accent: #f7931a;
+    --accent-light: #fff3e0;
+    --accent-mid: #e8820c;
+    --text: #1a1f2e;
+    --text-muted: #64748b;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --bg: #ffffff;
+    --bg-sidebar: #f8fafc;
+    --bg-code: #f1f5f9;
+    --link: #c47208;
+    --hover-bg: #fff8f0;
+    --active-bg: #ffecd0;
+    --active-text: #c47208;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── TOP NAV ── */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-height);
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+    gap: 16px;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+  }
+
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-mid));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+
+  .topbar-org { color: var(--text-muted); font-weight: 400; }
+
+  .topbar-search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .topbar-search kbd {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 11px;
+    font-family: inherit;
+    color: var(--text-muted);
+  }
+
+  .topbar-badge {
+    margin-left: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    margin-top: var(--header-height);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: var(--header-height);
+    bottom: 0;
+    overflow-y: auto;
+    padding: 24px 0 40px;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .sidebar-section {
+    margin-bottom: 8px;
+  }
+
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-light);
+    padding: 8px 20px 4px;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 7px 20px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.15s;
+    line-height: 1.4;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover {
+    background: var(--hover-bg);
+    color: var(--text);
+  }
+
+  .nav-item.active {
+    background: var(--active-bg);
+    color: var(--active-text);
+    font-weight: 600;
+  }
+
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .nav-num {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-right: 4px;
+  }
+
+  .nav-sub {
+    padding-left: 32px;
+    font-size: 13px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    max-width: 900px;
+    padding: 48px 64px 80px;
+  }
+
+  /* ── SECTIONS ── */
+  .doc-section {
+    display: none;
+    animation: fadeIn 0.2s ease;
+  }
+  .doc-section.visible { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── COVER ── */
+  .cover {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    margin-bottom: 48px;
+    background: linear-gradient(135deg, #fff8f0 0%, #fff 60%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(247,147,26,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  .cover-org {
+    font-size: 18px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .cover-tagline {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 560px;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cover-meta-item svg { color: var(--accent); }
+
+  /* ── TYPOGRAPHY ── */
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 32px 0 12px;
+    letter-spacing: -0.2px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 24px 0 8px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  ul, ol {
+    margin: 0 0 16px 24px;
+    color: #374151;
+  }
+
+  li { margin-bottom: 8px; line-height: 1.65; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 14.5px;
+    color: #7a3d00;
+  }
+
+  .callout-warning {
+    border-color: #d97706;
+    background: #fffbeb;
+    color: #92400e;
+  }
+
+  .callout strong { font-weight: 700; }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  th {
+    background: var(--bg-code);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #374151;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbfc; }
+
+  /* ── CLAUSE BLOCK ── */
+  .clause {
+    margin: 0 0 20px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fafbfc;
+    transition: border-color 0.15s;
+  }
+
+  .clause:hover { border-color: #c4d9d6; }
+
+  .clause-id {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-family: 'Inter', monospace;
+  }
+
+  .clause p { margin-bottom: 0; }
+
+  /* ── CHIPS ── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .chip {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--bg-code);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ── NAV FOOTER ── */
+  .doc-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    gap: 16px;
+  }
+
+  .doc-nav-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.15s;
+    flex: 1;
+    max-width: 220px;
+  }
+
+  .doc-nav-btn:hover {
+    border-color: var(--accent);
+    background: var(--hover-bg);
+  }
+
+  .doc-nav-btn.right { text-align: right; margin-left: auto; }
+
+  .doc-nav-label {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .doc-nav-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--link);
+  }
+
+  /* ── SIGNATURE BLOCK ── */
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .sig-box {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    background: #fafbfc;
+  }
+
+  .sig-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .sig-field {
+    margin-bottom: 14px;
+  }
+
+  .sig-field-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .sig-line {
+    border-bottom: 1px solid #ccc;
+    height: 28px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 32px 24px 60px; }
+  }
+
+  @media (max-width: 600px) {
+    .main { padding: 24px 16px 48px; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 30px; }
+    .cover { padding: 28px; }
+  }
+
+  /* search overlay */
+  .search-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px;
+  }
+  .search-overlay.open { display: flex; }
+  .search-box {
+    background: #fff;
+    border-radius: 12px;
+    width: 560px;
+    max-width: 90vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
+  .search-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+  }
+  .search-results {
+    border-top: 1px solid var(--border);
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  .search-result-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .search-result-item:hover { background: var(--hover-bg); }
+  .search-result-item:last-child { border-bottom: none; }
+  .sri-section { font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .sri-title { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  /* highlight */
+  mark { background: #fef3c7; color: inherit; border-radius: 2px; padding: 0 2px; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a class="topbar-logo" href="#" onclick="showSection('cover'); return false;">
+    <div class="logo-mark">C21</div>
+    <span>Consensus 21 Education Ltd</span>
+    <span class="topbar-org">/ Constitution</span>
+  </a>
+  <span class="topbar-badge">VRQA Draft</span>
+  <div class="topbar-search" onclick="openSearch()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Search constitution…
+    <kbd>⌘K</kbd>
+  </div>
+</header>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-box">
+    <input class="search-input" id="searchInput" placeholder="Search clauses, definitions…" oninput="doSearch(this.value)" />
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Overview</div>
+    <button class="nav-item active" onclick="showSection('cover')">📄 Cover & Preamble</button>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Sections</div>
+    <button class="nav-item" onclick="showSection('s1')"><span class="nav-num">1.</span> Name & Establishment</button>
+    <button class="nav-item" onclick="showSection('s2')"><span class="nav-num">2.</span> Objects & Protected Purpose</button>
+    <button class="nav-item" onclick="showSection('s3')"><span class="nav-num">3.</span> Definitions & Interpretation</button>
+    <button class="nav-item" onclick="showSection('s4')"><span class="nav-num">4.</span> Membership</button>
+    <button class="nav-item" onclick="showSection('s5')"><span class="nav-num">5.</span> Board of Directors</button>
+    <button class="nav-item" onclick="showSection('s6')"><span class="nav-num">6.</span> Meetings of the Board</button>
+    <button class="nav-item" onclick="showSection('s7')"><span class="nav-num">7.</span> Board Powers & Duties</button>
+    <button class="nav-item" onclick="showSection('s8')"><span class="nav-num">8.</span> General Meetings</button>
+    <button class="nav-item" onclick="showSection('s9')"><span class="nav-num">9.</span> Campus School Council</button>
+    <button class="nav-item" onclick="showSection('s10')"><span class="nav-num">10.</span> Principal</button>
+    <button class="nav-item" onclick="showSection('s11')"><span class="nav-num">11.</span> Financial Management</button>
+    <button class="nav-item" onclick="showSection('s12')"><span class="nav-num">12.</span> Indemnity & Insurance</button>
+    <button class="nav-item" onclick="showSection('s13')"><span class="nav-num">13.</span> Educational Philosophy</button>
+    <button class="nav-item" onclick="showSection('s14')"><span class="nav-num">14.</span> Records & Administration</button>
+    <button class="nav-item" onclick="showSection('s15')"><span class="nav-num">15.</span> Regulatory Compliance</button>
+    <button class="nav-item" onclick="showSection('s16')"><span class="nav-num">16.</span> Democratic Principles</button>
+    <button class="nav-item" onclick="showSection('s17')"><span class="nav-num">17.</span> Not-for-Profit Status</button>
+    <button class="nav-item" onclick="showSection('s18')"><span class="nav-num">18.</span> Governance Framework</button>
+    <button class="nav-item" onclick="showSection('s19')"><span class="nav-num">19.</span> Child Safety — MO 1359</button>
+    <button class="nav-item" onclick="showSection('s20')"><span class="nav-num">20.</span> Winding Up</button>
+    <button class="nav-item" onclick="showSection('s21')"><span class="nav-num">21.</span> Amending this Constitution</button>
+    <button class="nav-item" onclick="showSection('s22')"><span class="nav-num">22.</span> Miscellaneous</button>
+    <button class="nav-item" onclick="showSection('s23')"><span class="nav-num">23.</span> Transitional Provisions</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- COVER -->
+<div class="doc-section visible" id="sec-cover">
+  <div class="cover">
+    <div class="cover-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Governance Document
+    </div>
+    <h1>Constitution</h1>
+    <div class="cover-org">Consensus 21 Education Ltd</div>
+    <p class="cover-tagline">"Guided by the values of inquiry, democratic participation, and project-based learning for every child."</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Company Limited by Guarantee
+      </div>
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Peninsula 21, Mornington Peninsula, VIC
+      </div>
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Prepared for VRQA Registration
+      </div>
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Not-for-Profit · ACNC Registration Intended
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>About this document.</strong> This is the governing constitution of Consensus 21 Education Ltd, the corporate entity behind Peninsula 21 campus. Navigate using the sidebar to read any section. Key terms are defined in <a href="#" onclick="showSection('s3'); return false;" style="color:var(--accent)">Section 3 — Definitions</a>.
+  </div>
+
+  <h2>Document Structure</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Section</th><th>Key Topics</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Name &amp; Establishment</td><td>Company name, nature, registered office</td></tr>
+      <tr><td>2</td><td>Objects &amp; Protected Purpose</td><td>Mission, inquiry-based learning, democratic voice</td></tr>
+      <tr><td>3</td><td>Definitions</td><td>All defined terms A–Z</td></tr>
+      <tr><td>4</td><td>Membership</td><td>Sponsor Members, Board Elected, Community, Parent Observer</td></tr>
+      <tr><td>5</td><td>Board of Directors</td><td>Composition, appointment, tenure, removal</td></tr>
+      <tr><td>6</td><td>Board Meetings</td><td>Notice, quorum, voting, conflicts of interest</td></tr>
+      <tr><td>7</td><td>Board Powers</td><td>Governance, delegation, Principal appointment</td></tr>
+      <tr><td>8</td><td>General Meetings</td><td>AGM, SGM, quorum, voting</td></tr>
+      <tr><td>9</td><td>School Council</td><td>Advisory body for each campus</td></tr>
+      <tr><td>10</td><td>Principal</td><td>Appointment, responsibilities, delegation</td></tr>
+      <tr><td>11</td><td>Financial Management</td><td>Accounts, audit, signing authority</td></tr>
+      <tr><td>12</td><td>Indemnity &amp; Insurance</td><td>Director protections</td></tr>
+      <tr><td>13</td><td>Educational Philosophy</td><td>IBL, democratic voice, PBL, wellbeing</td></tr>
+      <tr><td>14</td><td>Records &amp; Administration</td><td>Minutes, member access, notices</td></tr>
+      <tr><td>15</td><td>Regulatory Compliance</td><td>VRQA, equal opportunity, privacy</td></tr>
+      <tr><td>16</td><td>Democratic Principles</td><td>VRQA Schedule 4 requirements</td></tr>
+      <tr><td>17</td><td>Not-for-Profit Status</td><td>Profit prohibition, related parties, winding up</td></tr>
+      <tr><td>18</td><td>Governance Framework</td><td>Charter, delegations, conflicts, child safety docs</td></tr>
+      <tr><td>19</td><td>Child Safety — MO 1359</td><td>WWC, policies, mandatory reporting</td></tr>
+      <tr><td>20</td><td>Winding Up</td><td>Procedure, surplus assets</td></tr>
+      <tr><td>21</td><td>Amendment</td><td>Ordinary and Protected Matter amendments</td></tr>
+      <tr><td>22</td><td>Miscellaneous</td><td>Disputes, governing law, severability</td></tr>
+      <tr><td>23</td><td>Transitional Provisions</td><td>Pre-opening period arrangements</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="doc-nav">
+    <div></div>
+    <button class="doc-nav-btn right" onclick="showSection('s1')">
+      <span class="doc-nav-label">Next →</span>
+      <span class="doc-nav-title">1. Name &amp; Establishment</span>
+    </button>
+  </div>
+</div>
+
+<!-- S1 -->
+<div class="doc-section" id="sec-s1">
+  <h1>1. Name and Establishment</h1>
+  <div class="clause"><div class="clause-id">1.1 Name</div><p>The name of the organisation is <strong>Consensus 21 Education Ltd</strong> (the "Company").</p></div>
+  <div class="clause"><div class="clause-id">1.2 Nature</div><p>The Company is a public company limited by guarantee incorporated under the <em>Corporations Act 2001</em> (Cth). It is a not-for-profit organisation established and operated in Australia solely for charitable and educational purposes. The Company intends to apply for registration as a charity with the ACNC and must at all times operate in a manner consistent with its charitable purposes.</p></div>
+  <div class="clause"><div class="clause-id">1.3 First Campus</div><p>The inaugural campus of the Company shall be known as <strong>Peninsula 21</strong>, located on the Mornington Peninsula, Victoria. Additional campuses may be established by resolution of the Board.</p></div>
+  <div class="clause"><div class="clause-id">1.4 Registered Office</div><p>The registered office of the Company shall be in the State of Victoria, Australia. The Board may change the registered office in accordance with the Act.</p></div>
+  <div class="clause"><div class="clause-id">1.5 Application of the Corporations Act</div><p>This Constitution is to be read in conjunction with the Act and Relevant Laws. The replaceable rules under the Act do not apply to the Company. Where any provision of this Constitution is inconsistent with Relevant Laws, Relevant Laws prevail to the extent of the inconsistency.</p></div>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('cover')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">Cover &amp; Preamble</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">2. Objects &amp; Protected Purpose</span></button>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="doc-section" id="sec-s2">
+  <h1>2. Objects and Protected Purpose</h1>
+  <h2>2.1 Principal Objects</h2>
+  <p>The principal objects of the Company are to:</p>
+  <ul>
+    <li>Establish, operate, and develop one or more independent primary schools in Victoria registered under the <em>Education and Training Reform Act 2006</em> (Vic);</li>
+    <li>Provide high-quality education grounded in the Protected Purpose set out in clause 2.2;</li>
+    <li>Foster intellectual curiosity, critical thinking, collaboration, and civic responsibility in every student;</li>
+    <li>Create school communities that are inclusive, values-driven, and responsive to the needs of students, families, and the broader community;</li>
+    <li>Support the professional development of teaching staff committed to progressive and evidence-informed pedagogical practice;</li>
+    <li>Promote the learning and wellbeing of each student so they thrive and contribute in a complex and changing world.</li>
+  </ul>
+
+  <h2>2.2 Protected Purpose</h2>
+  <div class="callout">
+    <strong>What is the Protected Purpose?</strong> The Protected Purpose is the educational philosophy that defines the character and identity of every Campus. No policy or decision may fundamentally alter it without a Mission Protection Resolution.
+  </div>
+  <div class="chips">
+    <span class="chip">🔍 Inquiry-Based Learning</span>
+    <span class="chip">🗳 Democratic Student Voice</span>
+    <span class="chip">🛠 Project-Based Learning</span>
+  </div>
+  <div class="clause"><div class="clause-id">2.2.1 Inquiry-Based Learning</div><p>Students are supported to question, investigate, and construct understanding through authentic exploration. The curriculum shall promote deep thinking, curiosity, and a love of learning. Teachers act as facilitators of inquiry rather than transmitters of information.</p></div>
+  <div class="clause"><div class="clause-id">2.2.2 Democratic Student Voice</div><p>Students have a genuine right to participate in decisions that affect their school experience. Each Campus shall maintain structures for meaningful student representation, including student councils or equivalent forums. Student perspectives shall be actively sought and considered in curriculum design, school rules, and community life.</p></div>
+  <div class="clause"><div class="clause-id">2.2.3 Project-Based Learning</div><p>Learning at each Campus shall be substantially organised around substantive, real-world projects that connect curriculum areas and engage students in sustained inquiry, involving public presentation, peer collaboration, and authentic assessment.</p></div>
+  <div class="callout-warning callout"><strong>Binding obligation.</strong> The Board, Principal, and all staff are obligated to operate each Campus consistently with the Protected Purpose. No policy, regulation, staffing decision, or curriculum change may fundamentally alter or contradict the Protected Purpose without a Mission Protection Resolution.</div>
+
+  <h2>2.3 Ancillary Objects</h2>
+  <p>In furtherance of the principal objects, the Company may: accept gifts, grants, bequests, and donations; enter into partnerships with educational institutions and community organisations; establish scholarships and bursaries; conduct educational research; establish subsidiary entities to further the objects; and do all things incidental or conducive to the attainment of the above objects.</p>
+
+  <h2>2.4 Not-for-Profit Obligation</h2>
+  <p>The income and property of the Company shall be applied solely toward the promotion of the objects of the Company and the conduct of its Campuses. No portion shall be paid or transferred, directly or indirectly, by way of dividend, bonus, or otherwise to members in their capacity as members. Nothing in this clause prevents payment in good faith of reasonable remuneration to employees or contractors, or reimbursement of properly incurred expenses.</p>
+
+  <h2>2.5 Powers</h2>
+  <p>Solely to carry out the objects and subject to clause 17, the Company has all the powers of an individual and a company limited by guarantee under the Act. The Company must not enter into any Prohibited Agreement or Arrangement as defined in the Relevant Laws.</p>
+
+  <h2>2.6 Sponsoring Body</h2>
+  <p>The Sponsor Members collectively constitute the sponsoring body of the Company. The role of the sponsoring body is not to exercise personal control over the Company but to act as the permanent guardian of the Protected Purpose — ensuring the school remains true to its founding educational mission across successive Boards, Principals, and school communities. The Sponsor Members must exercise their rights under this Constitution consistently with the objects of the Company and the Protected Purpose, and with the interests of the students, families, and communities served by each Campus.</p>
+
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">1. Name &amp; Establishment</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">3. Definitions</span></button>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="doc-section" id="sec-s3">
+  <h1>3. Definitions and Interpretation</h1>
+  <h2>3.1 Definitions</h2>
+  <p>In this Constitution, unless the context otherwise requires:</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ACNC</strong></td><td>Australian Charities and Not-for-profits Commission.</td></tr>
+      <tr><td><strong>ACNC Legislation</strong></td><td>The Australian Charities and Not-for-profits Commission Act 2012 (Cth) and the Australian Charities and Not-for-profits Commission (Consequential and Transitional) Act 2012 (Cth).</td></tr>
+      <tr><td><strong>Act</strong></td><td>Corporations Act 2001 (Cth), as amended from time to time.</td></tr>
+      <tr><td><strong>Board</strong></td><td>The Board of Directors of the Company with a quorum present to transact business.</td></tr>
+      <tr><td><strong>Board Elected Director</strong></td><td>A Director appointed by resolution of the Board under clause 5.3.2.</td></tr>
+      <tr><td><strong>Business Day</strong></td><td>A weekday which is not a public holiday in the State of Victoria.</td></tr>
+      <tr><td><strong>Campus</strong></td><td>A school campus operated by the Company, including Peninsula 21.</td></tr>
+      <tr><td><strong>Chair</strong></td><td>The Director elected to the position of Chairperson under clause 5.7.</td></tr>
+      <tr><td><strong>Company</strong></td><td>Consensus 21 Education Ltd, a company limited by guarantee.</td></tr>
+      <tr><td><strong>Company Secretary</strong></td><td>A secretary appointed by the Board under clause 6.8.</td></tr>
+      <tr><td><strong>Director</strong></td><td>A director of the Company appointed in accordance with this Constitution.</td></tr>
+      <tr><td><strong>Education Act</strong></td><td>Education and Training Reform Act 2006 (Vic).</td></tr>
+      <tr><td><strong>ETRR 2017</strong></td><td>Education and Training Reform Regulations 2017 (Vic).</td></tr>
+      <tr><td><strong>Fit and Proper Person</strong></td><td>A person who meets the requirements of Schedule 4 of the ETRR 2017.</td></tr>
+      <tr><td><strong>Guarantee Amount</strong></td><td>The amount each member undertakes to contribute on winding up, being $10.</td></tr>
+      <tr><td><strong>Mission Protection Resolution</strong></td><td>A resolution of the Sponsor Members passed by at least 75% of all Sponsor Members (not merely those present and voting). Where only two Sponsor Members remain, unanimity is required.</td></tr>
+      <tr><td><strong>Peninsula 21</strong></td><td>The inaugural campus located on the Mornington Peninsula, Victoria.</td></tr>
+      <tr><td><strong>Principal</strong></td><td>The head teacher of a Campus appointed by the Board under clause 10.</td></tr>
+      <tr><td><strong>Protected Matter</strong></td><td>Any resolution, decision, policy, or action that: (a) amends or is inconsistent with the Protected Purpose; (b) amends specified clauses; (c) alters Sponsor Member rights; (d) removes a Sponsor Member without consent; or (e) winds up, dissolves, or materially restructures the Company.</td></tr>
+      <tr><td><strong>Protected Purpose</strong></td><td>The educational philosophy set out in clause 2.2.</td></tr>
+      <tr><td><strong>Relevant Laws</strong></td><td>All laws relevant to the registration, reporting, or governance of the Company, including the Corporations Act, ACNC Legislation, Education Act, ETRR 2017, MO 1359, and others.</td></tr>
+      <tr><td><strong>School Council</strong></td><td>An advisory body for each Campus established under clause 9.</td></tr>
+      <tr><td><strong>Sponsor Member</strong></td><td>A person admitted as a Sponsor Member under clause 4.2 and Schedule 1.</td></tr>
+      <tr><td><strong>Sponsor-Nominated Director</strong></td><td>A Director nominated by the Sponsor Members under clause 5.3.1.</td></tr>
+      <tr><td><strong>Special Resolution</strong></td><td>A resolution passed by at least 75% of Voting Members present and voting at a duly convened general meeting.</td></tr>
+      <tr><td><strong>Terminable Conduct</strong></td><td>Conduct prejudicial to the Company's interests, inconsistent with being a Fit and Proper Person, or in breach of child safety obligations.</td></tr>
+      <tr><td><strong>VIT</strong></td><td>Victorian Institute of Teaching.</td></tr>
+      <tr><td><strong>VRQA</strong></td><td>Victorian Registration and Qualifications Authority.</td></tr>
+      <tr><td><strong>Voting Member</strong></td><td>A Sponsor Member, Board Elected Member, or Community Member. Parent Observer Members are non-voting at general meetings.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>3.2 Interpretation</h2>
+  <p>In this Constitution, unless the context otherwise requires: words importing the singular include the plural and vice versa; a reference to a person includes a corporation; headings are for convenience only; a reference to legislation includes any amendment or re-enactment; and if an expression has a meaning in the Act, that meaning applies except where a contrary intention appears.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">2. Objects &amp; Protected Purpose</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s4')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">4. Membership</span></button>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="doc-section" id="sec-s4">
+  <h1>4. Membership</h1>
+  <h2>4.1 Classes of Membership</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Class</th><th>Number</th><th>Voting</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sponsor Member</strong></td><td>2–5</td><td>Enhanced — Protected Matters</td><td>Perpetual. Cannot be removed by Board or Member vote. Veto over all Protected Matters.</td></tr>
+      <tr><td><strong>Board Elected Member</strong></td><td>Up to 5</td><td>Ordinary</td><td>Appointed by Board resolution. Skills-based.</td></tr>
+      <tr><td><strong>Community Member</strong></td><td>Up to 2</td><td>Ordinary</td><td>Appointed by Board. Community expertise and accountability.</td></tr>
+      <tr><td><strong>Parent Observer Member</strong></td><td>Up to 2</td><td>Non-voting (observer)</td><td>Receives reports, attends AGM. No vote.</td></tr>
+      <tr><td><strong>Life Member</strong></td><td>Unlimited</td><td>As determined</td><td>Elected by Mission Protection Resolution.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h2>4.2 Sponsor Members</h2>
+  <div class="clause"><div class="clause-id">4.2.1 Who are Sponsor Members</div><p>The Sponsor Members are the persons named as Sponsor Members in Schedule 1. Additional persons may be admitted only by a Mission Protection Resolution, with the written consent of the proposed new Sponsor Member.</p></div>
+  <div class="clause"><div class="clause-id">4.2.2 Perpetual membership</div><p>Sponsor Membership is perpetual and does not lapse by reason of a Sponsor Member's child ceasing to be enrolled, or ceasing to hold any other position. A Sponsor Member may only cease to be a Sponsor Member by: (a) voluntarily resigning in writing; (b) death; (c) becoming bankrupt or of unsound mind; (d) being convicted of an indictable offence; or (e) being removed by a resolution requiring the affirmative vote of all other Sponsor Members where the Sponsor Member has engaged in Terminable Conduct.</p></div>
+  <div class="clause"><div class="clause-id">4.2.3 Cannot be removed by Board or Members</div><p>A Sponsor Member cannot be removed by the Board, by an ordinary resolution of Members, or by any Special Resolution of Members. Removal requires the procedure in clause 4.2.2(e) only.</p></div>
+  <div class="clause"><div class="clause-id">4.2.4 Minimum number</div><p>Where the number of Sponsor Members falls below two (2), the remaining Sponsor Member(s) shall take reasonable steps to admit additional Sponsor Members. The rights of any sole remaining Sponsor Member are not diminished by this clause.</p></div>
+  <h2>4.3 Sponsor Member Voting Rights — Protected Matters</h2>
+  <div class="clause"><div class="clause-id">4.3.1 Enhanced voting on Protected Matters</div><p>In relation to any Protected Matter, a resolution is only validly passed if it is supported by both: (a) a Special Resolution of Voting Members at a duly convened general meeting; AND (b) a Mission Protection Resolution passed concurrently or within 30 days.</p></div>
+  <div class="clause"><div class="clause-id">4.3.2 Sponsor Member veto</div><p>If a Mission Protection Resolution is not obtained within 30 days of a Special Resolution purporting to resolve a Protected Matter, that Special Resolution has no force or effect in relation to the Protected Matter.</p></div>
+  <div class="clause"><div class="clause-id">4.3.3 Ordinary matters</div><p>In relation to all matters that are not Protected Matters, Sponsor Members vote as ordinary Voting Members with one vote each.</p></div>
+  <div class="clause"><div class="clause-id">4.3.4 Written resolution of Sponsor Members</div><p>A Mission Protection Resolution may be passed without a meeting if the requisite number of Sponsor Members sign a written document (including by email or electronic means) confirming their agreement.</p></div>
+  <h2>4.4 Board Elected Members and Community Members</h2>
+  <p>Board Elected Members and Community Members are appointed by ordinary resolution of the Board for terms of three (3) years and may be re-appointed. The Board shall seek to appoint Members with complementary skills including in education, law, finance, community engagement, or other areas relevant to the Company's objects. They may be removed by the Board by ordinary resolution, provided the person is given at least 14 days' written notice and an opportunity to respond.</p>
+  <h2>4.5 Parent Observer Members</h2>
+  <p>Parent Observer Members are parents or guardians of currently enrolled students. They may attend the AGM, receive reports, raise matters in writing to the Board, participate in the School Council, and make complaints. They do not have the right to vote at general meetings, stand for election, or participate in any resolutions. Membership ceases automatically when the member's child ceases to be enrolled.</p>
+  <h2>4.6 Life Members</h2>
+  <p>Life Members may be elected by a Mission Protection Resolution in recognition of exceptional service. The Sponsor Members shall determine the voting rights (if any) of Life Members at the time of their election.</p>
+  <h2>4.7 Guarantee and Liability</h2>
+  <p>Each Member's liability is limited to the Guarantee Amount ($10). Each Member and former member within the previous year undertakes to contribute up to $10 to the Company's assets on winding up.</p>
+  <h2>4.8 Rights Not Transferable</h2>
+  <p>Membership rights are personal and may not be transferred or transmitted.</p>
+  <h2>4.9 Register of Members</h2>
+  <p>The Company must maintain a register of Members in accordance with the Act, noting each Member's name, address, class, and membership start/end dates.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">3. Definitions</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s5')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">5. Board of Directors</span></button>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="doc-section" id="sec-s5">
+  <h1>5. Board of Directors</h1>
+  <h2>5.1 Composition and Number</h2>
+  <p>The Board shall consist of no fewer than three (3) and no more than nine (9) Directors. It shall at all times include: (a) up to three (3) Sponsor-Nominated Directors; and (b) up to six (6) Board Elected Directors. The Principal(s) and Company Secretary may attend and speak at Board meetings but may not vote.</p>
+  <h2>5.2 Eligibility</h2>
+  <p>A person is eligible for appointment as a Director if they: are over 18; are a Fit and Proper Person; are not disqualified from managing corporations; are not an undischarged bankrupt; have given written, signed consent; and have suitable qualifications and experience.</p>
+  <h2>5.3 Appointment of Directors</h2>
+  <div class="clause"><div class="clause-id">5.3.1 Sponsor-Nominated Directors</div><p>The Sponsor Members may, by Mission Protection Resolution, nominate up to three (3) persons as Sponsor-Nominated Directors. The Board must appoint any person so nominated who meets the eligibility criteria. The Sponsor Members may replace, remove, or decline to fill any Sponsor-Nominated Director position at any time. A Sponsor Member may themselves be a Sponsor-Nominated Director.</p></div>
+  <div class="clause"><div class="clause-id">5.3.2 Board Elected Directors</div><p>The Board may appoint up to six (6) Board Elected Directors by ordinary resolution. The Board shall seek candidates whose skills complement those of existing Directors and who are committed to the Protected Purpose.</p></div>
+  <div class="clause"><div class="clause-id">5.3.3 No election by general Members</div><p>Directors are not elected by Voting Members at general meetings. Members may propose candidates for Board Elected Director positions, but have no binding election right.</p></div>
+  <h2>5.4 Term of Office</h2>
+  <div class="clause"><div class="clause-id">5.4.1 Sponsor-Nominated Directors</div><p>Hold office at the pleasure of the Sponsor Members until replaced by Mission Protection Resolution, resignation, or ceasing to be eligible.</p></div>
+  <div class="clause"><div class="clause-id">5.4.2 Board Elected Directors</div><p>Hold office for three (3) years, commencing on the date of appointment. May be re-appointed, subject to a maximum of nine (9) continuous years of service.</p></div>
+  <div class="clause"><div class="clause-id">5.4.3 Extension beyond nine years</div><p>A Board Elected Director may be re-appointed beyond nine (9) years if the Board endorses the re-appointment on the grounds of exceptional service or ongoing need for the Director's skills.</p></div>
+  <div class="clause"><div class="clause-id">5.4.4 Break in service</div><p>If a Director ceases to serve for at least twelve (12) months, they may be re-appointed and prior service will not count toward the maximum.</p></div>
+  <h2>5.5 Casual Vacancies</h2>
+  <p>Sponsor-Nominated vacancies may be filled by Mission Protection Resolution. Board Elected vacancies may be filled by ordinary resolution of the Board. If Directors fall below three (3), the remaining Directors may only act to restore the minimum number.</p>
+  <h2>5.6 Ceasing to be a Director</h2>
+  <p>A person stops being a Director if they: resign; are removed by Mission Protection Resolution (Sponsor-Nominated) or ordinary Board resolution (Board Elected); are absent without leave from three consecutive or four meetings in a year; die or become subject to a court order; become ineligible; are no longer a Fit and Proper Person; engage in Terminable Conduct; or fail to declare a material personal interest.</p>
+  <h2>5.7 Chair and Deputy Chair</h2>
+  <p>The Board shall elect a Chairperson and Deputy Chairperson from among the Directors at the first meeting after each calendar year. The Chairperson presides at all Board and general meetings. In their absence, the Deputy presides. The Chair has a casting vote in the event of an equality of votes.</p>
+  <h2>5.8 Director Remuneration and Reimbursement</h2>
+  <p>Directors are not entitled to payment for ordinary Director duties unless separately determined. Directors may be reimbursed for reasonable travel and other expenses. Directors may be paid for professional or technical services outside ordinary duties, provided these are on reasonable and proper terms and have prior Board approval.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s4')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">4. Membership</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s6')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">6. Board Meetings</span></button>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="doc-section" id="sec-s6">
+  <h1>6. Meetings of the Board</h1>
+  <h2>6.1 Frequency</h2>
+  <p>The Board shall meet at least eight (8) times per year, and in any event at least once in each school term. Additional meetings may be convened by the Chair or on the requisition of any two (2) or more Directors.</p>
+  <h2>6.2 Notice</h2>
+  <p>At least five (5) Business Days' written notice of each Board meeting, together with an agenda, shall be provided to all Directors. In urgent circumstances, this period may be reduced with the agreement of a majority of Directors. Written notice must also be given to the Principal(s) (unless the meeting is in-camera or concerns the Principal personally).</p>
+  <h2>6.3 Quorum</h2>
+  <p>The quorum for a Board meeting is a majority of Directors then in office. Where one or more Directors must withdraw due to a conflict of interest, the quorum for that matter shall be the majority of remaining eligible Directors, provided at least two (2) are present and eligible to vote.</p>
+  <h2>6.4 Voting</h2>
+  <p>Questions are decided by a majority of votes. Each Director has one vote. Proxy voting is not permitted. In the event of an equality of votes, the Chair has a casting vote.</p>
+  <h2>6.5 Circulating Resolutions</h2>
+  <p>A Board resolution may be passed without a meeting if a majority of Directors sign a document (including electronically) confirming their agreement within seven (7) days. Circulating resolutions may not be used to resolve any Protected Matter.</p>
+  <h2>6.6 Use of Technology</h2>
+  <p>The Board may hold meetings using virtual meeting technology agreed to by the Board. A Director attending remotely is deemed present in person and must be given the opportunity to participate in all votes in real time.</p>
+  <h2>6.7 Conflicts and Personal Interests</h2>
+  <p>A Director with a material personal interest in a matter must disclose that interest and must not be present during deliberations or vote on the matter, unless the Act otherwise permits. Declarations of interest must be recorded in the minutes and entered in the Conflict of Interest Register under clause 18.3.</p>
+  <h2>6.8 Company Secretary</h2>
+  <p>The Board must appoint at least one Company Secretary. The Company Secretary's responsibilities include: statutory secretarial duties under the Act; convening meetings; issuing and receiving notices; ensuring compliance with Director appointment and removal processes; and arranging for minutes to be taken and signed. The Board may suspend or remove a Company Secretary.</p>
+  <h2>6.9 Minutes</h2>
+  <p>The Board must ensure minutes of all Board meetings, general meetings, and sub-committee meetings are recorded within one month and retained for at least seven (7) years. Minutes must be signed by the Chair. Signed minutes are prima facie evidence of the proceedings.</p>
+  <h2>6.10 Sub-Committees</h2>
+  <p>The Board may establish sub-committees. Each must include at least one Director. Sub-committees may only exercise powers expressly delegated by the Board and may not resolve any Protected Matter.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s5')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">5. Board of Directors</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s7')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">7. Board Powers &amp; Duties</span></button>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="doc-section" id="sec-s7">
+  <h1>7. Board Powers and Duties</h1>
+  <h2>7.1 Management Vests in Board</h2>
+  <p>The Board is responsible for the governance, business, and affairs of the Company and for furthering the Company's objects, including the Protected Purpose. The Board must not take any action, make any decision, or adopt any policy that is inconsistent with the Protected Purpose without first obtaining a Mission Protection Resolution.</p>
+  <h2>7.2 Power to Delegate</h2>
+  <p>The Board may delegate its powers and functions in writing to one or more Directors, the Principal, a committee, an employee, or any other person. Any power not expressly delegated resides with the Board. No delegation may authorise a delegate to resolve any Protected Matter.</p>
+  <h2>7.3 Power to Appoint Principal</h2>
+  <p>The Board may appoint and remove a Principal for each Campus on such terms and conditions as the Board determines. The Board must consult with the Sponsor Members before appointing or removing a Principal.</p>
+  <h2>7.4 Power to Make Regulations</h2>
+  <p>The Board may make, vary, and rescind Regulations for the Company. Regulations must not be inconsistent with this Constitution or the Protected Purpose.</p>
+  <h2>7.5 Duties of Directors</h2>
+  <p>Directors must comply with all duties under Relevant Laws, including: acting with due care and diligence; acting in good faith in the best interests of the Company; not improperly using their position; disclosing and managing conflicts of interest; supporting child safety obligations under MO 1359 and clause 19; and upholding the Protected Purpose and democratic principles.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s6')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">6. Board Meetings</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s8')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">8. General Meetings</span></button>
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="doc-section" id="sec-s8">
+  <h1>8. General Meetings</h1>
+  <h2>8.1 Annual General Meeting</h2>
+  <p>The Company shall hold an AGM within five (5) months after the end of each financial year. The business of the AGM shall include: receiving financial statements and reports; any proposed resolutions; and any other business required by this Constitution or the Act. Directors are not elected at the AGM.</p>
+  <h2>8.2 Special General Meetings</h2>
+  <p>The Board may convene a Special General Meeting at any time. The Board must convene a SGM within 21 days of receiving a written request signed by at least 10% of Voting Members. No Protected Matter may be resolved at a general meeting without also satisfying the Mission Protection Resolution requirement.</p>
+  <h2>8.3 Notice of Meeting</h2>
+  <p>At least 21 days' written notice of any general meeting must be given to every Director, every Member entitled to attend, and the Company's auditor. For a Special Resolution, the text of the proposed resolution must be included in the notice.</p>
+  <h2>8.4 Quorum</h2>
+  <p>The quorum at a general meeting is the greater of: (a) three (3) Voting Members; or (b) one-third of Voting Members entitled to vote — present in person or by Representative. If a quorum is not present within 30 minutes, the meeting is adjourned for 7–28 days.</p>
+  <h2>8.5 Voting</h2>
+  <p>Each Voting Member has one vote. Voting shall be by show of hands unless a poll is demanded. Written proxies lodged at least 48 hours before the meeting are permitted.</p>
+  <h2>8.6 Use of Technology</h2>
+  <p>General meetings may be held using virtual meeting technology that enables each Member to clearly and simultaneously communicate with every other Member.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s7')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">7. Board Powers &amp; Duties</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s9')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">9. Campus School Council</span></button>
+  </div>
+</div>
+
+<!-- S9 -->
+<div class="doc-section" id="sec-s9">
+  <h1>9. Campus School Council</h1>
+  <h2>9.1 Establishment</h2>
+  <p>Each Campus shall have an advisory School Council established within six (6) months of the Campus opening.</p>
+  <h2>9.2 Functions</h2>
+  <p>The School Council shall advise the Board and the Principal on: the educational program and campus culture; campus budget priorities; policies relating to student welfare and community engagement; and strategic planning at the campus level. The School Council is <em>advisory only</em> — final decision-making authority rests with the Board.</p>
+  <h2>9.3 Composition</h2>
+  <p>Each School Council shall include:</p>
+  <ul>
+    <li>The Campus Principal (Chairperson);</li>
+    <li>At least three (3) parent representatives elected by the parent community;</li>
+    <li>At least one (1) staff representative elected by Campus staff;</li>
+    <li>At least one (1) student representative (Year 5 or 6, or most senior year level available);</li>
+    <li>Up to two (2) community representatives appointed by the School Council.</li>
+  </ul>
+  <h2>9.4 Meetings</h2>
+  <p>School Councils shall meet at least four (4) times per year. Meetings shall be open to all Campus parents unless the Council resolves to move to a closed session for specified confidential matters.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s8')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">8. General Meetings</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s10')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">10. Principal</span></button>
+  </div>
+</div>
+
+<!-- S10 -->
+<div class="doc-section" id="sec-s10">
+  <h1>10. Principal</h1>
+  <h2>10.1 Appointment</h2>
+  <p>The Board shall appoint a Principal for each Campus following a merit-based recruitment process, in consultation with the Sponsor Members and School Council. The Principal must hold appropriate qualifications as required by the Education Act and VRQA, must be a registered teacher with the VIT, and must be a Fit and Proper Person. The Principal may not be a Director. Subject to any contract, the Board may remove the Principal at any time, in consultation with the Sponsor Members.</p>
+  <h2>10.2 Responsibilities</h2>
+  <p>The Principal is responsible for:</p>
+  <ul>
+    <li>Implementing the educational philosophy consistent with the Protected Purpose;</li>
+    <li>Leading and supporting all Campus staff;</li>
+    <li>Maintaining compliance with Relevant Laws including MO 1359;</li>
+    <li>Managing the Campus budget within parameters set by the Board;</li>
+    <li>Reporting to the Board at each Board meeting;</li>
+    <li>Ensuring the Campus operates in accordance with this Constitution.</li>
+  </ul>
+  <h2>10.3 Delegation</h2>
+  <p>The Board may delegate to the Principal such powers as are set out in the Delegations Register. The Board retains oversight of all significant financial decisions, staffing appointments, and policy changes.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s9')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">9. School Council</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s11')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">11. Financial Management</span></button>
+  </div>
+</div>
+
+<!-- S11 -->
+<div class="doc-section" id="sec-s11">
+  <h1>11. Financial Management</h1>
+  <h2>11.1 Financial Year</h2>
+  <p>The financial year commences on 1 January and ends on 31 December each year, unless the Board determines otherwise.</p>
+  <h2>11.2 Application of Funds</h2>
+  <p>All funds of the Company shall be applied solely to the promotion of the objects and the conduct of its Campuses. Government funding must be applied solely toward the Campus for which it is received. The Board shall maintain prudent financial controls and ensure all expenditure is properly authorised.</p>
+  <h2>11.3 Accounts and Reporting</h2>
+  <p>The Board must ensure proper financial records are kept in accordance with the Act, ACNC Legislation, and applicable accounting standards. Financial statements shall be prepared annually and presented to Members at the AGM. The Company must retain all financial and other records for at least seven (7) years.</p>
+  <h2>11.4 Audit</h2>
+  <p>The Company shall appoint and remunerate a registered auditor to audit the financial statements annually. The auditor is independent of the Board and is entitled to attend the AGM.</p>
+  <h2>11.5 Signing Authority</h2>
+  <p>All financial instruments above the threshold set in the Delegations Register must be authorised by at least two authorised signatories, one of whom must be a Director or the Principal. Documents may be signed electronically in accordance with the Act.</p>
+  <h2>11.6 Execution of Documents</h2>
+  <p>The Company may execute documents by the signature of: (a) two Directors; (b) one Director and the Principal; (c) one Director and the Company Secretary; or (d) other persons appointed by the Board — subject to the Delegations Register.</p>
+  <h2>11.7 School Fees</h2>
+  <p>The Board shall set school fees having regard to the objects and financial sustainability. The Board shall maintain a fee assistance or scholarship policy to support access for families experiencing financial hardship.</p>
+  <h2>11.8 Common Seal</h2>
+  <p>The Company may, but need not, have a common seal. If it does, it shall be used only by authority of the Board.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s10')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">10. Principal</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s12')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">12. Indemnity &amp; Insurance</span></button>
+  </div>
+</div>
+
+<!-- S12 -->
+<div class="doc-section" id="sec-s12">
+  <h1>12. Indemnity and Insurance</h1>
+  <h2>12.1 Indemnity</h2>
+  <p>Subject to the Act and ACNC Legislation, the Company shall indemnify every present and past Director, the Principal, and the Company Secretary out of the Company's assets against any Liability incurred in or arising out of the conduct of the Company's affairs or discharge of their duties, to the extent that: (a) they have acted in good faith; (b) the Company is not precluded by Relevant Laws; and (c) the Liability is not covered by insurance. This indemnity is continuing and survives cessation of office.</p>
+  <h2>12.2 Insurance</h2>
+  <p>The Company may pay premiums for Directors' and officers' insurance to insure current and former Directors, the Principal, and the Company Secretary against any Liability incurred in their role, as permitted by the Act.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s11')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">11. Financial Management</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s13')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">13. Educational Philosophy</span></button>
+  </div>
+</div>
+
+<!-- S13 -->
+<div class="doc-section" id="sec-s13">
+  <h1>13. Educational Philosophy and Standards</h1>
+  <div class="callout">This section gives operational substance to the Protected Purpose. Every Campus shall be operated in accordance with these commitments.</div>
+  <h2>13.1 Core Pedagogical Commitments</h2>
+  <div class="clause"><div class="clause-id">13.1.1 Inquiry-Based Learning</div><p>Students are supported to question, investigate, and construct understanding through authentic exploration. The curriculum shall promote deep thinking, curiosity, and a love of learning. Teachers act as facilitators of inquiry.</p></div>
+  <div class="clause"><div class="clause-id">13.1.2 Democratic Student Voice</div><p>Students have a genuine right to participate in decisions affecting their school experience. Each Campus shall maintain structures for meaningful student representation, including student councils or equivalent forums.</p></div>
+  <div class="clause"><div class="clause-id">13.1.3 Project-Based Learning</div><p>Learning at each Campus shall be substantially organised around substantive, real-world projects that engage students in sustained inquiry, peer collaboration, and authentic assessment.</p></div>
+  <h2>13.2 Curriculum</h2>
+  <p>Each Campus shall deliver a curriculum meeting or exceeding VCAA requirements and consistent with VRQA registration conditions. The pedagogical approaches in clause 13.1 shall be applied across all learning areas.</p>
+  <h2>13.3 Inclusion and Wellbeing</h2>
+  <p>Every Campus shall be an inclusive community committed to: providing reasonable adjustments for students with additional needs; evidence-based student wellbeing practices; the Child Safe Standards under MO 1359; and eliminating discrimination.</p>
+  <h2>13.4 Professional Learning</h2>
+  <p>The Board shall ensure adequate resources are allocated to ongoing professional development of all teaching staff, with particular emphasis on the Protected Purpose pedagogies.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s12')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">12. Indemnity &amp; Insurance</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s14')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">14. Records &amp; Administration</span></button>
+  </div>
+</div>
+
+<!-- S14 -->
+<div class="doc-section" id="sec-s14">
+  <h1>14. Records and Administration</h1>
+  <h2>14.1 Minutes and Records</h2>
+  <p>The Board must ensure minutes of all general meetings, Board meetings, and sub-committee meetings, and records of all resolutions, are recorded and retained for at least seven (7) years.</p>
+  <h2>14.2 Members' Access to Records</h2>
+  <p>A Member (other than a Director) is not entitled to inspect any document of the Company except as provided by Relevant Laws or authorised by the Board.</p>
+  <h2>14.3 Notices</h2>
+  <p>Notices may be given to Members or Directors personally, by post, email, or any means permitted by the Act. Posted notices are taken to be served five (5) Business Days after posting. Electronic notices are taken to be served at the time of sending. Non-receipt of a notice does not invalidate a meeting or resolution if the non-receipt occurred by accident.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s13')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">13. Educational Philosophy</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s15')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">15. Regulatory Compliance</span></button>
+  </div>
+</div>
+
+<!-- S15 -->
+<div class="doc-section" id="sec-s15">
+  <h1>15. Regulatory Compliance</h1>
+  <h2>15.1 School Registration</h2>
+  <p>The Board shall ensure each Campus is registered as a school in accordance with the Education Act and complies with all VRQA registration conditions. The Board must take all reasonable steps to maintain the Company's registration, charitable status, and compliance with Relevant Laws.</p>
+  <h2>15.2 Equal Opportunity and Anti-Discrimination</h2>
+  <p>The Company shall comply with the Equal Opportunity Act 2010 (Vic), the Disability Discrimination Act 1992 (Cth), the Racial Discrimination Act 1975 (Cth), and all applicable anti-discrimination legislation.</p>
+  <h2>15.3 Privacy</h2>
+  <p>The Company shall handle all personal information in accordance with the Privacy and Data Protection Act 2014 (Vic) and, where applicable, the Privacy Act 1988 (Cth).</p>
+  <h2>15.4 VRQA Notification Obligations</h2>
+  <p>The Company must notify the VRQA within 30 days of: any change in the membership of the Board; a change in the Principal of any Campus; a change in the registered address; any material change to the objects or governance structure; any amendment to this Constitution; or any matter that may affect compliance with minimum standards for school registration.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s14')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">14. Records &amp; Administration</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s16')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">16. Democratic Principles</span></button>
+  </div>
+</div>
+
+<!-- S16 -->
+<div class="doc-section" id="sec-s16">
+  <h1>16. Democratic Principles</h1>
+  <div class="callout"><strong>ETRR 2017, Schedule 4, clause 14.</strong> In accordance with Schedule 4 clause 14 of the ETRR 2017, the programs of, and teaching at, every Campus must support and promote the principles and practice of Australian democracy.</div>
+  <h2>16.1 Statement of Democratic Principles</h2>
+  <p>The Company affirms its commitment to the following democratic principles as required by the VRQA Minimum Standards:</p>
+  <ul>
+    <li>An elected government that is accountable to the people it represents;</li>
+    <li>The rule of law — all persons and institutions are subject to and accountable under the law;</li>
+    <li>Equal rights for all persons before the law without discrimination on the basis of race, religion, gender, disability, sexuality, or cultural background;</li>
+    <li>Freedom of religion and a secular government that does not impose or preference any religious belief;</li>
+    <li>Freedom of speech and freedom of association, exercised responsibly and without harm to others;</li>
+    <li>The value of cultural diversity and the right of all persons to maintain their culture, language, and identity.</li>
+  </ul>
+  <h2>16.2 Publication and Implementation</h2>
+  <p>This statement of democratic principles shall be published on each Campus website and made accessible to all students, parents, staff, and the broader community. The curriculum at each Campus shall be designed and delivered in a manner that supports and promotes these principles in an age-appropriate way.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s15')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">15. Regulatory Compliance</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s17')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">17. Not-for-Profit Status</span></button>
+  </div>
+</div>
+
+<!-- S17 -->
+<div class="doc-section" id="sec-s17">
+  <h1>17. Not-for-Profit Status and Prohibited Arrangements</h1>
+  <h2>17.1 Not-for-Profit Confirmation</h2>
+  <p>The Company is established and conducted as a not-for-profit school within the meaning of Schedule 4 clause 17 of the ETRR 2017. All money and property received by or for the Company must be applied solely toward the conduct of its Campuses and the objects of the Company.</p>
+  <h2>17.2 Prohibition on Profit Distribution</h2>
+  <p>The Company must not be established or conducted for the purpose of profit or gain of any individual or other entity. The Company must not pay or distribute any money or property to or for the benefit of the proprietor or any other person except: as genuine and reasonable remuneration for services rendered; as reimbursement of out-of-pocket expenses; as premiums for insurance; or in satisfaction of a legal obligation.</p>
+  <h2>17.3 Prohibited Agreements and Arrangements</h2>
+  <p>The Board must not enter into, and must take all reasonable steps to prevent the Company from entering into, any Prohibited Agreement or Arrangement, including any agreement that: has the purpose or effect of paying or diverting profit to any person; involves excessive fees, rent, or management charges that are not arm's length; or is not in the best interests of the Company or its students. Before entering into any related party agreement, the Board must document its assessment and confirm compliance with the ETRR 2017.</p>
+  <h2>17.4 Related Party Transactions</h2>
+  <p>All contracts, leases, related-entity agreements, loan agreements, and arrangements between the Company and a related party must be: at arm's length; approved by the Board with any conflict of interest properly managed; and documented and available to the VRQA on request.</p>
+  <h2>17.5 Winding Up — Education Purposes</h2>
+  <p>If upon winding up any surplus property remains after satisfaction of all debts and liabilities, it shall not be paid to or distributed among the Members. Such surplus shall be applied or transferred to: (a) the provision of education services to children of compulsory school age; or (b) another not-for-profit entity that provides education services; as determined by Mission Protection Resolution and Special Resolution concurrently, or as directed by the Supreme Court of Victoria. This clause shall not be amended without the prior consent of the VRQA and ASIC.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s16')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">16. Democratic Principles</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s18')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">18. Governance Framework</span></button>
+  </div>
+</div>
+
+<!-- S18 -->
+<div class="doc-section" id="sec-s18">
+  <h1>18. Governance Framework Documents</h1>
+  <div class="callout">The following governance documents are required to be adopted and maintained by the Company and must at all times be consistent with this Constitution. In the event of any inconsistency, this Constitution prevails. The Board must review each document at least annually.</div>
+  <h2>18.1 Governance Charter</h2>
+  <p>The Board shall adopt and maintain a Governance Charter setting out the roles, responsibilities, and accountabilities of the Board, each Director, any sub-committees, the Sponsor Members, and the Principal(s) of each Campus. Any provision of the Governance Charter that purports to alter Sponsor Member rights is void.</p>
+  <h2>18.2 Delegations Register</h2>
+  <p>The Board shall adopt and maintain a Delegations Register clearly setting out all financial and non-financial delegations from the Board to the Principal and other staff, specifying monetary thresholds, reviewed at least annually. No delegation may purport to authorise any person to resolve a Protected Matter.</p>
+  <h2>18.3 Conflict of Interest Register and Policy</h2>
+  <p>The Board shall establish and maintain a written Conflict of Interest Register covering all responsible persons including Directors and the Principal(s). Each responsible person must disclose any actual, potential, or perceived conflict of interest as soon as practicable. The Board shall adopt a Conflict of Interest Policy reviewed at least every two years.</p>
+  <h2>18.4 Fit and Proper Person Declarations</h2>
+  <p>Every Director, the Principal of each Campus, the Company Secretary, and any other responsible person required by the VRQA must complete a Fit and Proper Person Declaration: upon appointment; annually thereafter; and promptly upon any change in relevant circumstances. The Company must retain all declarations for at least seven (7) years and make them available to the VRQA on request.</p>
+  <h2>18.5 Enrolment Policy</h2>
+  <p>The Board shall adopt and maintain an Enrolment Policy for each Campus clearly stating: criteria for enrolment and priority of access; the procedure for processing applications; grounds for termination of enrolment; fees payable and the fee assistance policy; educational services provided; and the code of conduct applicable to students, parents, and guardians.</p>
+  <h2>18.6 Complaints and Grievances Policy</h2>
+  <p>The Board shall adopt and maintain a Complaints and Grievances Policy for each Campus providing a clear, accessible procedure for students, parents, and staff to raise complaints, ensuring complaints are dealt with promptly, fairly, and confidentially, with escalation to the Board where required.</p>
+  <h2>18.7 Annual Report to the VRQA</h2>
+  <p>The Company must provide an annual report to the VRQA in accordance with the ETRR 2017, and shall publish the report on each Campus website. The Board must also report annually to its Members including: achievements against the strategic plan; annual financial statements; Director appointments; and any proposed resolutions.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s17')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">17. Not-for-Profit Status</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s19')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">19. Child Safety</span></button>
+  </div>
+</div>
+
+<!-- S19 -->
+<div class="doc-section" id="sec-s19">
+  <h1>19. Child Safety — Ministerial Order 1359</h1>
+  <div class="callout-warning callout"><strong>Important.</strong> The Company is committed to the safety and wellbeing of every child in its care. This section reflects the Company's obligations under MO 1359, the Children, Youth and Families Act 2005 (Vic), and all other Relevant Laws relating to child safety. Any amendment to this clause must be notified to the VRQA in accordance with clause 15.4.</div>
+  <h2>19.1 Child Safe Culture</h2>
+  <p>The Board shall ensure every Campus embeds a culture of child safety with zero tolerance for child abuse. All applicable staff and volunteers must hold current Working with Children (WWC) clearances, which the Company must record and monitor. Student voices shall be heard in matters affecting their safety, and all Board members, staff, and volunteers must understand and fulfil their child safety responsibilities.</p>
+  <h2>19.2 Required Child Safety Policies</h2>
+  <p>The Board shall adopt, implement, and regularly review the following as required by MO 1359:</p>
+  <ul>
+    <li>Child Safety and Wellbeing Policy;</li>
+    <li>Child Safety Code of Conduct;</li>
+    <li>Child Safety Risk Register (a living document, regularly updated);</li>
+    <li>Child Safety Incident Response Policy;</li>
+    <li>Reportable Conduct Policy; and</li>
+    <li>Mandatory Reporting Policy, consistent with the Children, Youth and Families Act 2005 (Vic).</li>
+  </ul>
+  <h2>19.3 Legal Obligations</h2>
+  <p>The Company must ensure all staff and Board members understand their obligations under Relevant Laws, including: the mandatory reporting provisions of the Children, Youth and Families Act 2005 (Vic) (section 182); the failure to disclose offence under section 327 of the Crimes Act 1958 (Vic); the failure to protect offence under section 49O; and the grooming offence under section 49M of the Crimes Act 1958 (Vic).</p>
+  <h2>19.4 Anaphylaxis Management</h2>
+  <p>Each Campus must comply with Ministerial Order No. 706 — Anaphylaxis Management in Schools. The Board shall ensure each Campus has a current Anaphylaxis Management Policy and all relevant staff are trained in anaphylaxis response.</p>
+  <h2>19.5 Behaviour Management and Anti-Bullying</h2>
+  <p>Each Campus shall maintain a Behaviour Management and Student Wellbeing Policy including strategies to prevent and respond to bullying (including cyberbullying), consistent with child safety obligations and accessible to students, parents, and staff.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s18')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">18. Governance Framework</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s20')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">20. Winding Up</span></button>
+  </div>
+</div>
+
+<!-- S20 -->
+<div class="doc-section" id="sec-s20">
+  <h1>20. Winding Up</h1>
+  <h2>20.1 Voluntary Winding Up</h2>
+  <p>The Company may only be wound up voluntarily by: (a) a Mission Protection Resolution; AND (b) a Special Resolution of Voting Members at a general meeting convened with at least 28 days' notice.</p>
+  <h2>20.2 Contribution of Members</h2>
+  <p>Each Member and former Member within the previous year must contribute up to $10 to the Company's assets on winding up, for the payment of debts and the costs of winding up.</p>
+  <h2>20.3 Distribution of Surplus Assets</h2>
+  <p>See clause 17.5. The identity of the recipient entity shall be decided by Mission Protection Resolution and Special Resolution of Members. If not so determined, the recipient shall be determined by application to the Supreme Court of Victoria.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s19')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">19. Child Safety</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s21')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">21. Amending this Constitution</span></button>
+  </div>
+</div>
+
+<!-- S21 -->
+<div class="doc-section" id="sec-s21">
+  <h1>21. Amendment of This Constitution</h1>
+  <h2>21.1 Ordinary Amendment</h2>
+  <p>Subject to clause 21.2, this Constitution may be amended only by Special Resolution (75% of Voting Members present and voting) at a general meeting of which at least 21 days' notice has been given, including the text of the proposed amendment. No amendment shall cause the Company to cease to be a not-for-profit entity, or to be ineligible for registration as a charity with the ACNC, or be inconsistent with the Act or ACNC Legislation.</p>
+  <h2>21.2 Protected Matter Amendment</h2>
+  <p>Any amendment to a clause that is, or that directly affects, a Protected Matter requires both:</p>
+  <ul>
+    <li>A Special Resolution of Voting Members passed in accordance with clause 21.1; AND</li>
+    <li>A Mission Protection Resolution passed concurrently or within 30 days.</li>
+  </ul>
+  <p>The Protected Matter clauses are: 2.2 (Protected Purpose); 4.2 (Sponsor Member provisions); 4.3 (Sponsor Member voting rights); 5.3.1 (Sponsor-Nominated Directors); 5.4.1 (Sponsor-Nominated Director tenure); 5.6.2 (Sponsor-Nominated Director removal); 17.5 (winding up); 20.1 (voluntary winding up); and this clause 21.2.</p>
+  <h2>21.3 Notification</h2>
+  <p>Any amendment affecting school registration conditions must be notified to the VRQA in accordance with clause 15.4. Any amendment to a Protected Matter clause requires notification to both the VRQA and ASIC before it takes effect.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s20')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">20. Winding Up</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s22')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">22. Miscellaneous</span></button>
+  </div>
+</div>
+
+<!-- S22 -->
+<div class="doc-section" id="sec-s22">
+  <h1>22. Miscellaneous</h1>
+  <h2>22.1 Dispute Resolution</h2>
+  <p>Any dispute between Members, or between a Member and the Company, shall first be referred to the Board for resolution. If unresolved within 30 days, the parties shall attempt mediation before commencing legal proceedings. Any dispute involving Sponsor Member rights shall be referred first to the Sponsor Members collectively. Nothing in this clause affects the right of any person to complain to the VRQA or any other regulatory body.</p>
+  <h2>22.2 Governing Law</h2>
+  <p>This Constitution is governed by the laws of the State of Victoria and the Commonwealth of Australia.</p>
+  <h2>22.3 Change of Name</h2>
+  <p>The Members may change the Company's name by Special Resolution in accordance with the Act. This is an ordinary amendment and does not require a Mission Protection Resolution.</p>
+  <h2>22.4 Severability</h2>
+  <p>If any provision of this Constitution is held to be invalid or unenforceable, it shall be severed to the minimum extent necessary and the remainder of this Constitution shall continue in full force.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s21')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">21. Amendment</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('s23')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">23. Transitional Provisions</span></button>
+  </div>
+</div>
+
+<!-- S23 -->
+<div class="doc-section" id="sec-s23">
+  <h1>23. Transitional Provisions</h1>
+  <h2>23.1 Pre-Opening Period</h2>
+  <p>During the period prior to the first Campus opening and enrolling students (the Pre-Opening Period), the following transitional arrangements apply:</p>
+  <ul>
+    <li>The Board is not required to establish a School Council under clause 9 until within six (6) months of the first Campus opening;</li>
+    <li>The requirement to hold at least eight (8) Board meetings per year under clause 6.1 shall be reduced to four (4) meetings per year;</li>
+    <li>The requirement to appoint an auditor under clause 11.4 shall apply from the first full financial year in which the Company operates a Campus;</li>
+    <li>Any other operational requirement expressed to apply to a Campus shall be deferred until the Campus is operational, to the extent necessary and as determined by the Board acting reasonably.</li>
+  </ul>
+  <h2>23.2 VRQA Registration Period</h2>
+  <p>During the Pre-Opening Period, the Board shall take all reasonable steps to: (a) lodge an application for VRQA registration in accordance with the Education Act; (b) apply for registration as a charity with the ACNC; (c) adopt all governance documents required under clause 18; and (d) ensure all Directors have completed Fit and Proper Person Declarations under clause 18.4. Nothing in this clause 23 limits or defers the Company's obligations under clauses 2, 17, 19, or 21, or any obligations under Relevant Laws that apply prior to the Campus opening.</p>
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s22')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">22. Miscellaneous</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('cover')"><span class="doc-nav-label">↑ Back to</span><span class="doc-nav-title">Cover &amp; Preamble</span></button>
+  </div>
+</div>
+      <div class="sig-field"><div class="sig-field-label">Full Name</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Signature</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Date</div><div class="sig-line"></div></div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-label">Sponsor Member 2</div>
+      <div class="sig-field"><div class="sig-field-label">Full Name</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Signature</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Date</div><div class="sig-line"></div></div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-label">Sponsor Member 3</div>
+      <div class="sig-field"><div class="sig-field-label">Full Name</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Signature</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Date</div><div class="sig-line"></div></div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-label">Sponsor Member 4</div>
+      <div class="sig-field"><div class="sig-field-label">Full Name</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Signature</div><div class="sig-line"></div></div>
+      <div class="sig-field"><div class="sig-field-label">Date</div><div class="sig-line"></div></div>
+    </div>
+  </div>
+  
+  <div class="doc-nav">
+    <button class="doc-nav-btn" onclick="showSection('s23')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">23. Transitional Provisions</span></button>
+    <button class="doc-nav-btn right" onclick="showSection('cover')"><span class="doc-nav-label">↑ Back to</span><span class="doc-nav-title">Cover &amp; Preamble</span></button>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+const sectionMap = {
+  'cover': 'sec-cover',
+  's1': 'sec-s1', 's2': 'sec-s2', 's3': 'sec-s3',
+  's4': 'sec-s4', 's5': 'sec-s5', 's6': 'sec-s6',
+  's7': 'sec-s7', 's8': 'sec-s8', 's9': 'sec-s9',
+  's10': 'sec-s10', 's11': 'sec-s11', 's12': 'sec-s12',
+  's13': 'sec-s13', 's14': 'sec-s14', 's15': 'sec-s15',
+  's16': 'sec-s16', 's17': 'sec-s17', 's18': 'sec-s18',
+  's19': 'sec-s19', 's20': 'sec-s20', 's21': 'sec-s21',
+  's22': 'sec-s22', 's23': 'sec-s23'
+};
+
+function showSection(key) {
+  // hide all
+  document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  // show target
+  const secId = sectionMap[key];
+  if (secId) {
+    document.getElementById(secId).classList.add('visible');
+  }
+
+  // activate nav button
+  const btns = document.querySelectorAll('.nav-item');
+  btns.forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + key + "'")) {
+      btn.classList.add('active');
+    }
+  });
+
+  // scroll to top of main
+  window.scrollTo(0, 0);
+}
+
+// Search
+const searchIndex = [
+  { key: 'cover', section: 'Cover', title: 'Cover & Preamble', keywords: 'preamble introduction company peninsula 21' },
+  { key: 's1', section: '§1', title: 'Name & Establishment', keywords: 'name consensus 21 education company limited guarantee registered office victoria corporations act' },
+  { key: 's2', section: '§2', title: 'Objects & Protected Purpose', keywords: 'objects protected purpose inquiry based learning democratic student voice project based learning pbm ibl sponsor mission' },
+  { key: 's3', section: '§3', title: 'Definitions & Interpretation', keywords: 'definitions terms acnc act board director member vrqa etrr sponsor mission protection resolution terminable conduct voting' },
+  { key: 's4', section: '§4', title: 'Membership', keywords: 'membership sponsor member board elected community parent observer life member guarantee liability voting rights' },
+  { key: 's5', section: '§5', title: 'Board of Directors', keywords: 'board directors composition eligibility appointment sponsor nominated term casual vacancy chair deputy removal resign' },
+  { key: 's6', section: '§6', title: 'Meetings of the Board', keywords: 'board meetings notice quorum voting circulating resolutions technology conflicts interest company secretary minutes sub-committees' },
+  { key: 's7', section: '§7', title: 'Board Powers & Duties', keywords: 'board powers duties management delegation principal regulations directors duties' },
+  { key: 's8', section: '§8', title: 'General Meetings', keywords: 'annual general meeting agm special general meeting sgm notice quorum voting technology' },
+  { key: 's9', section: '§9', title: 'Campus School Council', keywords: 'school council advisory campus functions composition parent staff student community meetings' },
+  { key: 's10', section: '§10', title: 'Principal', keywords: 'principal appointment responsibilities delegation vit fit proper person board remove' },
+  { key: 's11', section: '§11', title: 'Financial Management', keywords: 'financial year accounts reporting audit signing authority execution school fees common seal' },
+  { key: 's12', section: '§12', title: 'Indemnity & Insurance', keywords: 'indemnity insurance directors officers liability' },
+  { key: 's13', section: '§13', title: 'Educational Philosophy', keywords: 'educational philosophy inquiry project democratic curriculum inclusion wellbeing professional learning vcaa vrqa' },
+  { key: 's14', section: '§14', title: 'Records & Administration', keywords: 'records minutes administration notices member access documents seven years' },
+  { key: 's15', section: '§15', title: 'Regulatory Compliance', keywords: 'regulatory compliance vrqa school registration equal opportunity anti discrimination privacy notification' },
+  { key: 's16', section: '§16', title: 'Democratic Principles', keywords: 'democratic principles etrr 2017 schedule 4 rule of law freedom speech religion government accountability diversity' },
+  { key: 's17', section: '§17', title: 'Not-for-Profit Status', keywords: 'not for profit prohibited arrangements profit distribution related party winding up surplus assets education' },
+  { key: 's18', section: '§18', title: 'Governance Framework', keywords: 'governance charter delegations register conflict of interest fit proper declarations enrolment policy complaints grievances annual report vrqa' },
+  { key: 's19', section: '§19', title: 'Child Safety — MO 1359', keywords: 'child safety ministerial order 1359 wwc working with children mandatory reporting anaphylaxis bullying behaviour culture' },
+  { key: 's20', section: '§20', title: 'Winding Up', keywords: 'winding up dissolution voluntary surplus assets contribution members' },
+  { key: 's21', section: '§21', title: 'Amendment of Constitution', keywords: 'amendment constitution special resolution protected matter mission protection vrqa asic notification' },
+  { key: 's22', section: '§22', title: 'Miscellaneous', keywords: 'miscellaneous dispute resolution governing law name change severability' },
+  { key: 's23', section: '§23', title: 'Transitional Provisions', keywords: 'transitional pre opening period vrqa registration acnc charity school council auditor' },
+];
+
+function openSearch() {
+  document.getElementById('searchOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 50);
+}
+
+function closeSearch(e) {
+  if (e.target === document.getElementById('searchOverlay')) {
+    document.getElementById('searchOverlay').classList.remove('open');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  if (e.key === 'Escape') {
+    document.getElementById('searchOverlay').classList.remove('open');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+  }
+});
+
+function doSearch(q) {
+  const container = document.getElementById('searchResults');
+  q = q.toLowerCase().trim();
+  if (!q) { container.innerHTML = ''; return; }
+
+  const results = searchIndex.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.keywords.toLowerCase().includes(q) ||
+    item.section.toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  if (!results.length) {
+    container.innerHTML = '<div style="padding:16px 20px;font-size:13.5px;color:#94a3b8;">No results found.</div>';
+    return;
+  }
+
+  container.innerHTML = results.map(r => `
+    <div class="search-result-item" onclick="selectResult('${r.key}')">
+      <div class="sri-section">${r.section}</div>
+      <div class="sri-title">${r.title}</div>
+    </div>
+  `).join('');
+}
+
+function selectResult(key) {
+  document.getElementById('searchOverlay').classList.remove('open');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').innerHTML = '';
+  showSection(key);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policy Manual — Consensus 21 Education Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sidebar-width: 280px;
+    --header-height: 56px;
+    --accent: #f7931a;
+    --accent-light: #fff3e0;
+    --accent-mid: #e8820c;
+    --text: #1a1f2e;
+    --text-muted: #64748b;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --bg: #ffffff;
+    --bg-sidebar: #f8fafc;
+    --bg-code: #f1f5f9;
+    --link: #c47208;
+    --hover-bg: #fff8f0;
+    --active-bg: #ffecd0;
+    --active-text: #c47208;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-height);
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+    gap: 16px;
+  }
+
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-mid));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+  }
+
+  .topbar-org { color: var(--text-muted); font-weight: 400; }
+
+  .topbar-search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .topbar-search kbd {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 11px;
+    font-family: inherit;
+    color: var(--text-muted);
+  }
+
+  .topbar-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .layout {
+    display: flex;
+    margin-top: var(--header-height);
+  }
+
+  .sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: var(--header-height);
+    bottom: 0;
+    overflow-y: auto;
+    padding: 20px 0 40px;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .sidebar-section { margin-bottom: 4px; }
+
+  .sidebar-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--text-light);
+    padding: 10px 20px 3px;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 6px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.15s;
+    line-height: 1.4;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover { background: var(--hover-bg); color: var(--text); }
+
+  .nav-item.active {
+    background: var(--active-bg);
+    color: var(--active-text);
+    font-weight: 600;
+  }
+
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .nav-num {
+    font-size: 10.5px;
+    color: var(--text-light);
+    font-weight: 600;
+    margin-right: 4px;
+    font-family: monospace;
+  }
+
+  .main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    max-width: 860px;
+    padding: 48px 64px 80px;
+  }
+
+  .doc-section { display: none; animation: fadeIn 0.2s ease; }
+  .doc-section.visible { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Cover */
+  .cover {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #fff8f0 0%, #fff 60%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(247,147,26,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    border: none;
+    padding: 0;
+  }
+
+  .cover-org { font-size: 18px; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+
+  .cover-tagline {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 540px;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .cover-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .cover-meta-item {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Typography */
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 28px 0 10px;
+    letter-spacing: -0.2px;
+  }
+
+  h3 {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 20px 0 6px;
+  }
+
+  p { margin-bottom: 14px; color: #374151; line-height: 1.75; }
+
+  ul, ol { margin: 0 0 14px 22px; color: #374151; }
+  li { margin-bottom: 6px; line-height: 1.65; }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: #7a3d00;
+  }
+
+  /* Policy meta block */
+  .policy-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .policy-no-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+  }
+
+  .policy-meta {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-key { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+  .meta-val { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; margin: 16px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+  th {
+    background: var(--bg-code);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 9px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #374151;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafbfc; }
+
+  /* Nav */
+  .doc-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    gap: 16px;
+  }
+
+  .doc-nav-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.15s;
+    flex: 1;
+    max-width: 240px;
+  }
+
+  .doc-nav-btn:hover { border-color: var(--accent); background: var(--hover-bg); }
+  .doc-nav-btn.right { text-align: right; margin-left: auto; }
+
+  .doc-nav-label { font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .doc-nav-title { font-size: 13px; font-weight: 600; color: var(--link); }
+
+  /* Search */
+  .search-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px;
+  }
+  .search-overlay.open { display: flex; }
+  .search-box { background: #fff; border-radius: 12px; width: 560px; max-width: 90vw; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; }
+  .search-input { width: 100%; padding: 16px 20px; font-size: 16px; border: none; outline: none; font-family: 'Inter', sans-serif; color: var(--text); }
+  .search-results { border-top: 1px solid var(--border); max-height: 340px; overflow-y: auto; }
+  .search-result-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  .search-result-item:hover { background: var(--hover-bg); }
+  .search-result-item:last-child { border-bottom: none; }
+  .sri-section { font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .sri-title { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 32px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="topbar-logo" onclick="showPolicy('cover')">
+    <div class="logo-mark">C21</div>
+    <span>Consensus 21 Education Ltd</span>
+    <span class="topbar-org">/ Policy Manual</span>
+  </button>
+  <span class="topbar-badge">Version 1.0 · 2025</span>
+  <div class="topbar-search" onclick="openSearch()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    Search policies…
+    <kbd>⌘K</kbd>
+  </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-box">
+    <input class="search-input" id="searchInput" placeholder="Search policies, topics…" oninput="doSearch(this.value)" />
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<div class="layout">
+
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Overview</div>
+    <button class="nav-item active" onclick="showPolicy('cover')" id="nav-cover">📄 Policy Manual</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">🏥 Section A — Health & Safety</div>
+    <button class="nav-item" onclick="showPolicy('A1')" id="nav-A1"><span class="nav-num">A1</span> Section A --- Health & Safety</button>
+    <button class="nav-item" onclick="showPolicy('A2')" id="nav-A2"><span class="nav-num">A2</span> Anaphylaxis Management Policy</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">🏛 Section B — Governance</div>
+    <button class="nav-item" onclick="showPolicy('B1')" id="nav-B1"><span class="nav-num">B1</span> Board Governance Charter</button>
+    <button class="nav-item" onclick="showPolicy('B2')" id="nav-B2"><span class="nav-num">B2</span> Delegations Policy and Schedule</button>
+    <button class="nav-item" onclick="showPolicy('B3')" id="nav-B3"><span class="nav-num">B3</span> Conflict of Interest Policy</button>
+    <button class="nav-item" onclick="showPolicy('B4')" id="nav-B4"><span class="nav-num">B4</span> Sub-Committee Terms of Reference</button>
+    <button class="nav-item" onclick="showPolicy('B5')" id="nav-B5"><span class="nav-num">B5</span> Register of Registers</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">👥 Section C — HR & Workplace</div>
+    <button class="nav-item" onclick="showPolicy('C1')" id="nav-C1"><span class="nav-num">C1</span> Fraud and Corruption Prevention Policy</button>
+    <button class="nav-item" onclick="showPolicy('C2')" id="nav-C2"><span class="nav-num">C2</span> Privacy Policy</button>
+    <button class="nav-item" onclick="showPolicy('C3')" id="nav-C3"><span class="nav-num">C3</span> Whistleblower Policy</button>
+    <button class="nav-item" onclick="showPolicy('C4')" id="nav-C4"><span class="nav-num">C4</span> Sexual Harassment, Bullying & Discrimination Policy (Staff)</button>
+    <button class="nav-item" onclick="showPolicy('C5')" id="nav-C5"><span class="nav-num">C5</span> Occupational Health & Safety Policy</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">🚨 Section D — Emergency Management</div>
+    <button class="nav-item" onclick="showPolicy('D1')" id="nav-D1"><span class="nav-num">D1</span> Emergency Management Plan</button>
+    <button class="nav-item" onclick="showPolicy('D2')" id="nav-D2"><span class="nav-num">D2</span> Bushfire Response Plan</button>
+    <button class="nav-item" onclick="showPolicy('D3')" id="nav-D3"><span class="nav-num">D3</span> Critical Incident Plan</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">🏫 Section E — Student & School Operations</div>
+    <button class="nav-item" onclick="showPolicy('E1')" id="nav-E1"><span class="nav-num">E1</span> Enrolment Policy</button>
+    <button class="nav-item" onclick="showPolicy('E2')" id="nav-E2"><span class="nav-num">E2</span> Enrolment Agreement</button>
+    <button class="nav-item" onclick="showPolicy('E3')" id="nav-E3"><span class="nav-num">E3</span> Attendance Policy</button>
+    <button class="nav-item" onclick="showPolicy('E4')" id="nav-E4"><span class="nav-num">E4</span> Concerns and Complaints Policy</button>
+    <button class="nav-item" onclick="showPolicy('E5')" id="nav-E5"><span class="nav-num">E5</span> School Fees Policy and Schedule</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">🤝 Section F — Student Behaviour & Welfare</div>
+    <button class="nav-item" onclick="showPolicy('F1')" id="nav-F1"><span class="nav-num">F1</span> Section F --- Student Behaviour & Welfare</button>
+    <button class="nav-item" onclick="showPolicy('F2')" id="nav-F2"><span class="nav-num">F2</span> Supervision Policy (including Excursion Risk Assessment)</button>
+    <button class="nav-item" onclick="showPolicy('F3')" id="nav-F3"><span class="nav-num">F3</span> Bullying and Harassment Policy (Students)</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">🛡 Section G — Child Safety</div>
+    <button class="nav-item" onclick="showPolicy('G1')" id="nav-G1"><span class="nav-num">G1</span> Section G --- Child Safety</button>
+    <button class="nav-item" onclick="showPolicy('G2')" id="nav-G2"><span class="nav-num">G2</span> Protecting Children --- Mandatory Reporting Policy</button>
+    <button class="nav-item" onclick="showPolicy('G3')" id="nav-G3"><span class="nav-num">G3</span> Duty of Care Policy</button>
+    <button class="nav-item" onclick="showPolicy('G4')" id="nav-G4"><span class="nav-num">G4</span> Working with Children Policy</button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">💻 Section H — Digital Technologies & Reporting</div>
+    <button class="nav-item" onclick="showPolicy('H1')" id="nav-H1"><span class="nav-num">H1</span> Section H --- Digital Technologies & Reporting</button>
+    <button class="nav-item" onclick="showPolicy('H2')" id="nav-H2"><span class="nav-num">H2</span> Reporting Policy</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<div class="doc-section visible" id="sec-cover">
+  <div class="cover">
+    <div class="cover-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Governance Document
+    </div>
+    <h1>School Policy Manual</h1>
+    <div class="cover-org">Consensus 21 Education Ltd</div>
+    <p class="cover-tagline">This document contains the official policies of Consensus 21 Education Ltd and is to be reviewed annually by the Board.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Peninsula 21, Mornington Peninsula, VIC
+      </div>
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Version 1.0 · January 2025
+      </div>
+      <div class="cover-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Adopted by the Board of Directors
+      </div>
+    </div>
+  </div>
+
+  <div class="callout"><strong>29 policies</strong> across 8 sections. Click any policy in the sidebar or table below to read it. Use <strong>⌘K</strong> to search.</div>
+
+  <h2>Policy Index</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>No.</th><th>Policy Title</th><th>Section</th></tr></thead>
+<tbody>
+<tr><td><strong>A1</strong></td><td><a href="#" onclick="showPolicy('A1'); return false;" style="color:var(--link)">Section A --- Health & Safety</a></td><td>Section A — Health & Safety</td></tr>
+<tr><td><strong>A2</strong></td><td><a href="#" onclick="showPolicy('A2'); return false;" style="color:var(--link)">Anaphylaxis Management Policy</a></td><td>Section A — Health & Safety</td></tr>
+<tr><td><strong>B1</strong></td><td><a href="#" onclick="showPolicy('B1'); return false;" style="color:var(--link)">Board Governance Charter</a></td><td>Section B — Governance</td></tr>
+<tr><td><strong>B2</strong></td><td><a href="#" onclick="showPolicy('B2'); return false;" style="color:var(--link)">Delegations Policy and Schedule</a></td><td>Section B — Governance</td></tr>
+<tr><td><strong>B3</strong></td><td><a href="#" onclick="showPolicy('B3'); return false;" style="color:var(--link)">Conflict of Interest Policy</a></td><td>Section B — Governance</td></tr>
+<tr><td><strong>B4</strong></td><td><a href="#" onclick="showPolicy('B4'); return false;" style="color:var(--link)">Sub-Committee Terms of Reference</a></td><td>Section B — Governance</td></tr>
+<tr><td><strong>B5</strong></td><td><a href="#" onclick="showPolicy('B5'); return false;" style="color:var(--link)">Register of Registers</a></td><td>Section B — Governance</td></tr>
+<tr><td><strong>C1</strong></td><td><a href="#" onclick="showPolicy('C1'); return false;" style="color:var(--link)">Fraud and Corruption Prevention Policy</a></td><td>Section C — HR & Workplace</td></tr>
+<tr><td><strong>C2</strong></td><td><a href="#" onclick="showPolicy('C2'); return false;" style="color:var(--link)">Privacy Policy</a></td><td>Section C — HR & Workplace</td></tr>
+<tr><td><strong>C3</strong></td><td><a href="#" onclick="showPolicy('C3'); return false;" style="color:var(--link)">Whistleblower Policy</a></td><td>Section C — HR & Workplace</td></tr>
+<tr><td><strong>C4</strong></td><td><a href="#" onclick="showPolicy('C4'); return false;" style="color:var(--link)">Sexual Harassment, Bullying & Discrimination Policy (Staff)</a></td><td>Section C — HR & Workplace</td></tr>
+<tr><td><strong>C5</strong></td><td><a href="#" onclick="showPolicy('C5'); return false;" style="color:var(--link)">Occupational Health & Safety Policy</a></td><td>Section C — HR & Workplace</td></tr>
+<tr><td><strong>D1</strong></td><td><a href="#" onclick="showPolicy('D1'); return false;" style="color:var(--link)">Emergency Management Plan</a></td><td>Section D — Emergency Management</td></tr>
+<tr><td><strong>D2</strong></td><td><a href="#" onclick="showPolicy('D2'); return false;" style="color:var(--link)">Bushfire Response Plan</a></td><td>Section D — Emergency Management</td></tr>
+<tr><td><strong>D3</strong></td><td><a href="#" onclick="showPolicy('D3'); return false;" style="color:var(--link)">Critical Incident Plan</a></td><td>Section D — Emergency Management</td></tr>
+<tr><td><strong>E1</strong></td><td><a href="#" onclick="showPolicy('E1'); return false;" style="color:var(--link)">Enrolment Policy</a></td><td>Section E — Student & School Operations</td></tr>
+<tr><td><strong>E2</strong></td><td><a href="#" onclick="showPolicy('E2'); return false;" style="color:var(--link)">Enrolment Agreement</a></td><td>Section E — Student & School Operations</td></tr>
+<tr><td><strong>E3</strong></td><td><a href="#" onclick="showPolicy('E3'); return false;" style="color:var(--link)">Attendance Policy</a></td><td>Section E — Student & School Operations</td></tr>
+<tr><td><strong>E4</strong></td><td><a href="#" onclick="showPolicy('E4'); return false;" style="color:var(--link)">Concerns and Complaints Policy</a></td><td>Section E — Student & School Operations</td></tr>
+<tr><td><strong>E5</strong></td><td><a href="#" onclick="showPolicy('E5'); return false;" style="color:var(--link)">School Fees Policy and Schedule</a></td><td>Section E — Student & School Operations</td></tr>
+<tr><td><strong>F1</strong></td><td><a href="#" onclick="showPolicy('F1'); return false;" style="color:var(--link)">Section F --- Student Behaviour & Welfare</a></td><td>Section F — Student Behaviour & Welfare</td></tr>
+<tr><td><strong>F2</strong></td><td><a href="#" onclick="showPolicy('F2'); return false;" style="color:var(--link)">Supervision Policy (including Excursion Risk Assessment)</a></td><td>Section F — Student Behaviour & Welfare</td></tr>
+<tr><td><strong>F3</strong></td><td><a href="#" onclick="showPolicy('F3'); return false;" style="color:var(--link)">Bullying and Harassment Policy (Students)</a></td><td>Section F — Student Behaviour & Welfare</td></tr>
+<tr><td><strong>G1</strong></td><td><a href="#" onclick="showPolicy('G1'); return false;" style="color:var(--link)">Section G --- Child Safety</a></td><td>Section G — Child Safety</td></tr>
+<tr><td><strong>G2</strong></td><td><a href="#" onclick="showPolicy('G2'); return false;" style="color:var(--link)">Protecting Children --- Mandatory Reporting Policy</a></td><td>Section G — Child Safety</td></tr>
+<tr><td><strong>G3</strong></td><td><a href="#" onclick="showPolicy('G3'); return false;" style="color:var(--link)">Duty of Care Policy</a></td><td>Section G — Child Safety</td></tr>
+<tr><td><strong>G4</strong></td><td><a href="#" onclick="showPolicy('G4'); return false;" style="color:var(--link)">Working with Children Policy</a></td><td>Section G — Child Safety</td></tr>
+<tr><td><strong>H1</strong></td><td><a href="#" onclick="showPolicy('H1'); return false;" style="color:var(--link)">Section H --- Digital Technologies & Reporting</a></td><td>Section H — Digital Technologies & Reporting</td></tr>
+<tr><td><strong>H2</strong></td><td><a href="#" onclick="showPolicy('H2'); return false;" style="color:var(--link)">Reporting Policy</a></td><td>Section H — Digital Technologies & Reporting</td></tr>
+</tbody></table></div>
+</div>
+
+
+<div class="doc-section" id="sec-A1">
+  <div class="policy-tag"><span class="policy-no-badge">A1</span> Section A — Health & Safety</div>
+  <h1>Section A --- Health & Safety</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure the health and safety of all students,</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All students, staff, contractors, volunteers and</span></div></div>
+  <p><strong>Legal Basis</strong>     Occupational Health and Safety Act 2004 (Vic);</p>
+<p>Education and Training Reform Act 2006 (Vic); VRQA</p>
+<p>Minimum Standards.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd (Peninsula 21) is committed to providing a safe environment for all members of the school community. The school will maintain adequate first aid resources, trained personnel, and clear procedures to respond to illness and injury.</p>
+<h2>2. First Aid Officers</h2>
+<p>The Principal must ensure that at all times during school hours and school activities, at least one qualified First Aid Officer is present on campus or accompanying students off-campus.</p>
+<p>At least one staff member per 50 students holds a current first aid</p>
+<p>qualification (HLTAID012 or equivalent).</p>
+<p>First Aid Officers are clearly identified to students, staff and</p>
+<p>visitors.</p>
+<p>First aid qualifications must be renewed every three years.</p>
+<h2>3. First Aid Facilities</h2>
+<p>A dedicated first aid room is maintained, accessible to all students and</p>
+<p>staff.</p>
+<p>First aid kits are maintained and checked termly. Contents comply with</p>
+<p>relevant standards.</p>
+<p>An automated external defibrillator (AED) is maintained on campus with</p>
+<p>staff trained in its use.</p>
+<p>A register of all first aid incidents is maintained.</p>
+<h2>4. Responding to Illness or Injury</h2>
+<p>Assess the situation and ensure safety of the area.</p>
+<p>Call for a qualified First Aid Officer immediately.</p>
+<p>Administer first aid appropriate to the situation.</p>
+<p>Contact parents/guardians for all significant incidents.</p>
+<p>Call 000 for any life-threatening emergency.</p>
+<p>Complete a First Aid Incident Record on the same day.</p>
+<p>Notify the Principal as soon as practicable.</p>
+<h2>5. Student Medical Information</h2>
+<p>The school collects and maintains up-to-date medical information for all enrolled students, including allergies, chronic conditions, and medications. This information is stored securely and accessible to relevant staff.</p>
+<h2>6. Medication Administration</h2>
+<p>Prescription medications may only be administered with written authority</p>
+<p>from a parent/guardian and, where required, a medical practitioner.</p>
+<p>Medications are stored securely and a record of administration is</p>
+<p>maintained.</p>
+<p>Staff do not administer non-prescribed medications except in emergency</p>
+<p>situations.</p>
+<h2>7. Communication</h2>
+<p>Parents/guardians are notified promptly of any first aid treatment administered to their child. All serious incidents are reported to the Principal and documented in the incident register.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('cover')"><span class="doc-nav-label">← Back to</span><span class="doc-nav-title">Cover</span></button><button class="doc-nav-btn right" onclick="showPolicy('A2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">A2 Anaphylaxis Management Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-A2">
+  <div class="policy-tag"><span class="policy-no-badge">A2</span> Section A — Health & Safety</div>
+  <h1>Anaphylaxis Management Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To minimise the risk of anaphylaxis and to ensure</span></div></div>
+  <p><strong>Scope</strong>           All students, staff and visitors at Peninsula 21.</p>
+<p><strong>Legal Basis</strong>     Ministerial Order No. 706 --- Anaphylaxis</p>
+<p>Management in Schools; Education and Training</p>
+<p>Reform Act 2006 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd is committed to providing a safe environment for students at risk of anaphylaxis. This policy complies with Ministerial Order No. 706 and is based on the Anaphylaxis Guidelines published by the Department of Education.</p>
+<h2>2. Risk Minimisation</h2>
+<p>The school maintains a register of all students identified as being at</p>
+<p>risk of anaphylaxis.</p>
+<p>Individual Anaphylaxis Management Plans (IAMPs) are developed for each</p>
+<p>at-risk student in consultation with parents and the student\'s medical</p>
+<p>practitioner.</p>
+<p>School activities, menus and environments are reviewed to minimise</p>
+<p>allergen exposure.</p>
+<p>Students are not permitted to share food.</p>
+<p>Communication to the school community includes reminders about allergen</p>
+<p>risks.</p>
+<h2>3. Individual Anaphylaxis Management Plans</h2>
+<p>An IAMP must be prepared for each student at risk and must include:</p>
+<p>Information about the student\'s medical condition and known allergens.</p>
+<p>Strategies to minimise the risk of exposure.</p>
+<p>The emergency response to be followed if anaphylaxis occurs.</p>
+<p>An ASCIA Action Plan signed by the student\'s medical practitioner.</p>
+<p>IAMPs are reviewed annually, when the student\'s condition changes, or</p>
+<p>following an anaphylactic reaction.</p>
+<h2>4. Adrenaline Auto-Injectors (EpiPens)</h2>
+<p>Students identified as at risk must have a prescribed adrenaline</p>
+<p>auto-injector (e.g. EpiPen) at school at all times.</p>
+<p>The school maintains a general-use EpiPen for emergency use only, stored</p>
+<p>in the first aid room and other accessible locations as determined by</p>
+<p>the Principal.</p>
+<p>EpiPens are checked regularly and replaced before expiry.</p>
+<h2>5. Staff Training</h2>
+<p>All staff who supervise students complete anaphylaxis awareness training</p>
+<p>annually.</p>
+<p>At least two staff members on campus at all times hold a current</p>
+<p>Anaphylaxis Management qualification.</p>
+<p>All staff know the location of EpiPens and the emergency response</p>
+<p>procedure.</p>
+<h2>6. Emergency Response</h2>
+<p>Lay the student flat --- do not allow them to stand.</p>
+<p>Administer the student\'s EpiPen (or general-use EpiPen if unavailable)</p>
+<p>to the outer mid-thigh.</p>
+<p>Call 000 immediately --- state \'anaphylaxis\'.</p>
+<p>Contact the student\'s parents/guardians.</p>
+<p>Administer a second EpiPen after 5 minutes if no improvement.</p>
+<p>Stay with the student until ambulance arrives.</p>
+<p>Complete an incident report on the same day.</p>
+<p>Students who have received an EpiPen must be transported to hospital by</p>
+<p>ambulance even if symptoms improve.</p>
+<h2>7. Excursions and Off-Campus Activities</h2>
+<p>IAMPs and relevant EpiPens accompany at-risk students on all excursions. At least one trained staff member accompanies at-risk students at all times.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('A1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">A1 Section A --- Health & Safety</span></button><button class="doc-nav-btn right" onclick="showPolicy('B1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">B1 Board Governance Charter</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-B1">
+  <div class="policy-tag"><span class="policy-no-badge">B1</span> Section B — Governance</div>
+  <h1>Board Governance Charter</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To establish the governance framework, roles and</span></div></div>
+  <p><strong>Scope</strong>           Board of Directors, Sponsor Members, Principal,</p>
+<p>Company Secretary.</p>
+<p><strong>Legal Basis</strong>     Corporations Act 2001 (Cth); ACNC Legislation; ETRR</p>
+<p>2017; Constitution of Consensus 21 Education Ltd.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Role of the Board</h2>
+<p>The Board of Directors is responsible for the governance, strategic direction, and financial oversight of Consensus 21 Education Ltd. The Board ensures the Company operates in accordance with its Constitution, objects, and all Relevant Laws.</p>
+<p>The Board does not manage the day-to-day operations of the school --- this is the responsibility of the Principal --- but retains oversight of all significant decisions.</p>
+<h2>2. Board Composition</h2>
+<p>The Board consists of no fewer than 3 and no more than 9 Directors.</p>
+<p>Up to 3 Directors are Sponsor-Nominated Directors appointed by the</p>
+<p>Sponsor Members.</p>
+<p>Up to 6 Directors are Board Elected Directors appointed by the Board.</p>
+<p>The Board shall at all times seek a balance of skills including</p>
+<p>education, finance, law, and community engagement.</p>
+<h2>3. Director Responsibilities</h2>
+<p>Each Director must:</p>
+<p>Act in good faith in the best interests of the Company and its students.</p>
+<p>Exercise due care and diligence in their role.</p>
+<p>Disclose and manage conflicts of interest.</p>
+<p>Maintain confidentiality of Board deliberations.</p>
+<p>Attend at least 75% of Board meetings in each year.</p>
+<p>Complete annual Fit and Proper Person Declarations as required by the</p>
+<p>VRQA.</p>
+<p>Uphold the Protected Purpose and the school\'s values at all times.</p>
+<h2>4. Chair and Deputy Chair</h2>
+<p>The Chairperson leads the Board, chairs all meetings, and acts as the primary liaison between the Board and the Principal. The Deputy Chairperson acts in the Chair\'s absence. Both are elected annually by the Board.</p>
+<h2>5. Board Meetings</h2>
+<p>The Board meets at least 8 times per year, at least once each school</p>
+<p>term.</p>
+<p>Meetings are convened by the Chair or on the request of any 2 Directors.</p>
+<p>At least 5 Business Days\' notice and an agenda must be provided.</p>
+<p>A quorum is a majority of Directors then in office.</p>
+<p>Each Director has one vote. The Chair has a casting vote in a tied vote.</p>
+<h2>6. Conflicts of Interest</h2>
+<p>Directors must declare any actual, potential, or perceived conflict of interest as soon as they become aware of it. A Director with a material personal interest in a matter must not participate in deliberations or vote on that matter. All declarations are recorded in the Conflict of Interest Register.</p>
+<h2>7. Board-Principal Relationship</h2>
+<p>The Board appoints and supports the Principal and holds them accountable for school performance. The Principal is responsible for operational management and reports to the Board at each meeting. The Principal attends Board meetings but does not vote.</p>
+<h2>8. Board Effectiveness</h2>
+<p>The Board commits to annual self-assessment of its performance and governance practices. The Board will ensure adequate professional development and induction for all Directors.</p>
+<h2>9. Protected Matters</h2>
+<p>Certain decisions require both a Special Resolution of Members and a Mission Protection Resolution of Sponsor Members. These include changes to the educational philosophy, Sponsor Member rights, and winding up. The Board must not take any action inconsistent with the Protected Purpose without a Mission Protection Resolution.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('A2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">A2 Anaphylaxis Management Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('B2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">B2 Delegations Policy and Schedule</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-B2">
+  <div class="policy-tag"><span class="policy-no-badge">B2</span> Section B — Governance</div>
+  <h1>Delegations Policy and Schedule</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To set out the authority delegated by the Board to</span></div></div>
+  <p><strong>Scope</strong>           Board of Directors, Principal, Business Manager,</p>
+<p>all staff.</p>
+<p><strong>Legal Basis</strong>     Constitution of Consensus 21 Education Ltd (clause</p>
+<p>7.2 and 18.2); Corporations Act 2001 (Cth).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>The Board retains ultimate responsibility for all decisions of the Company. The Board delegates specific financial and operational powers to the Principal and other staff to enable efficient day-to-day operations. No delegation extends to Protected Matters.</p>
+<h2>2. Principles</h2>
+<p>Delegations must be exercised consistently with this policy, the</p>
+<p>Constitution, and all Relevant Laws.</p>
+<p>Delegates must not sub-delegate without express Board approval.</p>
+<p>All delegated decisions must be documented and reported to the Board.</p>
+<p>The Board may revoke or amend any delegation at any time.</p>
+<h2>3. Delegations Schedule</h2>
+<p><strong>Matter</strong>                <strong>Board</strong>       <strong>Principal</strong>   **Threshold /</p>
+<p>Notes**</p>
+<p>Approval of annual budget Board           ---             Board resolution</p>
+<p>required</p>
+<p>Expenditure --- within    ---             Principal       Up to \$10,000 per</p>
+<p>approved budget                                           transaction</p>
+<p>Expenditure --- within    Board           With approval   \$10,001--\$50,000</p>
+<p>approved budget (large)                                   --- Board approval</p>
+<p>required</p>
+<p>Expenditure ---           Board           ---             Any amount --- Board</p>
+<p>unbudgeted                                                approval required</p>
+<p>Signing contracts / legal Board           Up to \$10,000  Above \$10,000</p>
+<p>agreements                                                requires Board</p>
+<p>approval</p>
+<p>Employment of staff       Board           Casual/temp     Permanent</p>
+<p>under \$20,000  appointments require</p>
+<p>Board approval</p>
+<p>Staff termination         Board           ---             Board approval</p>
+<p>required</p>
+<p>Student enrolment         ---             Principal       Subject to Enrolment</p>
+<p>Policy</p>
+<p>Student suspension        ---             Principal       Up to 3 days</p>
+<p>(short-term)</p>
+<p>Student suspension        Board           ---             Board approval</p>
+<p>(long-term) / expulsion                                   required</p>
+<p>School fee waivers /      ---             Principal       Up to 50% of fees</p>
+<p>hardship                                                  per student</p>
+<p>Setting school fees       Board           ---             Annual --- Board</p>
+<p>resolution required</p>
+<p>Bank account signatories  Board           ---             Two signatories</p>
+<p>required for all</p>
+<p>payments</p>
+<p>Media / public statements Board           Operational     Strategic matters</p>
+<p>matters         require Board</p>
+<p>approval</p>
+<p>Policy amendments         Board           Recommend only  All policy changes</p>
+<p>require Board</p>
+<p>approval</p>
+<p>Capital expenditure       Board           ---             Any amount --- Board</p>
+<p>approval required</p>
+<p>Grant applications        Board           Principal       Report to Board</p>
+<p>(\>\$50,000)    (\<\$50,000)    within 30 days</p>
+<p>Incident reporting to     Board notified  Principal       Principal reports;</p>
+<p>regulators                                                Board notified same</p>
+<p>day</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('B1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">B1 Board Governance Charter</span></button><button class="doc-nav-btn right" onclick="showPolicy('B3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">B3 Conflict of Interest Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-B3">
+  <div class="policy-tag"><span class="policy-no-badge">B3</span> Section B — Governance</div>
+  <h1>Conflict of Interest Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure that actual, potential and perceived</span></div></div>
+  <p><strong>Scope</strong>           All Directors, the Principal, Company Secretary,</p>
+<p>and senior staff.</p>
+<p><strong>Legal Basis</strong>     Corporations Act 2001 (Cth) s.191; ACNC Governance</p>
+<p>Standards; Constitution clause 6.7 and 18.3.</p>
+<p><strong>Review Cycle</strong>    Every 2 years</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd requires all responsible persons to act in the best interests of the Company. Where a personal interest conflicts --- or may appear to conflict --- with those duties, that interest must be disclosed and managed.</p>
+<h2>2. What is a Conflict of Interest?</h2>
+<p>A conflict of interest arises when a person\'s private interests (financial or otherwise) could improperly influence their decisions in their role. This includes:</p>
+<p>Financial interests in a supplier, contractor or other entity doing</p>
+<p>business with the school.</p>
+<p>Personal relationships with employees, students or suppliers.</p>
+<p>Outside employment or business activities.</p>
+<p>Receipt of gifts, hospitality or benefits from parties doing business</p>
+<p>with the school.</p>
+<h2>3. Disclosure Requirements</h2>
+<p>All responsible persons must:</p>
+<p>Disclose any actual, potential or perceived conflict of interest as soon</p>
+<p>as they become aware of it.</p>
+<p>Complete an annual Conflict of Interest Declaration.</p>
+<p>Notify the Chair (or Principal for staff) immediately if a conflict</p>
+<p>arises during the year.</p>
+<h2>4. Management of Conflicts</h2>
+<p>Once a conflict is disclosed, the Board (or Principal for staff matters) will determine how to manage it. Options include:</p>
+<p>The person recuses themselves from deliberations and decisions on the</p>
+<p>matter.</p>
+<p>The person is excluded from access to related information.</p>
+<p>The person resigns from a position creating the conflict.</p>
+<p>For Directors: a Director with a material personal interest must not</p>
+<p>vote on the matter and must not be present during deliberations, as</p>
+<p>required by the Corporations Act 2001.</p>
+<h2>5. Conflict of Interest Register</h2>
+<p>The Company Secretary maintains a Conflict of Interest Register recording all declared interests. The register is reviewed at each Board meeting and available to the VRQA on request.</p>
+<h2>6. Gifts and Hospitality</h2>
+<p>Responsible persons must not accept gifts worth more than \$50 from parties doing business with or seeking to do business with the school. All gifts received must be declared and recorded. Gifts must never influence decisions.</p>
+<h2>7. Breach</h2>
+<p>Failure to disclose a conflict of interest may constitute Terminable Conduct under the Constitution and may be reported to relevant regulators.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('B2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">B2 Delegations Policy and Schedule</span></button><button class="doc-nav-btn right" onclick="showPolicy('B4')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">B4 Sub-Committee Terms of Reference</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-B4">
+  <div class="policy-tag"><span class="policy-no-badge">B4</span> Section B — Governance</div>
+  <h1>Sub-Committee Terms of Reference</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To establish the scope, authority and operation of</span></div></div>
+  <p><strong>Scope</strong>           All Board sub-committees and their members.</p>
+<p><strong>Legal Basis</strong>     Constitution of Consensus 21 Education Ltd (clause</p>
+<p>6.10).</p>
+<p><strong>Review Cycle</strong>    Annual or upon establishment of a new sub-committee</p>
+<h2>1. Establishment</h2>
+<p>The Board may establish sub-committees to assist it in carrying out its functions. Each sub-committee is established by Board resolution setting out its purpose, membership and delegated authority.</p>
+<h2>2. Standard Provisions --- All Sub-Committees</h2>
+<p>Each sub-committee must include at least one Director of the Company.</p>
+<p>Sub-committee members need not be Directors or Members of the Company.</p>
+<p>Sub-committees may only exercise powers expressly delegated by the</p>
+<p>Board.</p>
+<p>No sub-committee may resolve any Protected Matter.</p>
+<p>Sub-committees report to the Board at each Board meeting.</p>
+<p>Minutes of sub-committee meetings are provided to the Board.</p>
+<h2>3. Standing Sub-Committees</h2>
+<p>### 3.1 Finance and Audit Committee</p>
+<p>Purpose: Oversee financial management, risk, and audit functions.</p>
+<p>Membership: At least 2 Directors including the Chair, plus the Principal</p>
+<p>and Business Manager (ex officio).</p>
+<p>Meets: At least quarterly.</p>
+<p>Authority: Reviews financial reports, monitors budget compliance,</p>
+<p>recommends annual budget to Board, oversees internal and external audit.</p>
+<p>### 3.2 Education and Curriculum Committee</p>
+<p>Purpose: Advise the Board on educational performance, curriculum, and</p>
+<p>the Protected Purpose.</p>
+<p>Membership: At least 2 Directors, the Principal, and up to 2 co-opted</p>
+<p>members with educational expertise.</p>
+<p>Meets: At least termly.</p>
+<p>Authority: Reviews educational data and outcomes, advises on curriculum</p>
+<p>initiatives, monitors Protected Purpose implementation.</p>
+<p>### 3.3 People and Culture Committee</p>
+<p>Purpose: Oversee staffing, performance, and culture matters.</p>
+<p>Membership: At least 2 Directors and the Principal (except when the</p>
+<p>Principal is the subject of discussion).</p>
+<p>Meets: As required, at least twice per year.</p>
+<p>Authority: Reviews HR policies, oversees Principal performance review,</p>
+<p>advises on staff culture and wellbeing.</p>
+<h2>4. Ad Hoc Sub-Committees</h2>
+<p>The Board may establish ad hoc sub-committees for specific projects or purposes. Terms of reference, membership and delegated authority are set at the time of establishment and cease upon completion of the task.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('B3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">B3 Conflict of Interest Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('B5')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">B5 Register of Registers</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-B5">
+  <div class="policy-tag"><span class="policy-no-badge">B5</span> Section B — Governance</div>
+  <h1>Register of Registers</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To identify all registers and records the Company</span></div></div>
+  <p><strong>Scope</strong>           All Directors, the Principal and Company Secretary.</p>
+<p><strong>Legal Basis</strong>     Corporations Act 2001 (Cth); ACNC Legislation; ETRR</p>
+<p>2017; Constitution clauses 14, 18.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Purpose</h2>
+<p>This Register of Registers identifies all statutory and governance registers maintained by the Company. The Company Secretary is responsible for ensuring all registers are maintained, current and accessible.</p>
+<p><strong>Register</strong>         <strong>Legal         </strong>Custodian<strong>   </strong>Retention**</p>
+<p>Requirement**</p>
+<p>Register of Members  Corporations    Company         7 years after</p>
+<p>Act s.168       Secretary       ceasing</p>
+<p>Register of          Corporations    Company         7 years after</p>
+<p>Directors            Act s.205G      Secretary       ceasing</p>
+<p>Conflict of Interest Constitution    Company         7 years</p>
+<p>Register             cl.18.3         Secretary</p>
+<p>Fit and Proper       ETRR 2017 Sch.4 Principal       7 years</p>
+<p>Person Declarations</p>
+<p>Working With         WWCC Act 2005   Principal       Duration of</p>
+<p>Children Checks      (Vic)                           engagement + 7</p>
+<p>years</p>
+<p>First Aid Incident   OHS Act 2004    Principal       7 years</p>
+<p>Register             (Vic)</p>
+<p>Child Safety         MO 1359         Principal       At least 7 years</p>
+<p>Incident Register</p>
+<p>Anaphylaxis /        MO 706          Principal       Current + 7 years</p>
+<p>Student Medical                                      after leaving</p>
+<p>Register</p>
+<p>Staff / HR Records   Employment      Principal       7 years after</p>
+<p>legislation                     cessation</p>
+<p>Financial Records    Corporations    Board /         7 years</p>
+<p>Act s.286       Treasurer</p>
+<p>Minutes of Board     Corporations    Company         7 years</p>
+<p>Meetings             Act s.251A      Secretary</p>
+<p>Minutes of General   Corporations    Company         7 years</p>
+<p>Meetings             Act s.251A      Secretary</p>
+<p>Gifts and Benefits   ACNC Governance Company         7 years</p>
+<p>Register             Standard 5      Secretary</p>
+<p>Asset Register       Accounting      Business        Life of asset + 7</p>
+<p>Standards       Manager         years</p>
+<p>Enrolment Register   Education Act   Principal       Duration of</p>
+<p>2006 (Vic)                      enrolment + 7 years</p>
+<p>Attendance Register  Education Act   Principal       7 years</p>
+<p>2006 (Vic)</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('B4')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">B4 Sub-Committee Terms of Reference</span></button><button class="doc-nav-btn right" onclick="showPolicy('C1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">C1 Fraud and Corruption Prevention Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-C1">
+  <div class="policy-tag"><span class="policy-no-badge">C1</span> Section C — HR & Workplace</div>
+  <h1>Fraud and Corruption Prevention Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To prevent, detect and respond to fraud, corruption</span></div></div>
+  <p><strong>Scope</strong>           All Directors, staff, contractors, volunteers and</p>
+<p>agents of the Company.</p>
+<p><strong>Legal Basis</strong>     Corporations Act 2001 (Cth); Criminal Code Act 1995</p>
+<p>(Cth); Crimes Act 1958 (Vic); ACNC Governance</p>
+<p>Standards.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd has zero tolerance for fraud, corruption, theft or any form of financial misconduct. The Company is committed to protecting its assets, public funding and reputation through strong internal controls and a culture of integrity and accountability.</p>
+<h2>2. What is Fraud?</h2>
+<p>Fraud includes any intentional act or omission designed to deceive, resulting in the Company or another party suffering loss, including:</p>
+<p>Theft of money, property or assets belonging to the Company.</p>
+<p>Misappropriation or misuse of Company funds.</p>
+<p>Falsification of records, accounts, expense claims or timesheets.</p>
+<p>Accepting or offering bribes, kickbacks or secret commissions.</p>
+<p>Conflicts of interest not disclosed and managed.</p>
+<p>Improper use of the Company\'s name, property or resources.</p>
+<h2>3. Prevention</h2>
+<p>The Board maintains a Delegations Register with clear financial</p>
+<p>authorities and dual-signatory requirements.</p>
+<p>All financial transactions are properly authorised and documented.</p>
+<p>Accounts are audited annually by an independent registered auditor.</p>
+<p>Staff are trained in financial controls and their obligations on</p>
+<p>induction.</p>
+<p>No single person has unchecked control over financial processes.</p>
+<h2>4. Detection and Reporting</h2>
+<p>All persons are encouraged and expected to report suspected fraud. Reports may be made to:</p>
+<p>The Principal (for staff matters).</p>
+<p>The Board Chair (for matters involving the Principal or a Director).</p>
+<p>Anonymously via the Whistleblower process (Policy C3).</p>
+<p>Reports will be taken seriously and investigated promptly. Victimisation</p>
+<p>of a person who reports in good faith is a serious disciplinary matter.</p>
+<h2>5. Investigation</h2>
+<p>The Board Chair (or a Director appointed by the Board) will oversee investigation of fraud allegations. Where the allegation involves a Director, an independent external investigator may be appointed. Investigations will be conducted confidentially and in accordance with natural justice.</p>
+<h2>6. Consequences</h2>
+<p>Substantiated fraud may result in dismissal, recovery of losses, referral to police and/or regulatory bodies, and civil action. There are no exceptions based on seniority or length of service.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('B5')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">B5 Register of Registers</span></button><button class="doc-nav-btn right" onclick="showPolicy('C2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">C2 Privacy Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-C2">
+  <div class="policy-tag"><span class="policy-no-badge">C2</span> Section C — HR & Workplace</div>
+  <h1>Privacy Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure the Company handles personal information</span></div></div>
+  <p><strong>Scope</strong>           All staff, Directors, contractors and volunteers</p>
+<p>who handle personal information.</p>
+<p><strong>Legal Basis</strong>     Privacy and Data Protection Act 2014 (Vic); Privacy</p>
+<p>Act 1988 (Cth); Health Records Act 2001 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd collects, uses, stores and discloses personal information about students, families and staff in order to provide educational services. The Company is committed to protecting privacy and handling personal information in accordance with applicable law.</p>
+<h2>2. What Personal Information We Collect</h2>
+<p>Students: name, date of birth, address, enrolment details, academic</p>
+<p>records, health and medical information, photos and video.</p>
+<p>Families: contact details, financial information, communications.</p>
+<p>Staff: employment records, qualifications, payroll, health information,</p>
+<p>background check results.</p>
+<h2>3. How We Collect It</h2>
+<p>We collect personal information directly from individuals where practicable --- through enrolment forms, employment applications, medical forms, and direct contact. We may also collect information from third parties such as previous schools, medical practitioners, or government agencies where permitted.</p>
+<h2>4. How We Use It</h2>
+<p>To provide education and support services to students.</p>
+<p>To communicate with families about their child\'s progress and school</p>
+<p>matters.</p>
+<p>To comply with legislative and regulatory requirements.</p>
+<p>To manage employment relationships.</p>
+<p>For school operations including billing, records management, and safety.</p>
+<h2>5. Disclosure</h2>
+<p>We do not disclose personal information to third parties except:</p>
+<p>Where required or permitted by law (e.g. mandatory reporting, VRQA,</p>
+<p>ACNC).</p>
+<p>With the consent of the individual (or parent/guardian for students).</p>
+<p>To service providers bound by confidentiality obligations.</p>
+<h2>6. Storage and Security</h2>
+<p>Personal information is stored securely --- whether in physical or electronic form --- with access limited to authorised staff. We take reasonable steps to protect information from misuse, interference, loss, and unauthorised access.</p>
+<h2>7. Access and Correction</h2>
+<p>Individuals have the right to access their personal information held by the school and to request corrections. Requests should be made in writing to the Principal. We will respond within 30 days.</p>
+<h2>8. Data Breaches</h2>
+<p>In the event of a data breach, the Company will act promptly to contain it, assess the risk, and notify affected individuals and relevant authorities where required by law.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('C1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">C1 Fraud and Corruption Prevention Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('C3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">C3 Whistleblower Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-C3">
+  <div class="policy-tag"><span class="policy-no-badge">C3</span> Section C — HR & Workplace</div>
+  <h1>Whistleblower Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To encourage reporting of misconduct and to protect</span></div></div>
+  <p><strong>Scope</strong>           All Directors, staff, contractors, suppliers,</p>
+<p>volunteers, and associates.</p>
+<p><strong>Legal Basis</strong>     Corporations Act 2001 (Cth) Part 9.4AAA (as amended</p>
+<p>by Treasury Laws Amendment (Enhancing Whistleblower</p>
+<p>Protections) Act 2019).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd is committed to maintaining a culture of honesty, transparency and accountability. The Company encourages anyone who has reasonable grounds to suspect misconduct to report it, and guarantees protection from victimisation for those who do.</p>
+<h2>2. Who Can Make a Report?</h2>
+<p>Any current or former Director, officer, employee, contractor, supplier, associate, or relative of such a person may make a whistleblower report.</p>
+<h2>3. What Can Be Reported?</h2>
+<p>Reports may relate to:</p>
+<p>Fraud, theft, misappropriation or financial misconduct.</p>
+<p>Breach of the Corporations Act or ACNC legislation.</p>
+<p>Misconduct by a Director or staff member.</p>
+<p>Conduct that represents a danger to the public, the environment, or the</p>
+<p>health or safety of any person.</p>
+<p>A cover-up of any of the above.</p>
+<h2>4. How to Make a Report</h2>
+<p>Reports can be made to:</p>
+<p>The Board Chair --- directly or by email marked \'Confidential ---</p>
+<p>Whistleblower\'.</p>
+<p>Any Director other than the person the report concerns.</p>
+<p>Anonymously by sealed letter addressed to the Board Chair.</p>
+<p>Reports may also be made to external bodies including ASIC, the ATO, or</p>
+<p>a legal practitioner.</p>
+<h2>5. Protections</h2>
+<p>The Corporations Act provides the following protections to eligible whistleblowers:</p>
+<p>Confidentiality --- the identity of the discloser will not be revealed</p>
+<p>without consent except where required by law.</p>
+<p>Protection from victimisation --- it is illegal to dismiss, demote,</p>
+<p>harass, discriminate against, or cause detriment to a person for making</p>
+<p>a protected disclosure.</p>
+<p>Civil and criminal immunity --- a whistleblower is not liable for breach</p>
+<p>of confidentiality or other legal obligations by making a protected</p>
+<p>disclosure.</p>
+<h2>6. Investigation</h2>
+<p>All reports will be acknowledged within 5 business days. An impartial investigation will be conducted by a Director not involved in the matter, or by an external investigator if appropriate. The discloser will be kept informed of progress where their identity is known.</p>
+<h2>7. Victimisation</h2>
+<p>Any person who victimises, threatens or disadvantages a whistleblower --- or attempts to identify one --- commits a serious disciplinary offence and may commit a criminal offence under the Corporations Act.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('C2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">C2 Privacy Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('C4')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">C4 Sexual Harassment, Bullying & Discrimination Policy (Staff)</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-C4">
+  <div class="policy-tag"><span class="policy-no-badge">C4</span> Section C — HR & Workplace</div>
+  <h1>Sexual Harassment, Bullying & Discrimination Policy (Staff)</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To provide a workplace free from sexual harassment,</span></div></div>
+  <p><strong>Scope</strong>           All staff, Directors, contractors, volunteers and</p>
+<p>visitors.</p>
+<p><strong>Legal Basis</strong>     Equal Opportunity Act 2010 (Vic); Sex</p>
+<p>Discrimination Act 1984 (Cth); Fair Work Act 2009</p>
+<p>(Cth); OHS Act 2004 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd is committed to providing a safe, respectful and inclusive workplace. Sexual harassment, bullying and unlawful discrimination in any form are unacceptable and will not be tolerated.</p>
+<h2>2. Definitions</h2>
+<p>### Sexual Harassment</p>
+<p>### Unwelcome sexual advances, requests for sexual favours, or other conduct of a sexual nature that a reasonable person would anticipate would cause offence, humiliation or intimidation. This includes physical, verbal, written and electronic conduct.</p>
+<p>### Workplace Bullying</p>
+<p>### Repeated, unreasonable behaviour directed towards a worker or group of workers that creates a risk to health and safety. A single serious incident may also constitute bullying. Reasonable management action taken in a reasonable manner is not bullying.</p>
+<p>### Unlawful Discrimination</p>
+<p>### Treating a person less favourably because of a protected attribute, including age, disability, ethnicity, gender, parental status, pregnancy, race, religion, sex, or sexual orientation.</p>
+<h2>3. Responsibilities</h2>
+<p>All staff are responsible for:</p>
+<p>Treating colleagues with dignity, respect and professionalism.</p>
+<p>Reporting conduct that may breach this policy.</p>
+<p>Cooperating with any investigation.</p>
+<p>The Principal is responsible for:</p>
+<p>Modelling appropriate behaviour.</p>
+<p>Responding promptly to complaints.</p>
+<p>Taking reasonable steps to prevent breaches.</p>
+<h2>4. Complaint Process</h2>
+<p>The complainant raises the matter with the Principal (or Board Chair if</p>
+<p>the complaint involves the Principal).</p>
+<p>The Principal meets with the complainant and, where appropriate,</p>
+<p>attempts informal resolution.</p>
+<p>Where informal resolution is not appropriate or unsuccessful, a formal</p>
+<p>investigation is initiated.</p>
+<p>Both parties have the right to be heard and to have a support person</p>
+<p>present.</p>
+<p>The outcome is communicated to both parties in writing.</p>
+<p>A record of the complaint and outcome is retained confidentially.</p>
+<h2>5. External Complaints</h2>
+<p>Any person may make a complaint to the Victorian Equal Opportunity and Human Rights Commission (VEOHRC) or the Fair Work Commission, regardless of whether an internal complaint has been made.</p>
+<h2>6. Consequences</h2>
+<p>Substantiated breaches of this policy may result in disciplinary action up to and including dismissal. False or malicious complaints also constitute misconduct.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('C3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">C3 Whistleblower Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('C5')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">C5 Occupational Health & Safety Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-C5">
+  <div class="policy-tag"><span class="policy-no-badge">C5</span> Section C — HR & Workplace</div>
+  <h1>Occupational Health & Safety Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To provide and maintain a safe and healthy</span></div></div>
+  <p><strong>Scope</strong>           All staff, students, contractors, volunteers and</p>
+<p>visitors.</p>
+<p><strong>Legal Basis</strong>     Occupational Health and Safety Act 2004 (Vic); OHS</p>
+<p>Regulations 2017 (Vic); WorkCover legislation.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd is committed to providing and maintaining a working and learning environment that is safe and without risk to the health of all staff, students and visitors. Health and safety is everyone\'s responsibility.</p>
+<h2>2. Responsibilities</h2>
+<p>### The Board</p>
+<p>Allocates adequate resources for OHS.</p>
+<p>Reviews OHS performance annually.</p>
+<p>Ensures the Principal has appropriate OHS training and support.</p>
+<p>### The Principal</p>
+<p>Implements and monitors this policy.</p>
+<p>Ensures hazard identification and risk assessment processes are in</p>
+<p>place.</p>
+<p>Ensures all staff receive OHS induction and training.</p>
+<p>Reports notifiable incidents to WorkSafe Victoria.</p>
+<p>### All Staff</p>
+<p>Comply with OHS policies and procedures.</p>
+<p>Report hazards, near-misses and incidents promptly.</p>
+<p>Do not undertake work they believe to be unsafe.</p>
+<p>Cooperate with the Company\'s OHS management system.</p>
+<h2>3. Hazard Identification and Risk Management</h2>
+<p>The school conducts regular workplace inspections and risk assessments. All identified hazards are recorded in the Hazard Register and addressed in order of priority using the hierarchy of controls: eliminate, substitute, isolate, engineer, administer, PPE.</p>
+<h2>4. Incident Reporting</h2>
+<p>All injuries, illnesses and near-miss incidents must be reported to the Principal on the day they occur. Serious incidents (as defined by the OHS Act) must be reported to WorkSafe Victoria immediately. All incidents are investigated to prevent recurrence.</p>
+<h2>5. Consultation</h2>
+<p>The school consults with staff on OHS matters through regular staff meetings and, where required, through health and safety representative processes. Staff are encouraged to raise OHS concerns at any time.</p>
+<h2>6. Emergency Procedures</h2>
+<p>Emergency evacuation procedures are posted throughout the campus and practised at least once per term. First aid facilities are maintained as per the First Aid Policy (A1). An emergency management plan is maintained and reviewed annually.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('C4')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">C4 Sexual Harassment, Bullying & Discrimination Policy (Staff)</span></button><button class="doc-nav-btn right" onclick="showPolicy('D1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">D1 Emergency Management Plan</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-D1">
+  <div class="policy-tag"><span class="policy-no-badge">D1</span> Section D — Emergency Management</div>
+  <h1>Emergency Management Plan</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To prepare the school to prevent, respond to and</span></div></div>
+  <p><strong>Scope</strong>           All staff, students, contractors and visitors.</p>
+<p><strong>Legal Basis</strong>     OHS Act 2004 (Vic); Emergency Management Act 2013</p>
+<p>(Vic); VRQA Minimum Standards.</p>
+<p><strong>Review Cycle</strong>    Annual --- following any emergency or emergency</p>
+<p>drill</p>
+<h2>1. Purpose and Scope</h2>
+<p>This Emergency Management Plan (EMP) sets out how Consensus 21 Education Ltd (Peninsula 21) will prepare for, respond to and recover from emergencies. It applies to all persons on the school site and during school activities.</p>
+<h2>2. Emergency Management Team</h2>
+<p><strong>Role</strong>                <strong>Responsibilities</strong>    <strong>Position Holder</strong></p>
+<p>Chief Warden            Overall command of      Principal</p>
+<p>emergency response;</p>
+<p>liaises with emergency</p>
+<p>services; authorises</p>
+<p>evacuation and</p>
+<p>all-clear.</p>
+<p>Deputy Warden           Assists Chief Warden;   Deputy Principal /</p>
+<p>takes command if Chief  Nominated Senior</p>
+<p>Warden unavailable.     Teacher</p>
+<p>Floor/Area Wardens      Conduct sweeps of       Designated staff per</p>
+<p>assigned areas; account building/area</p>
+<p>for all persons; assist</p>
+<p>with evacuation.</p>
+<p>First Aid Officer       Administer first aid;   Qualified First Aid</p>
+<p>liaise with emergency   Officer(s)</p>
+<p>services on medical</p>
+<p>matters.</p>
+<p>Communications Officer  Manage communications   Designated staff member</p>
+<p>with parents, media,</p>
+<p>and authorities.</p>
+<h2>3. General Evacuation Procedure</h2>
+<p>Sound the evacuation alarm.</p>
+<p>All persons stop what they are doing immediately.</p>
+<p>Teachers take the class roll/attendance and lead students to the</p>
+<p>designated Assembly Area.</p>
+<p>Area Wardens sweep their areas and confirm all persons have evacuated.</p>
+<p>Chief Warden accounts for all students, staff and visitors using roll</p>
+<p>and visitor register.</p>
+<p>Chief Warden contacts emergency services (000) if not already done.</p>
+<p>No one re-enters the building until the Chief Warden gives the</p>
+<p>all-clear.</p>
+<p>All events are recorded in the Emergency Incident Log.</p>
+<h2>4. Lockdown Procedure</h2>
+<p>A lockdown is implemented when there is a threat requiring all persons to shelter in place (e.g. armed intruder, external hazardous materials incident).</p>
+<p>Chief Warden announces lockdown via PA system or personal communication.</p>
+<p>All persons move immediately to the nearest lockdown room and</p>
+<p>lock/barricade doors.</p>
+<p>Lights are turned off, blinds closed, phones silenced.</p>
+<p>Chief Warden contacts 000 and advises of the situation.</p>
+<p>No one opens doors until police give the all-clear.</p>
+<p>Parents are notified as soon as it is safe to do so.</p>
+<h2>5. Drills and Training</h2>
+<p>Evacuation drills are conducted at least once per term.</p>
+<p>Lockdown drills are conducted at least once per year.</p>
+<p>All staff are trained in emergency procedures on induction and annually.</p>
+<p>Drills are reviewed and improvements recorded.</p>
+<h2>6. Communication</h2>
+<p>In an emergency, the Communications Officer manages all external communications. Parents are notified via SMS/email as soon as it is safe to do so. Media inquiries are directed to the Board Chair or Principal only.</p>
+<h2>7. Recovery</h2>
+<p>Following an emergency, the Principal will arrange psychological first aid and debrief for affected staff and students. A post-incident review will be conducted within 5 business days and improvements implemented.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('C5')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">C5 Occupational Health & Safety Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('D2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">D2 Bushfire Response Plan</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-D2">
+  <div class="policy-tag"><span class="policy-no-badge">D2</span> Section D — Emergency Management</div>
+  <h1>Bushfire Response Plan</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To protect the safety of students, staff and</span></div></div>
+  <p><strong>Scope</strong>           All staff, students and visitors during the</p>
+<p>declared Fire Danger Period.</p>
+<p><strong>Legal Basis</strong>     Country Fire Authority Act 1958 (Vic); Emergency</p>
+<p>Management Act 2013 (Vic); CFA Prepare. Act.</p>
+<p>Survive. framework.</p>
+<p><strong>Review Cycle</strong>    Annual --- before each Fire Danger Period (1</p>
+<p>October)</p>
+<h2>1. Context</h2>
+<p>Peninsula 21 is located on the Mornington Peninsula, Victoria. While not currently classified as a Bushfire At-Risk Register (BARR) school, the school monitors CFA ratings and activates this plan when conditions warrant. The Principal reviews the school\'s bushfire risk level annually.</p>
+<h2>2. Fire Danger Ratings and School Response</h2>
+<p><strong>FDR</strong>             <strong>Rating</strong>              <strong>School Action</strong></p>
+<p>Moderate / High     Low--Moderate risk      Normal operations. Monitor</p>
+<p>CFA updates.</p>
+<p>Very High           Elevated risk           Principal monitors</p>
+<p>conditions. Alert staff.</p>
+<p>Review dismissal plans.</p>
+<p>Severe              High risk               Principal assesses local</p>
+<p>conditions. Consider early</p>
+<p>dismissal. Parent</p>
+<p>notification.</p>
+<p>Extreme             Very high risk          Early closure likely.</p>
+<p>Parents notified by 7:30am.</p>
+<p>Students not on BARR list</p>
+<p>dismissed.</p>
+<p>Catastrophic        Life-threatening        School closed. Students not</p>
+<p>transported by bus. Parents</p>
+<p>collect children.</p>
+<h2>3. Early Dismissal Procedure</h2>
+<p>Principal determines early dismissal is required, in consultation with</p>
+<p>the Board Chair if time permits.</p>
+<p>Automated SMS/email to all families sent no later than 7:30am on the</p>
+<p>day.</p>
+<p>Families required to collect students or nominate an authorised</p>
+<p>collector.</p>
+<p>Students who cannot be collected shelter in the designated assembly area</p>
+<p>(indoors).</p>
+<p>Emergency services are contacted if fire threatens the school site.</p>
+<p>Last resort: shelter in designated \'stay and defend\' location</p>
+<p>(identify in site plan).</p>
+<h2>4. Preparation</h2>
+<p>Gutters and roof are cleared of debris before the Fire Danger Period.</p>
+<p>School grounds are maintained with reduced fuel load.</p>
+<p>Emergency water supply is checked and operational.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('D1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">D1 Emergency Management Plan</span></button><button class="doc-nav-btn right" onclick="showPolicy('D3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">D3 Critical Incident Plan</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-D3">
+  <div class="policy-tag"><span class="policy-no-badge">D3</span> Section D — Emergency Management</div>
+  <h1>Critical Incident Plan</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To provide a clear response framework for critical</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All staff and students, including incidents</span></div><div class="meta-item"><span class="meta-key">Legal Basis</span><span class="meta-val">OHS Act 2004 (Vic); Emergency Management Act 2013</span></div></div>
+  <p>(Vic); Children, Youth and Families Act 2005 (Vic);</p>
+<p>VRQA requirements.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. What is a Critical Incident?</h2>
+<p>A critical incident is a sudden, unexpected event that causes or threatens serious harm to a member of the school community and that is likely to overwhelm the normal coping resources of the school. Examples include:</p>
+<p>Death of a student, staff member or parent (including suicide).</p>
+<p>Serious injury to a student or staff member.</p>
+<p>Physical assault or threatened violence on the school site.</p>
+<p>Sexual assault involving a student.</p>
+<p>Severe psychological trauma to a significant number of students.</p>
+<p>Major accident involving students or staff during a school activity.</p>
+<p>Disappearance or abduction of a student.</p>
+<h2>2. Immediate Response</h2>
+<p>Ensure the safety of all persons --- call 000 if required.</p>
+<p>Notify the Principal immediately (or most senior staff member present).</p>
+<p>Principal notifies the Board Chair within 1 hour.</p>
+<p>Preserve the scene if it is a potential crime scene.</p>
+<p>Restrict access to affected areas.</p>
+<p>Appoint a Communications Officer --- no other person speaks to media or</p>
+<p>external parties.</p>
+<p>Principal contacts the Department of Education Regional Office if</p>
+<p>required.</p>
+<h2>3. Communication</h2>
+<p>### Within the school community</p>
+<p>Students are informed in an age-appropriate way, within the school day</p>
+<p>if possible.</p>
+<p>Staff are briefed before students if time allows.</p>
+<p>Parents/guardians are notified promptly --- by phone/email, not via</p>
+<p>students.</p>
+<p>Communication is factual, sensitive, and does not speculate.</p>
+<p>### Media</p>
+<p>All media inquiries are directed to the Board Chair or their nominee.</p>
+<p>No staff member or student speaks to media without authorisation.</p>
+<p>A brief holding statement is prepared promptly.</p>
+<h2>4. Psychological Support</h2>
+<p>The Principal arranges access to a school counsellor or psychologist on</p>
+<p>the day of the incident if possible.</p>
+<p>Students and staff are monitored for signs of trauma in the days</p>
+<p>following the incident.</p>
+<p>Referrals to external support services are offered to those who need</p>
+<p>them.</p>
+<p>Staff wellbeing is prioritised --- a staff debrief is held within 24--48</p>
+<p>hours.</p>
+<h2>5. Reporting Obligations</h2>
+<p>Depending on the nature of the incident, the Principal must notify:</p>
+<p>WorkSafe Victoria --- for workplace injuries and notifiable incidents.</p>
+<p>Victoria Police --- for criminal matters and mandatory reporting.</p>
+<p>VRQA --- for matters affecting school registration or student safety.</p>
+<p>ACNC --- for serious incidents affecting the Company\'s charitable</p>
+<p>status.</p>
+<p>Board --- all critical incidents to be reported at the next Board</p>
+<p>meeting, or sooner.</p>
+<h2>6. Post-Incident Review</h2>
+<p>A post-incident review is conducted within 10 business days. The review examines the causes of the incident, the adequacy of the response, and improvements to policies and procedures. Findings are reported to the Board.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('D2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">D2 Bushfire Response Plan</span></button><button class="doc-nav-btn right" onclick="showPolicy('E1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">E1 Enrolment Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-E1">
+  <div class="policy-tag"><span class="policy-no-badge">E1</span> Section E — Student & School Operations</div>
+  <h1>Enrolment Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To establish fair, transparent and lawful enrolment</span></div></div>
+  <p><strong>Scope</strong>           All prospective and enrolled students and their</p>
+<p>families.</p>
+<p><strong>Legal Basis</strong>     Education and Training Reform Act 2006 (Vic); Equal</p>
+<p>Opportunity Act 2010 (Vic); VRQA Minimum Standards.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd (Peninsula 21) is a non-selective independent primary school open to all students regardless of background, ability, religion or cultural heritage. Enrolment decisions are made fairly, transparently and in accordance with this policy.</p>
+<h2>2. Eligibility</h2>
+<p>Students of compulsory school age (6--15 years) resident in Victoria are</p>
+<p>eligible to enrol.</p>
+<p>Peninsula 21 caters to primary school students (Foundation to Year 6).</p>
+<p>As the school grows, additional year levels may be added by Board</p>
+<p>resolution.</p>
+<p>The school does not discriminate on the basis of race, ethnicity,</p>
+<p>religion, disability, gender, or any other protected attribute.</p>
+<h2>3. Priority of Access</h2>
+<p>Where demand exceeds places, priority is given in the following order:</p>
+<p>Siblings of currently enrolled students.</p>
+<p>Children of founding families (first year of operation only).</p>
+<p>Children of staff members.</p>
+<p>Children from the local Mornington Peninsula area.</p>
+<p>All other applicants, in order of application date.</p>
+<h2>4. Enrolment Process</h2>
+<p>Family submits an Expression of Interest form.</p>
+<p>Family is invited to attend a school information session and tour.</p>
+<p>Family completes a formal Enrolment Application.</p>
+<p>Principal reviews the application and confirms eligibility and place</p>
+<p>availability.</p>
+<p>Offer of enrolment is made in writing.</p>
+<p>Family accepts by signing the Enrolment Agreement and paying the</p>
+<p>enrolment fee.</p>
+<p>Enrolment is confirmed. All required documentation (medical,</p>
+<p>immunisation, previous school reports) is collected before the first</p>
+<p>day.</p>
+<h2>5. Enrolment Agreement</h2>
+<p>All families must sign an Enrolment Agreement prior to the student\'s first day. The Agreement sets out:</p>
+<p>The school\'s fees and payment terms.</p>
+<p>The school\'s behaviour expectations and code of conduct.</p>
+<p>The family\'s obligations regarding attendance, communication and school</p>
+<p>participation.</p>
+<p>The school\'s policies that apply to the student\'s enrolment.</p>
+<h2>6. Waiting List</h2>
+<p>Where no place is available, applicants are placed on a waiting list in priority order. Families are notified when a place becomes available.</p>
+<h2>7. Refusal or Termination of Enrolment</h2>
+<p>The Principal may refuse or terminate an enrolment where:</p>
+<p>The student has been subject to a formal expulsion from another school.</p>
+<p>The family has provided false or misleading information.</p>
+<p>The family has failed to pay fees and has not engaged with the fee</p>
+<p>assistance process.</p>
+<p>The student\'s continued enrolment poses an unacceptable risk to others</p>
+<p>that cannot reasonably be mitigated.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('D3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">D3 Critical Incident Plan</span></button><button class="doc-nav-btn right" onclick="showPolicy('E2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">E2 Enrolment Agreement</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-E2">
+  <div class="policy-tag"><span class="policy-no-badge">E2</span> Section E — Student & School Operations</div>
+  <h1>Enrolment Agreement</h1>
+  
+  <p><strong>Year Level</strong>      _______________________________________________</p>
+<p>**Parent/Guardian   _______________________________________________</p>
+<p>1**</p>
+<p>**Parent/Guardian   _______________________________________________</p>
+<p>2**</p>
+<p><strong>Address</strong>         _______________________________________________</p>
+<p><strong>Phone</strong>           _______________________________________________</p>
+<p><strong>Email</strong>           _______________________________________________</p>
+<p>**Commencement      _______________________________________________</p>
+<p>Date**</p>
+<p>Terms and Conditions</p>
+<p>### 1. School Fees</p>
+<p>### The family agrees to pay school fees as set out in the current School Fees Schedule (Policy F1). Fees are due as per the payment schedule. Late payment may attract a late fee. Fee assistance is available --- see the School Fees Policy.</p>
+<p>### 2. Attendance</p>
+<p>### The family is responsible for ensuring the student attends school every day that school is open, unless the student is ill or other exceptional circumstances apply. All absences must be explained to the school on the day of absence. Consistent unexplained absences will be escalated in accordance with the Attendance Policy (E3).</p>
+<p>### 3. Code of Conduct</p>
+<p>### The family and student agree to abide by the school\'s Code of Conduct and Behaviour Management Policy (F1). Students are expected to treat peers, staff and property with respect.</p>
+<p>### 4. Acknowledgement of Policies</p>
+<p>### The family acknowledges they have received, or been directed to, the following school policies and agree to abide by them:</p>
+<p>Behaviour Management Policy</p>
+<p>Attendance Policy</p>
+<p>School Fees Policy</p>
+<p>Bullying and Harassment Policy</p>
+<p>Digital Technologies Policy</p>
+<p>Complaints and Grievances Policy</p>
+<p>### 5. Privacy and Photography</p>
+<p>### The school collects personal information for enrolment and educational purposes in accordance with its Privacy Policy (C2). By signing this Agreement, the family consents to the school using photographs and video of the student for school purposes (newsletters, website, social media), unless indicated otherwise below.</p>
+<p>### I do / do not (circle) consent to photographs/video of my child being used by the school for school publications.</p>
+<p>### 6. Medical Information</p>
+<p>### The family agrees to provide complete and accurate medical information and to update the school promptly when it changes. The family acknowledges the school\'s Anaphylaxis Management Policy and First Aid Policy.</p>
+<p>### 7. Variation and Termination</p>
+<p>### The school reserves the right to amend its policies from time to time and will notify families of material changes. Either party may terminate this Agreement in accordance with the Enrolment Policy (E1).</p>
+<p>###</p>
+<p>Signatures</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('E1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">E1 Enrolment Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('E3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">E3 Attendance Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-E3">
+  <div class="policy-tag"><span class="policy-no-badge">E3</span> Section E — Student & School Operations</div>
+  <h1>Attendance Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To promote regular attendance and to respond</span></div></div>
+  <p><strong>Scope</strong>           All enrolled students and their families.</p>
+<p><strong>Legal Basis</strong>     Education and Training Reform Act 2006 (Vic)</p>
+<p>s.2.1.1 (compulsory attendance); Education</p>
+<p>Regulations 2017 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Regular school attendance is essential for student learning and wellbeing. The school is legally required to keep attendance records and to follow up unexplained absences. Parents and guardians share responsibility for ensuring their child attends school.</p>
+<h2>2. Recording Attendance</h2>
+<p>Attendance is recorded for every student at the start of each morning</p>
+<p>and afternoon session.</p>
+<p>The Attendance Register is a legal document and must be accurate and</p>
+<p>retained for 7 years.</p>
+<p>Attendance records are maintained in the school\'s student management</p>
+<p>system.</p>
+<h2>3. Explaining Absences</h2>
+<p>Parents/guardians must contact the school on the day of any absence,</p>
+<p>before 9:00am.</p>
+<p>Contact can be made by phone, email, or the school\'s preferred digital</p>
+<p>communication channel.</p>
+<p>Medical certificates are required for absences of 5 or more consecutive</p>
+<p>days.</p>
+<p>Extended leave (3+ days for non-illness reasons) requires prior approval</p>
+<p>from the Principal.</p>
+<h2>4. Unexplained Absences</h2>
+<p>If a student is absent and no explanation has been received by 9:30am,</p>
+<p>the school will contact parents/guardians to confirm the student\'s</p>
+<p>whereabouts and safety.</p>
+<p>Unexplained absences are flagged in the Attendance Register and followed</p>
+<p>up in writing if they recur.</p>
+<h2>5. Chronic Absence</h2>
+<p>A student is considered chronically absent if they miss 10% or more of school days. Where this occurs:</p>
+<p>The classroom teacher raises the matter with the Principal.</p>
+<p>The Principal meets with the family to understand the reasons and</p>
+<p>develop an attendance improvement plan.</p>
+<p>If absence continues, the Principal may refer the matter to the</p>
+<p>Department of Education for support.</p>
+<p>Where truancy is suspected, the matter may be referred to relevant</p>
+<p>authorities.</p>
+<h2>6. Student Wellbeing</h2>
+<p>The school recognises that chronic absence may indicate an underlying welfare concern. Staff are trained to identify and respond to such concerns sensitively and in accordance with the Child Safety policy.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('E2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">E2 Enrolment Agreement</span></button><button class="doc-nav-btn right" onclick="showPolicy('E4')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">E4 Concerns and Complaints Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-E4">
+  <div class="policy-tag"><span class="policy-no-badge">E4</span> Section E — Student & School Operations</div>
+  <h1>Concerns and Complaints Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To provide a clear, accessible and fair process for</span></div></div>
+  <p><strong>Scope</strong>           Students, families, staff, contractors and the</p>
+<p>broader community.</p>
+<p><strong>Legal Basis</strong>     VRQA Minimum Standards; ACNC Governance Standards;</p>
+<p>Constitution clause 18.6.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd takes all concerns and complaints seriously and is committed to resolving them fairly, promptly and confidentially. Raising a complaint will not disadvantage a student or family in any way.</p>
+<h2>2. Informal Resolution</h2>
+<p>Most concerns can be resolved quickly through direct communication. Families are encouraged to:</p>
+<p>First speak with the classroom teacher about matters relating to their</p>
+<p>child\'s learning or day-to-day school experience.</p>
+<p>Contact the Principal for matters that cannot be resolved with the</p>
+<p>classroom teacher or that relate to school policy.</p>
+<p>The school aims to acknowledge all concerns within 2 business days and</p>
+<p>resolve informal matters within 10 business days.</p>
+<h2>3. Formal Complaint Process</h2>
+<p>Where informal resolution is not achieved or is not appropriate, a formal complaint may be made.</p>
+<p>The complainant submits a written complaint to the Principal (or Board</p>
+<p>Chair if the complaint involves the Principal).</p>
+<p>The school acknowledges the complaint in writing within 3 business days.</p>
+<p>The Principal investigates the complaint, including giving the subject</p>
+<p>of the complaint an opportunity to respond.</p>
+<p>The Principal provides a written outcome to the complainant within 20</p>
+<p>business days.</p>
+<p>If the complainant is not satisfied with the outcome, they may request a</p>
+<p>review by the Board Chair within 10 business days of receiving the</p>
+<p>outcome.</p>
+<p>The Board Chair (or a Director they nominate) conducts an independent</p>
+<p>review and provides a written outcome within 20 business days. This is</p>
+<p>the final internal step.</p>
+<h2>4. External Complaints</h2>
+<p>Complainants who are not satisfied with the school\'s internal process, or who wish to raise matters directly with external bodies, may contact:</p>
+<p>VRQA --- for matters relating to school registration standards.</p>
+<p>ACNC --- for matters relating to the Company\'s charitable status.</p>
+<p>Victorian Ombudsman --- for matters of maladministration.</p>
+<p>Victoria Police --- for matters involving criminal conduct.</p>
+<h2>5. Confidentiality</h2>
+<p>All complaints are handled confidentially. Information is shared only with those directly involved in investigating and resolving the complaint.</p>
+<h2>6. Record-Keeping</h2>
+<p>A record of all formal complaints and their outcomes is maintained by the Principal for 7 years. Complaint records are used to identify patterns and improve school policies and practices.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('E3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">E3 Attendance Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('E5')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">E5 School Fees Policy and Schedule</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-E5">
+  <div class="policy-tag"><span class="policy-no-badge">E5</span> Section E — Student & School Operations</div>
+  <h1>School Fees Policy and Schedule</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To establish how school fees are set, communicated</span></div></div>
+  <p><strong>Scope</strong>           All enrolled families.</p>
+<p><strong>Legal Basis</strong>     Constitution of Consensus 21 Education Ltd (clauses</p>
+<p>11.7, 17.1, 17.2); Education and Training Reform</p>
+<p>Act 2006 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual --- fees reviewed by Board each November for</p>
+<p>the following year</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd is a not-for-profit school. School fees are set to cover the cost of providing high-quality education at Peninsula 21. Fees are not set to generate profit. The Board is committed to making Peninsula 21 accessible to families from all economic backgrounds.</p>
+<h2>2. Fee Setting</h2>
+<p>School fees are set by the Board each year, following a budget process that considers:</p>
+<p>The full cost of delivering the educational program.</p>
+<p>Government funding received.</p>
+<p>Capital and maintenance requirements.</p>
+<p>The school\'s not-for-profit obligations.</p>
+<p>Affordability for the school community.</p>
+<h2>3. Fee Schedule</h2>
+<p><strong>Fee Item</strong>                    <strong>Amount (2025)</strong>   <strong>Notes</strong></p>
+<p>Enrolment Fee (once only)       \$\[INSERT\]        Non-refundable.</p>
+<p>Paid on acceptance</p>
+<p>of offer.</p>
+<p>Annual Tuition Fee ---          \$\[INSERT\] per    Invoiced at start</p>
+<p>Foundation to Year 2            year                of each term.</p>
+<p>Annual Tuition Fee --- Year 3   \$\[INSERT\] per    Invoiced at start</p>
+<p>to Year 6                       year                of each term.</p>
+<p>Building and Resource Levy      \$\[INSERT\] per    Invoiced annually.</p>
+<p>year</p>
+<p>Excursion and Activities Levy   \$\[INSERT\] per    Invoiced annually.</p>
+<p>year                Specific excursion</p>
+<p>costs separately</p>
+<p>invoiced.</p>
+<p>Before/After School Care (if    Refer to provider   Provided by</p>
+<p>applicable)                                         \[INSERT</p>
+<p>provider\].</p>
+<h2>4. Payment</h2>
+<p>Fees are invoiced at the beginning of each school term.</p>
+<p>Payment is due within 14 days of invoice.</p>
+<p>Accepted payment methods: EFT, BPAY, credit card.</p>
+<p>Late payment of more than 30 days may attract a \$50 administration fee.</p>
+<h2>5. Fee Assistance and Hardship</h2>
+<p>The school offers fee assistance to families experiencing financial hardship. Families may apply in confidence to the Principal. Applications are assessed on a case-by-case basis and may result in reduced fees, deferred payment, or a payment plan. The school never removes a student from enrolment solely because of financial difficulty.</p>
+<h2>6. Refunds</h2>
+<p>The enrolment fee is non-refundable.</p>
+<p>Term fees are refundable on a pro-rata basis where a student withdraws</p>
+<p>with more than 4 weeks\' written notice before the end of term.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('E4')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">E4 Concerns and Complaints Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('F1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">F1 Section F --- Student Behaviour & Welfare</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-F1">
+  <div class="policy-tag"><span class="policy-no-badge">F1</span> Section F — Student Behaviour & Welfare</div>
+  <h1>Section F --- Student Behaviour & Welfare</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To foster a safe, respectful and inclusive school</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All students at Peninsula 21, including during</span></div><div class="meta-item"><span class="meta-key">Legal Basis</span><span class="meta-val">Education and Training Reform Act 2006 (Vic); Equal</span></div></div>
+  <p>Opportunity Act 2010 (Vic); MO 1359.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd believes that positive behaviour is built through strong relationships, a supportive community and clear expectations --- not through punishment alone. Our approach to behaviour management is restorative, consistent and grounded in respect for the dignity of every student.</p>
+<h2>2. School Values and Expectations</h2>
+<p>All students are expected to:</p>
+<p>Treat every person with respect and kindness.</p>
+<p>Engage fully and honestly in their learning.</p>
+<p>Take responsibility for their actions.</p>
+<p>Care for the school environment and others\' property.</p>
+<p>Follow reasonable directions from staff.</p>
+<h2>3. Positive Behaviour Support</h2>
+<p>The school\'s primary approach is to reinforce positive behaviour through:</p>
+<p>Clear, consistent and age-appropriate expectations communicated to all</p>
+<p>students.</p>
+<p>Regular recognition and celebration of positive behaviour.</p>
+<p>Strong classroom relationships and engaging curriculum.</p>
+<p>Restorative conversations to address harm and repair relationships.</p>
+<p>Individual support plans for students who require additional assistance.</p>
+<h2>4. Responding to Inappropriate Behaviour</h2>
+<p>Staff respond to inappropriate behaviour using a graduated approach:</p>
+<p>Verbal reminder --- private, respectful, and brief.</p>
+<p>Restorative conversation --- exploring the impact of the behaviour.</p>
+<p>Planned consequences --- time out, loss of privilege, or restitution.</p>
+<p>Parent contact --- phone or meeting with family.</p>
+<p>Formal behaviour plan --- developed in consultation with family.</p>
+<p>Short-term suspension (up to 3 days) --- Principal decision.</p>
+<p>Long-term suspension or expulsion --- Board decision after formal</p>
+<p>process.</p>
+<h2>5. Suspension and Expulsion</h2>
+<p>### Short-term Suspension (up to 3 days)</p>
+<p>### The Principal may suspend a student for up to 3 days where the student\'s behaviour poses a risk to others or where the student has seriously breached the Code of Conduct. Parents are notified on the day and given written reasons.</p>
+<p>### Long-term Suspension and Expulsion</p>
+<p>### Long-term suspension (more than 3 days) and expulsion require Board approval. The family must be given a formal hearing before any such decision is made. The student has the right to be accompanied by a support person.</p>
+<h2>6. Physical Intervention</h2>
+<p>Physical restraint of students is permitted only in circumstances where it is necessary to prevent immediate harm to the student or others, is proportionate, and ceases as soon as safe. All use of physical restraint must be reported to the Principal immediately and to parents on the same day.</p>
+<h2>7. Records</h2>
+<p>Significant behaviour incidents are recorded in the student management system. Records are confidential and accessed only by authorised staff.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('E5')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">E5 School Fees Policy and Schedule</span></button><button class="doc-nav-btn right" onclick="showPolicy('F2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">F2 Supervision Policy (including Excursion Risk Assessment)</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-F2">
+  <div class="policy-tag"><span class="policy-no-badge">F2</span> Section F — Student Behaviour & Welfare</div>
+  <h1>Supervision Policy (including Excursion Risk Assessment)</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure all students are adequately supervised at</span></div></div>
+  <p><strong>Scope</strong>           All staff with supervision responsibilities; all</p>
+<p>students.</p>
+<p><strong>Legal Basis</strong>     OHS Act 2004 (Vic); Education and Training Reform</p>
+<p>Act 2006 (Vic); Duty of Care (Policy G3).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd has a duty of care to all students. Adequate supervision is essential to ensure student safety and wellbeing at all times during school hours and activities.</p>
+<h2>2. Supervision Ratios</h2>
+<p><strong>Context</strong>                 <strong>Min. Ratio</strong>  <strong>Notes</strong></p>
+<p>Classroom --- Foundation to 1:25            Teacher + aide recommended</p>
+<p>Year 2                                      for F--2.</p>
+<p>Classroom --- Year 3 to     1:30            Standard classroom ratio.</p>
+<p>Year 6</p>
+<p>Playground / Recess         1:50            Multiple supervisors</p>
+<p>required for full school.</p>
+<p>Excursion --- low risk      1:10            Adjust based on risk</p>
+<p>assessment.</p>
+<p>Excursion --- medium/high   1:6             Activity-specific risk</p>
+<p>risk                                        assessment required.</p>
+<p>Swimming / Water activities 1:6             Qualified lifeguard in</p>
+<p>addition to teacher ratio.</p>
+<p>Camps (overnight)           1:8             Male and female supervisors</p>
+<p>where mixed group.</p>
+<h2>3. Before and After School</h2>
+<p>No student is to be left unsupervised on the school site before the</p>
+<p>official start of supervision or after the end of school care.</p>
+<p>Supervision begins 15 minutes before the official school start time.</p>
+<p>Students not collected within 30 minutes of school ending will be</p>
+<p>supervised in accordance with the school\'s procedures, and parents</p>
+<p>contacted.</p>
+<h2>4. Excursions and Camps</h2>
+<p>All excursions and camps require:</p>
+<p>Prior Principal approval.</p>
+<p>A completed Excursion Risk Assessment (see template below).</p>
+<p>Written parent/guardian permission.</p>
+<p>Sufficient staffing to meet required supervision ratios.</p>
+<p>Relevant medical information for all attending students.</p>
+<p>An emergency contact list and communication plan.</p>
+<h2>5. Excursion Risk Assessment Template</h2>
+<p>**Excursion</p>
+<p>Name**</p>
+<h3>Date(s)</h3>
+<h3>Destination</h3>
+<p>**Number of</p>
+<p>Students**</p>
+<p>**Number of</p>
+<p>Supervisors**</p>
+<p>**Transport</p>
+<p>Method**</p>
+<p>**Hazards</p>
+<p>Identified**</p>
+<p>**Risk Rating</p>
+<p>(L/M/H)**</p>
+<p>**Controls in</p>
+<p>Place**</p>
+<p>**Emergency</p>
+<p>Procedures**</p>
+<p>**Medical</p>
+<p>Requirements**</p>
+<p>**Parent          Obtained: Yes / No</p>
+<p>Permission**</p>
+<p>**Principal       Name: _________________ Date:</p>
+<p>Approval**        _________</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('F1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">F1 Section F --- Student Behaviour & Welfare</span></button><button class="doc-nav-btn right" onclick="showPolicy('F3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">F3 Bullying and Harassment Policy (Students)</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-F3">
+  <div class="policy-tag"><span class="policy-no-badge">F3</span> Section F — Student Behaviour & Welfare</div>
+  <h1>Bullying and Harassment Policy (Students)</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To prevent and respond to bullying and harassment</span></div></div>
+  <p><strong>Scope</strong>           All students, including conduct occurring</p>
+<p>off-campus that impacts the school community.</p>
+<p><strong>Legal Basis</strong>     Education and Training Reform Act 2006 (Vic); MO</p>
+<p>1359; OHS Act 2004 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd has zero tolerance for bullying and harassment. Every student has the right to feel safe, respected and included at school. Bullying undermines learning, damages wellbeing and will not be accepted.</p>
+<h2>2. What is Bullying?</h2>
+<p>Bullying is repeated behaviour (or a single serious incident) by an individual or group, intended to cause harm, where there is an imbalance of power. It includes:</p>
+<p>Physical bullying --- hitting, kicking, pushing, or damaging property.</p>
+<p>Verbal bullying --- teasing, name-calling, threats, or humiliation.</p>
+<p>Social bullying --- excluding, gossiping, or manipulating relationships.</p>
+<p>Cyberbullying --- bullying through digital technology (SMS, social</p>
+<p>media, gaming platforms).</p>
+<p>Note: Conflict between students of equal power, or a single act of</p>
+<p>unkindness, is not bullying --- though it still requires attention and</p>
+<p>response.</p>
+<h2>3. Reporting Bullying</h2>
+<p>Students are encouraged to report bullying to any trusted adult --- their teacher, the Principal, or a parent who can report on their behalf. No student will be disadvantaged for reporting bullying in good faith.</p>
+<p>Students can report verbally, in writing, or via a confidential</p>
+<p>reporting system (if established).</p>
+<p>Staff who observe or are informed of bullying are required to act.</p>
+<h2>4. School Response</h2>
+<p>The staff member receiving the report investigates promptly and</p>
+<p>sensitively.</p>
+<p>Both the student affected and the student alleged to have bullied are</p>
+<p>spoken to separately.</p>
+<p>Parents of both students are notified.</p>
+<p>A restorative process is facilitated where appropriate.</p>
+<p>Consequences are applied in accordance with the Behaviour Management</p>
+<p>Policy.</p>
+<p>Follow-up contact with the affected student is made within one week.</p>
+<p>Significant incidents are recorded in the student management system.</p>
+<h2>5. Cyberbullying</h2>
+<p>Cyberbullying that affects the school community will be treated as seriously as in-person bullying, even if it occurs outside school hours. The school may require a student to produce device records and may impose school-based consequences.</p>
+<h2>6. Prevention</h2>
+<p>The school embeds anti-bullying education in the curriculum.</p>
+<p>Staff are trained annually in recognising and responding to bullying.</p>
+<p>The school maintains a positive, inclusive culture through the</p>
+<p>Democratic Student Voice structures.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('F2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">F2 Supervision Policy (including Excursion Risk Assessment)</span></button><button class="doc-nav-btn right" onclick="showPolicy('G1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">G1 Section G --- Child Safety</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-G1">
+  <div class="policy-tag"><span class="policy-no-badge">G1</span> Section G — Child Safety</div>
+  <h1>Section G --- Child Safety</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To embed a culture of child safety and to protect</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All staff, Directors, volunteers, contractors and</span></div><div class="meta-item"><span class="meta-key">Legal Basis</span><span class="meta-val">Ministerial Order 1359; Children, Youth and</span></div></div>
+  <p>Families Act 2005 (Vic); Crimes Act 1958 (Vic);</p>
+<p>VRQA Minimum Standards.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Commitment</h2>
+<p>Consensus 21 Education Ltd is committed to the safety, wellbeing and best interests of every child in its care. Child safety is embedded in all aspects of the school\'s culture, policies, practices and governance. We hold zero tolerance for child abuse in any form.</p>
+<h2>2. The Child Safe Standards</h2>
+<p>The school implements all 11 Child Safe Standards required by Ministerial Order 1359:</p>
+<p>Organisations establish a culturally safe environment for Aboriginal</p>
+<p>children.</p>
+<p>Child safety and wellbeing is embedded in organisational leadership,</p>
+<p>governance and culture.</p>
+<p>Children and young people are empowered about their rights, participate</p>
+<p>in decisions affecting them, and are taken seriously.</p>
+<p>Families and communities are informed, and involved in promoting child</p>
+<p>safety.</p>
+<p>Equity is upheld and diverse needs are taken into account.</p>
+<p>People working with children are suitable and supported to reflect child</p>
+<p>safety values.</p>
+<p>Processes for complaints and concerns are child-focused.</p>
+<p>Staff and volunteers are equipped with the knowledge, skills and</p>
+<p>awareness to keep children safe.</p>
+<p>Physical and online environments promote safety and minimise the</p>
+<p>opportunity for abuse to occur.</p>
+<p>Implementation of the Child Safe Standards is continuously reviewed and</p>
+<p>improved.</p>
+<p>Policies and procedures document how the organisation is child safe.</p>
+<h2>3. Zero Tolerance for Abuse</h2>
+<p>The school will not tolerate any form of child abuse, including:</p>
+<p>Physical abuse --- any intentional act causing injury or trauma to a</p>
+<p>child.</p>
+<p>Sexual abuse --- any sexual act or behaviour involving a child.</p>
+<p>Emotional and psychological abuse --- conduct that harms a child\'s</p>
+<p>emotional development.</p>
+<p>Neglect --- failure to provide for a child\'s basic needs.</p>
+<p>Grooming --- behaviour by an adult intended to build a relationship with</p>
+<p>a child for the purpose of abuse.</p>
+<h2>4. Empowering Students</h2>
+<p>Students are taught about their rights to safety and what constitutes</p>
+<p>inappropriate behaviour.</p>
+<p>Students are encouraged to speak up if they feel unsafe.</p>
+<p>Student voice structures (student councils, surveys) include wellbeing</p>
+<p>as a regular agenda item.</p>
+<p>Complaints and reporting processes are communicated to students in</p>
+<p>age-appropriate ways.</p>
+<h2>5. Safe Environments</h2>
+<p>The school maintains physical environments that minimise the risk of</p>
+<p>abuse (sight lines, open-door policies, supervised spaces).</p>
+<p>Online and digital safety is addressed through the Digital Technologies</p>
+<p>Policy (H1).</p>
+<p>The school\'s code of conduct for staff sets clear expectations for</p>
+<p>appropriate adult-child relationships.</p>
+<h2>6. Recruitment and Screening</h2>
+<p>All staff and volunteers undergo Working with Children Checks before</p>
+<p>commencing.</p>
+<p>Reference checks and qualifications verification are conducted for all</p>
+<p>appointments.</p>
+<p>Child safety is embedded in position descriptions and induction.</p>
+<h2>7. Governance</h2>
+<p>The Board reviews child safety policies and the Child Safety Risk</p>
+<p>Register annually.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('F3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">F3 Bullying and Harassment Policy (Students)</span></button><button class="doc-nav-btn right" onclick="showPolicy('G2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">G2 Protecting Children --- Mandatory Reporting Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-G2">
+  <div class="policy-tag"><span class="policy-no-badge">G2</span> Section G — Child Safety</div>
+  <h1>Protecting Children --- Mandatory Reporting Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure all mandatory reporters understand and</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All staff, Directors, volunteers and contractors.</span></div><div class="meta-item"><span class="meta-key">Legal Basis</span><span class="meta-val">Children, Youth and Families Act 2005 (Vic) s.182</span></div></div>
+  <p>(failure to disclose); s.49O (failure to protect);</p>
+<p>s.49M (grooming).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Mandatory Reporting Obligations</h2>
+<p>Under the Children, Youth and Families Act 2005 (Vic), registered teachers and other specified persons are mandatory reporters. A mandatory reporter must make a report to Child Protection (DFFH) if they form a reasonable belief that a child has suffered, or is likely to suffer, significant harm as a result of physical or sexual abuse, and the child\'s parents have not protected or are unlikely to protect the child from that harm.</p>
+<h2>2. What is a \'Reasonable Belief\'?</h2>
+<p>A reasonable belief exists when a person, aware of the circumstances, would believe that an act or omission has caused or is likely to cause significant harm. You do not need proof --- if you are uncertain, you should still report. It is not your job to investigate; it is your job to report.</p>
+<h2>3. Additional Obligations</h2>
+<p>### Failure to Disclose (s.327 Crimes Act)</p>
+<p>### Any adult who holds information that leads them to form a reasonable belief that a sexual offence has been committed against a child under 16 by another adult must disclose that information to police. Failure to do so without reasonable excuse is a criminal offence.</p>
+<p>### Failure to Protect (s.49O Crimes Act)</p>
+<p>### A person in a position of authority in an organisation who knew of a substantial risk that another person would commit a sexual offence against a child under 16 in the organisation\'s care, and had the power to reduce or remove that risk but negligently failed to do so, commits a criminal offence.</p>
+<p>### Grooming (s.49M Crimes Act)</p>
+<p>### It is a criminal offence for a person (aged 18+) to communicate with a child or their parents/carers with the intention of facilitating child sexual abuse.</p>
+<h2>4. How to Make a Report</h2>
+<p>Where a child is in immediate danger, call 000.</p>
+<p>Contact the Child Protection intake line: 13 12 78 (24 hours).</p>
+<p>Notify the Principal of any report made (unless the Principal is the</p>
+<p>subject of the concern, in which case notify the Board Chair directly).</p>
+<p>Document the concerns, observations and actions taken.</p>
+<p>Mandatory reporters who make a report in good faith are protected from</p>
+<p>civil and criminal liability even if the report turns out to be</p>
+<p>unsubstantiated.</p>
+<h2>5. Internal Reporting</h2>
+<p>All child safety concerns must be reported internally to the Principal (or Board Chair if the Principal is involved) regardless of whether a mandatory report is required. The Principal maintains a confidential record of all concerns and reports.</p>
+<h2>6. Training</h2>
+<p>All staff complete mandatory reporting training on commencement and annually thereafter. Training covers recognition of signs of abuse, reporting obligations, and how to respond to a child who discloses.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('G1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">G1 Section G --- Child Safety</span></button><button class="doc-nav-btn right" onclick="showPolicy('G3')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">G3 Duty of Care Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-G3">
+  <div class="policy-tag"><span class="policy-no-badge">G3</span> Section G — Child Safety</div>
+  <h1>Duty of Care Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure all staff understand and fulfil their</span></div></div>
+  <p><strong>Scope</strong>           All staff and volunteers with responsibility for</p>
+<p>students.</p>
+<p><strong>Legal Basis</strong>     Common law duty of care; Education and Training</p>
+<p>Reform Act 2006 (Vic); OHS Act 2004 (Vic).</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. What is Duty of Care?</h2>
+<p>A duty of care is a legal and ethical obligation to take reasonable steps to avoid causing foreseeable harm. Schools and their staff have a non-delegable duty of care to students while they are at school or engaged in school activities. This duty requires staff to act as a \'reasonable and prudent parent\' would in the same circumstances.</p>
+<h2>2. Scope of Duty</h2>
+<p>The school\'s duty of care applies:</p>
+<p>During all school hours on the school site.</p>
+<p>During all excursions, camps, sport and other school-organised</p>
+<p>activities.</p>
+<p>Where the school has assumed control of students (e.g. at a transport</p>
+<p>pick-up point).</p>
+<p>In some circumstances, to conduct off-campus that impacts student</p>
+<p>wellbeing at school.</p>
+<h2>3. Responsibilities of Staff</h2>
+<p>Be present and attentive during supervision times.</p>
+<p>Anticipate risks and act to prevent foreseeable harm.</p>
+<p>Follow school policies on supervision, first aid, behaviour management</p>
+<p>and child safety.</p>
+<p>Not leave students unsupervised.</p>
+<p>Report concerns about student wellbeing promptly.</p>
+<p>Maintain appropriate professional boundaries with students at all times.</p>
+<h2>4. Limits of Duty</h2>
+<p>The duty of care does not make staff insurers of student safety against all risks. The standard is one of reasonableness. Minor risks that are inherent in normal childhood activity do not require elimination --- they require management through reasonable precautions.</p>
+<h2>5. Breach of Duty</h2>
+<p>A breach of duty occurs when a staff member fails to take the steps a reasonable person in their position would have taken. Breaches may result in:</p>
+<p>Civil liability for the school and/or individual staff member.</p>
+<p>Disciplinary action by the school.</p>
+<p>Referral to the VIT or other regulatory body.</p>
+<h2>6. Professional Boundaries</h2>
+<p>Staff must maintain professional boundaries with students at all times, including:</p>
+<p>Not engaging in one-on-one unsupervised contact with students.</p>
+<p>Not communicating with students via personal social media or messaging</p>
+<p>applications.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('G2')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">G2 Protecting Children --- Mandatory Reporting Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('G4')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">G4 Working with Children Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-G4">
+  <div class="policy-tag"><span class="policy-no-badge">G4</span> Section G — Child Safety</div>
+  <h1>Working with Children Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To ensure all persons working with children at the</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All staff, Directors, contractors and volunteers</span></div><div class="meta-item"><span class="meta-key">Legal Basis</span><span class="meta-val">Working with Children Act 2005 (Vic); VRQA Minimum</span></div></div>
+  <p>Standards; MO 1359.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd requires all persons working with children at Peninsula 21 to hold a current Working with Children Check (WWCC) issued by the Department of Justice and Community Safety (Victoria). The WWCC is a mandatory child safety requirement and compliance is non-negotiable.</p>
+<h2>2. Who Needs a WWCC?</h2>
+<p>All teachers and other employees who have direct contact with students.</p>
+<p>All volunteers who assist with school activities involving students.</p>
+<p>All contractors and service providers who work on the school site when</p>
+<p>students are present.</p>
+<p>All Directors of the Company (as \'officers\' of an organisation</p>
+<p>providing services to children).</p>
+<p>Note: A Registered Teaching Certificate from the Victorian Institute of</p>
+<p>Teaching (VIT) satisfies the WWCC requirement for registered teachers.</p>
+<h2>3. Verification and Monitoring</h2>
+<p>The Principal verifies WWCC status for all persons before they commence</p>
+<p>work or volunteering.</p>
+<p>WWCC status is recorded in the WWCC Register.</p>
+<p>The Register is reviewed termly to identify expiring checks.</p>
+<p>Any person whose WWCC expires or is revoked must immediately cease</p>
+<p>working with children until a valid check is obtained.</p>
+<h2>4. Negative Notices</h2>
+<p>A person who has been issued a negative notice by the Department of Justice must not be engaged in any child-related work. If the school becomes aware that a person has received a negative notice, they must be immediately stood down from work involving children.</p>
+<h2>5. Responsibility</h2>
+<p>The Principal is responsible for maintaining the WWCC Register and</p>
+<p>monitoring compliance.</p>
+<p>All persons required to hold a WWCC are responsible for ensuring their</p>
+<p>check remains current.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('G3')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">G3 Duty of Care Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('H1')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">H1 Section H --- Digital Technologies & Reporting</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-H1">
+  <div class="policy-tag"><span class="policy-no-badge">H1</span> Section H — Digital Technologies & Reporting</div>
+  <h1>Section H --- Digital Technologies & Reporting</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To enable safe, responsible and effective use of</span></div><div class="meta-item"><span class="meta-key">Scope</span><span class="meta-val">All students, staff and volunteers.</span></div><div class="meta-item"><span class="meta-key">Legal Basis</span><span class="meta-val">Privacy and Data Protection Act 2014 (Vic); Privacy</span></div></div>
+  <p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Policy Statement</h2>
+<p>Consensus 21 Education Ltd embraces digital technology as a powerful tool for learning, creativity and collaboration. All members of the school community are expected to use digital technology safely, ethically and in a manner consistent with the school\'s values and this policy.</p>
+<h2>2. Acceptable Use --- Students</h2>
+<p>Students may use school devices and networks for learning purposes. Students must:</p>
+<p>Use devices only for school-related purposes during class time.</p>
+<p>Treat devices with care and respect.</p>
+<p>Not access, create or share content that is harmful, offensive,</p>
+<p>discriminatory, or illegal.</p>
+<p>Not access social media during school hours unless specifically directed</p>
+<p>by a teacher for educational purposes.</p>
+<p>Not share personal information online without teacher approval.</p>
+<p>Report any concerning online content or contact to a staff member</p>
+<p>immediately.</p>
+<h2>3. Acceptable Use --- Staff</h2>
+<p>Staff may use school devices and systems for professional purposes. Staff must:</p>
+<p>Not communicate with students via personal social media or messaging</p>
+<p>applications.</p>
+<p>Maintain student data in accordance with the Privacy Policy (C2).</p>
+<p>Use school email systems for official school communications.</p>
+<p>Report any cybersecurity incidents or data breaches to the Principal</p>
+<p>immediately.</p>
+<h2>4. Internet Safety</h2>
+<p>The school maintains filtered internet access for students.</p>
+<p>Digital literacy and online safety is embedded in the curriculum at</p>
+<p>every year level.</p>
+<p>Students are taught to recognise and respond to cyberbullying,</p>
+<p>inappropriate contact, and online risks.</p>
+<h2>5. Personal Devices --- Students</h2>
+<p>Students may bring personal devices (phones, tablets) to school subject to the following:</p>
+<p>Phones must be stored in a designated location during class time.</p>
+<p>Personal devices may be used at recess and lunch at the student\'s risk.</p>
+<p>The school accepts no liability for loss, damage, or theft of personal</p>
+<p>devices.</p>
+<p>Devices found to have been used to bully, harass or harm others will be</p>
+<p>confiscated and parents notified.</p>
+<h2>6. Social Media</h2>
+<p>The school\'s social media accounts are managed by the Principal or a designated staff member. Staff personal social media use must not:</p>
+<p>Identify students or share images without parental consent.</p>
+<p>Comment negatively on the school, colleagues, students or families.</p>
+<p>Share confidential information about the school or its community.</p>
+<h2>7. Breaches</h2>
+<p>Breaches of this policy by students are addressed through the Behaviour Management Policy. Breaches by staff are a disciplinary matter and may be referred to the VIT.</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('G4')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">G4 Working with Children Policy</span></button><button class="doc-nav-btn right" onclick="showPolicy('H2')"><span class="doc-nav-label">Next →</span><span class="doc-nav-title">H2 Reporting Policy</span></button></div>
+</div>
+
+<div class="doc-section" id="sec-H2">
+  <div class="policy-tag"><span class="policy-no-badge">H2</span> Section H — Digital Technologies & Reporting</div>
+  <h1>Reporting Policy</h1>
+  <div class="policy-meta"><div class="meta-item"><span class="meta-key">Purpose</span><span class="meta-val">To establish the school\'s framework for reporting</span></div></div>
+  <p><strong>Scope</strong>           All teaching staff; all enrolled students and</p>
+<p>families.</p>
+<p><strong>Legal Basis</strong>     Education and Training Reform Act 2006 (Vic); VRQA</p>
+<p>Minimum Standards; ACNC Governance Standards.</p>
+<p><strong>Review Cycle</strong>    Annual</p>
+<h2>1. Student Reporting to Families</h2>
+<p>### 1.1 Formal Reports</p>
+<p>### The school provides formal written reports to families twice per year --- mid-year and at the end of the year. Reports address:</p>
+<p>Progress against the Australian Curriculum achievement standards.</p>
+<p>Engagement, behaviour and social development.</p>
+<p>Attendance.</p>
+<p>Learning goals for the next reporting period.</p>
+<p>### 1.2 Parent-Teacher Interviews</p>
+<p>### Parent-teacher interviews are offered at least twice per year --- in Term 1 and following mid-year reports. Additional meetings can be requested by families or initiated by the school at any time.</p>
+<p>### 1.3 Ongoing Communication</p>
+<p>### Teachers maintain ongoing communication with families through the school\'s communication platform, newsletters, and direct contact as needed.</p>
+<h2>2. Regulatory Reporting</h2>
+<p>### VRQA</p>
+<p>Annual report submitted in accordance with the ETRR 2017.</p>
+<p>Notification of changes to Board, Principal, registered address or</p>
+<p>governance structure within 30 days.</p>
+<p>Notification of any matter that may affect school registration.</p>
+<p>### ACNC</p>
+<p>Annual Information Statement submitted by the due date.</p>
+<p>Financial reports submitted where required by the ACNC.</p>
+<p>Notification of \'significant events\' affecting the charity (e.g.</p>
+<p>insolvency, investigation, change in name or objects).</p>
+<p>### ATO</p>
+<p>Annual income tax return (or exemption reporting) as required.</p>
+<p>BAS/GST reporting as required.</p>
+<p>### Other</p>
+<p>WorkSafe Victoria --- notifiable incidents reported within required</p>
+<p>timeframes.</p>
+<p>Victoria Police --- mandatory reporting as required.</p>
+<p>DFFH --- Child Protection reports as required.</p>
+<h2>3. Board Reporting</h2>
+<p>The Principal provides the Board with a written report at every Board meeting, covering:</p>
+<p>Enrolment and attendance data.</p>
+<p>Educational program highlights and concerns.</p>
+<p>Staffing matters.</p>
+<p>Significant incidents.</p>
+<p>Financial update against budget.</p>
+<p>Regulatory and compliance matters.</p>
+<h3>Document Control</h3>
+<p>This Policy Manual was adopted by the Board of Directors of Consensus 21</p>
+<p>Education Ltd at a meeting held on:</p>
+<p>Date:</p>
+<p>_______________________________________________</p>
+<p>Board Chair Signature:</p>
+<p>________________________________</p>
+<p>Board Chair Name:</p>
+<p>____________________________________</p>
+<p>Review Schedule</p>
+<p>All policies in this manual are to be reviewed annually unless otherwise specified. The Principal is responsible for scheduling reviews and presenting updated policies to the Board for approval.</p>
+<p><strong>No.</strong>   <strong>Policy</strong>              <strong>Owner</strong>       <strong>Next      </strong>Approved</p>
+<p>Review<strong>    By</strong></p>
+<p>A1        First Aid               Principal       Jan 2026    Board</p>
+<p>A2        Anaphylaxis Management  Principal       Jan 2026    Board</p>
+<p>B1        Board Governance        Board Chair     Jan 2026    Board</p>
+<p>Charter</p>
+<p>B2        Delegations             Board Chair     Jan 2026    Board</p>
+<p>B3        Conflict of Interest    Board Chair     Jan 2027    Board</p>
+<p>B4        Sub-Committee Terms of  Board Chair     Jan 2026    Board</p>
+<p>Reference</p>
+<p>B5        Register of Registers   Company         Jan 2026    Board</p>
+<p>Secretary</p>
+<p>C1        Fraud and Corruption    Board Chair     Jan 2026    Board</p>
+<p>Prevention</p>
+<p>C2        Privacy                 Principal       Jan 2026    Board</p>
+<p>C3        Whistleblower           Board Chair     Jan 2026    Board</p>
+<p>C4        Sexual Harassment,      Principal       Jan 2026    Board</p>
+<p>Bullying &</p>
+<p>Discrimination (Staff)</p>
+<p>C5        Occupational Health &   Principal       Jan 2026    Board</p>
+<p>Safety</p>
+<p>D1        Emergency Management    Principal       Jan 2026    Board</p>
+<p>Plan</p>
+<p>D2        Bushfire Response Plan  Principal       Oct 2025    Board</p>
+<p>D3        Critical Incident Plan  Principal       Jan 2026    Board</p>
+<p>E1        Enrolment Policy        Principal       Jan 2026    Board</p>
+<p>E2        Enrolment Agreement     Principal       Jan 2026    Board</p>
+<p>E3        Attendance              Principal       Jan 2026    Board</p>
+<p>E4        Concerns and Complaints Principal       Jan 2026    Board</p>
+<p>E5        School Fees and         Principal       Nov 2025    Board</p>
+<p>Schedule</p>
+<p>F1        Behaviour Management    Principal       Jan 2026    Board</p>
+<p>F2        Supervision and         Principal       Jan 2026    Board</p>
+<p>Excursion Risk</p>
+<p>Assessment</p>
+<p>F3        Bullying and Harassment Principal       Jan 2026    Board</p>
+<p>(Students)</p>
+<p>G1        Child Safety and        Principal       Jan 2026    Board</p>
+<p>Wellbeing</p>
+<p>G2        Mandatory Reporting     Principal       Jan 2026    Board</p>
+<p>G3        Duty of Care            Principal       Jan 2026    Board</p>
+<p>G4        Working with Children   Principal       Jan 2026    Board</p>
+<p>H1        Digital Technologies    Principal       Jan 2026    Board</p>
+<p>H2        Reporting               Principal       Jan 2026    Board</p>
+  <div class="doc-nav"><button class="doc-nav-btn" onclick="showPolicy('H1')"><span class="doc-nav-label">← Previous</span><span class="doc-nav-title">H1 Section H --- Digital Technologies & Reporting</span></button><button class="doc-nav-btn right" onclick="showPolicy('cover')"><span class="doc-nav-label">↑ Back to</span><span class="doc-nav-title">Cover</span></button></div>
+</div>
+
+
+</main>
+</div>
+
+<script>
+const sectionMap = {
+  'cover': 'sec-cover',
+  'A1': 'sec-A1',
+  'A2': 'sec-A2',
+  'B1': 'sec-B1',
+  'B2': 'sec-B2',
+  'B3': 'sec-B3',
+  'B4': 'sec-B4',
+  'B5': 'sec-B5',
+  'C1': 'sec-C1',
+  'C2': 'sec-C2',
+  'C3': 'sec-C3',
+  'C4': 'sec-C4',
+  'C5': 'sec-C5',
+  'D1': 'sec-D1',
+  'D2': 'sec-D2',
+  'D3': 'sec-D3',
+  'E1': 'sec-E1',
+  'E2': 'sec-E2',
+  'E3': 'sec-E3',
+  'E4': 'sec-E4',
+  'E5': 'sec-E5',
+  'F1': 'sec-F1',
+  'F2': 'sec-F2',
+  'F3': 'sec-F3',
+  'G1': 'sec-G1',
+  'G2': 'sec-G2',
+  'G3': 'sec-G3',
+  'G4': 'sec-G4',
+  'H1': 'sec-H1',
+  'H2': 'sec-H2'
+};
+
+function showPolicy(key) {
+  document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const secId = sectionMap[key];
+  if (secId) document.getElementById(secId).classList.add('visible');
+  const btn = document.getElementById('nav-' + key);
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+const searchIndex = [
+  { key: 'cover', section: 'Overview', title: 'Policy Manual — Cover', keywords: 'cover index overview' },
+  { key: 'A1', section: 'A1', title: 'Section A --- Health & Safety', keywords: 'a1 section a --- health & safety' },
+  { key: 'A2', section: 'A2', title: 'Anaphylaxis Management Policy', keywords: 'a2 anaphylaxis management policy' },
+  { key: 'B1', section: 'B1', title: 'Board Governance Charter', keywords: 'b1 board governance charter' },
+  { key: 'B2', section: 'B2', title: 'Delegations Policy and Schedule', keywords: 'b2 delegations policy and schedule' },
+  { key: 'B3', section: 'B3', title: 'Conflict of Interest Policy', keywords: 'b3 conflict of interest policy' },
+  { key: 'B4', section: 'B4', title: 'Sub-Committee Terms of Reference', keywords: 'b4 sub-committee terms of reference' },
+  { key: 'B5', section: 'B5', title: 'Register of Registers', keywords: 'b5 register of registers' },
+  { key: 'C1', section: 'C1', title: 'Fraud and Corruption Prevention Policy', keywords: 'c1 fraud and corruption prevention policy' },
+  { key: 'C2', section: 'C2', title: 'Privacy Policy', keywords: 'c2 privacy policy' },
+  { key: 'C3', section: 'C3', title: 'Whistleblower Policy', keywords: 'c3 whistleblower policy' },
+  { key: 'C4', section: 'C4', title: 'Sexual Harassment, Bullying & Discrimination Policy (Staff)', keywords: 'c4 sexual harassment, bullying & discrimination policy (staff)' },
+  { key: 'C5', section: 'C5', title: 'Occupational Health & Safety Policy', keywords: 'c5 occupational health & safety policy' },
+  { key: 'D1', section: 'D1', title: 'Emergency Management Plan', keywords: 'd1 emergency management plan' },
+  { key: 'D2', section: 'D2', title: 'Bushfire Response Plan', keywords: 'd2 bushfire response plan' },
+  { key: 'D3', section: 'D3', title: 'Critical Incident Plan', keywords: 'd3 critical incident plan' },
+  { key: 'E1', section: 'E1', title: 'Enrolment Policy', keywords: 'e1 enrolment policy' },
+  { key: 'E2', section: 'E2', title: 'Enrolment Agreement', keywords: 'e2 enrolment agreement' },
+  { key: 'E3', section: 'E3', title: 'Attendance Policy', keywords: 'e3 attendance policy' },
+  { key: 'E4', section: 'E4', title: 'Concerns and Complaints Policy', keywords: 'e4 concerns and complaints policy' },
+  { key: 'E5', section: 'E5', title: 'School Fees Policy and Schedule', keywords: 'e5 school fees policy and schedule' },
+  { key: 'F1', section: 'F1', title: 'Section F --- Student Behaviour & Welfare', keywords: 'f1 section f --- student behaviour & welfare' },
+  { key: 'F2', section: 'F2', title: 'Supervision Policy (including Excursion Risk Assessment)', keywords: 'f2 supervision policy (including excursion risk assessment)' },
+  { key: 'F3', section: 'F3', title: 'Bullying and Harassment Policy (Students)', keywords: 'f3 bullying and harassment policy (students)' },
+  { key: 'G1', section: 'G1', title: 'Section G --- Child Safety', keywords: 'g1 section g --- child safety' },
+  { key: 'G2', section: 'G2', title: 'Protecting Children --- Mandatory Reporting Policy', keywords: 'g2 protecting children --- mandatory reporting policy' },
+  { key: 'G3', section: 'G3', title: 'Duty of Care Policy', keywords: 'g3 duty of care policy' },
+  { key: 'G4', section: 'G4', title: 'Working with Children Policy', keywords: 'g4 working with children policy' },
+  { key: 'H1', section: 'H1', title: 'Section H --- Digital Technologies & Reporting', keywords: 'h1 section h --- digital technologies & reporting' },
+  { key: 'H2', section: 'H2', title: 'Reporting Policy', keywords: 'h2 reporting policy' }
+];
+
+function openSearch() {
+  document.getElementById('searchOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 50);
+}
+
+function closeSearch(e) {
+  if (e.target === document.getElementById('searchOverlay')) {
+    document.getElementById('searchOverlay').classList.remove('open');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
+  if (e.key === 'Escape') {
+    document.getElementById('searchOverlay').classList.remove('open');
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+  }
+});
+
+function doSearch(q) {
+  const container = document.getElementById('searchResults');
+  q = q.toLowerCase().trim();
+  if (!q) { container.innerHTML = ''; return; }
+  const results = searchIndex.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.keywords.toLowerCase().includes(q) ||
+    item.section.toLowerCase().includes(q)
+  ).slice(0, 10);
+  if (!results.length) {
+    container.innerHTML = '<div style="padding:16px 20px;font-size:13.5px;color:#94a3b8;">No results found.</div>';
+    return;
+  }
+  container.innerHTML = results.map(r =>
+    '<div class="search-result-item" onclick="selectResult(\'' + r.key + '\')">' +
+    '<div class="sri-section">' + r.section + '</div>' +
+    '<div class="sri-title">' + r.title + '</div></div>'
+  ).join('');
+}
+
+function selectResult(key) {
+  document.getElementById('searchOverlay').classList.remove('open');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').innerHTML = '';
+  showPolicy(key);
+}
+</script>
+</body>
+</html>
