@@ -461,6 +461,66 @@
             }
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.4rem;
+            z-index: 1100;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1050;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            color: #66b3ff;
+        }
+
         @media (max-width: 768px) {
             .hero-brand {
                 font-size: 3.5rem;
@@ -481,6 +541,10 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .hamburger {
+                display: flex;
             }
 
             .map-container {
@@ -653,8 +717,25 @@
                 <li><a href="#community">Community</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
+
+    <nav class="mobile-menu" id="mobile-menu">
+        <a href="#home" onclick="closeMobileMenu()">Home</a>
+        <a href="#about" onclick="closeMobileMenu()">About</a>
+        <a href="#learning" onclick="closeMobileMenu()">Learning</a>
+        <a href="#student-life" onclick="closeMobileMenu()">Student Life</a>
+        <a href="#enrolment" onclick="closeMobileMenu()">Enrolment</a>
+        <a href="#parents" onclick="closeMobileMenu()">Parents</a>
+        <a href="#news" onclick="closeMobileMenu()">News & Events</a>
+        <a href="#community" onclick="closeMobileMenu()">Community</a>
+        <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </nav>
 
     <section class="hero" id="home">
         <h1 class="hero-brand">Peninsula<span>21</span> <span class="hero-school-word">School</span></h1>
@@ -1152,6 +1233,20 @@
     </button>
 
     <script>
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        }
+
         // Back to top visibility
         window.addEventListener('scroll', function () {
             const btn = document.getElementById('back-to-top');
