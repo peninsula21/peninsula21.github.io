@@ -697,6 +697,23 @@
         .reveal-delay-3 {
             transition-delay: 0.45s;
         }
+
+        /* Stylized Image Overlay */
+        .image-box.stylized-overlay {
+            position: relative;
+        }
+        .image-box.stylized-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,102,204,0.15), rgba(0,0,0,0.3));
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        .image-box.stylized-overlay img {
+            filter: blur(2.5px) saturate(0.8) contrast(1.15) brightness(0.9);
+            transform: scale(1.02);
+        }
     </style>
 </head>
 
@@ -792,6 +809,9 @@
                     critical thinking, system design, and coding skills are built.</p>
             </div>
         </div>
+        <div class="image-box reveal stylized-overlay" style="border-radius: 20px; overflow: hidden; margin-top: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <img src="images/outdoors.jpg" alt="Students playing outdoors" style="width: 100%; height: 500px; object-fit: cover; object-position: 50% 65%; display: block;">
+        </div>
     </section>
 
     <section class="section" id="learning">
@@ -819,6 +839,9 @@
                 <p>We will empower students to define problems, design user interfaces, and build visual and text-based
                     algorithms. Critical branching and iteration skills will form our core coding approach.</p>
             </div>
+        </div>
+        <div class="image-box reveal" style="border-radius: 20px; overflow: hidden; margin-top: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <img src="images/digital_learning.jpg" alt="Students engaged in coding and robotics" style="width: 100%; height: 500px; object-fit: cover; display: block;">
         </div>
     </section>
 
@@ -870,15 +893,20 @@
         <h2 class="section-title reveal">A Specialised STEM Approach</h2>
         <p class="section-subtitle">Dedicated tech educators building future leaders</p>
 
-        <div class="feature-box reveal reveal-delay-2">
-            <h3>Bridging Code and Community</h3>
-            <p>Peninsula21 employs fully qualified tech-focused teachers who leverage advanced systems to ensure
-                world-class conceptual understanding of programming and digital ecosystems.</p>
-            <p>Our educators teach students to define complex problems, decompose them logically, and synthesise working
-                algorithms via continuous testing and iteration.</p>
-            <p><strong>Our comprehensive K-6 programme includes:</strong> Algorithm design and implementation • Data
-                visualisation • Cybersecurity fundamentals • Robotics and physical computing • Social and ecological
-                tech impacts</p>
+        <div class="two-column">
+            <div class="feature-box reveal reveal-delay-2">
+                <h3>Bridging Code and Community</h3>
+                <p>Peninsula21 employs fully qualified tech-focused teachers who leverage advanced systems to ensure
+                    world-class conceptual understanding of programming and digital ecosystems.</p>
+                <p>Our educators teach students to define complex problems, decompose them logically, and synthesise working
+                    algorithms via continuous testing and iteration.</p>
+                <p><strong>Our comprehensive K-6 programme includes:</strong> Algorithm design and implementation • Data
+                    visualisation • Cybersecurity fundamentals • Robotics and physical computing • Social and ecological
+                    tech impacts</p>
+            </div>
+            <div class="image-box reveal reveal-delay-1" style="border-radius: 20px; overflow: hidden; display: flex; align-items: stretch; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <img src="images/robotics1.jpg" alt="Students focused on robotics learning" style="width: 100%; object-fit: cover; min-height: 350px;">
+            </div>
         </div>
     </section>
 
@@ -904,6 +932,9 @@
                 <p>Students will thrive in our planned open-plan makerspaces, designed to encourage peer-to-peer
                     mentoring, pair programming, and collaborative problem-solving from day one.</p>
             </div>
+        </div>
+        <div class="image-box reveal stylized-overlay" style="border-radius: 20px; overflow: hidden; margin-top: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <img src="images/beach.jpg" alt="Students engaged in outdoor learning" style="width: 100%; height: 500px; object-fit: cover; object-position: 50% 60%; display: block;">
         </div>
     </section>
 
@@ -979,6 +1010,9 @@
                 <p style="margin-top: 1rem;">These collaborations will expand our students' horizons and provide them
                     with unique learning opportunities that extend beyond the classroom walls the moment we open.</p>
             </div>
+        </div>
+        <div class="image-box reveal stylized-overlay" style="border-radius: 20px; overflow: hidden; margin-top: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <img src="images/grass-play.jpg" alt="Children playing as part of our community" style="width: 100%; height: 500px; object-fit: cover; object-position: 50% 60%; display: block;">
         </div>
     </section>
 
