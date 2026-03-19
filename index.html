@@ -706,13 +706,9 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(rgba(0,102,204,0.15), rgba(0,0,0,0.3));
+            background: rgba(0, 40, 90, 0.35); /* Darkish blue overlay */
             pointer-events: none;
-            mix-blend-mode: overlay;
-        }
-        .image-box.stylized-overlay img {
-            filter: blur(2.5px) saturate(0.8) contrast(1.15) brightness(0.9);
-            transform: scale(1.02);
+            mix-blend-mode: multiply;
         }
     </style>
 </head>
