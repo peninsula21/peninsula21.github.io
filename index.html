@@ -342,10 +342,13 @@
         }
 
         .map-container {
+            position: absolute;
+            inset: 0;
             width: 100%;
-            height: 450px;
+            height: 100%;
             overflow: hidden;
-            margin-top: 4rem;
+            z-index: 0;
+            margin-top: 0;
         }
 
         .map-container iframe {
@@ -385,19 +388,33 @@
         }
 
         footer {
-            background: var(--electric-blue);
+            position: relative;
+            background: transparent;
             padding: 4rem 5% 2rem;
             color: #ffffff;
             margin-top: 0;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--electric-blue);
+            opacity: 0.85;
+            z-index: 1;
         }
 
         .footer-inner {
+            position: relative;
+            z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .footer-brand {
@@ -551,10 +568,6 @@
 
             .hamburger {
                 display: flex;
-            }
-
-            .map-container {
-                height: 350px;
             }
 
             .section {
@@ -1171,13 +1184,6 @@
         </div>
     </section>
 
-    <div class="map-container">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.8729542865934!2d145.01637431531556!3d-38.28056797968976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad5f3c5b5e5e5e5%3A0x5e5e5e5e5e5e5e5e!2s370%20Craigie%20Rd%2C%20Mount%20Martha%20VIC%203934!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-
     <!-- Removed modal wrapper as form is now embedded inline -->
 
     <script>
@@ -1250,6 +1256,12 @@
     </script>
 
     <footer>
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.8729542865934!2d145.01637431531556!3d-38.28056797968976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad5f3c5b5e5e5e5%3A0x5e5e5e5e5e5e5e5e!2s370%20Craigie%20Rd%2C%20Mount%20Martha%20VIC%203934!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
         <div class="footer-inner">
             <div class="footer-brand">Peninsula<span>21</span></div>
             <div class="footer-divider"></div>
@@ -1270,7 +1282,7 @@
                 <a href="constitution.html" target="_blank" class="btn btn-secondary">View Constitution</a>
             </div>
 
-            <div class="footer-copy">&copy; 2026 Peninsula21. All rights reserved. | <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none;">Terms of Use</a></div>
+            <div class="footer-copy">&copy; 2026 Peninsula21. All rights reserved.</div>
         </div>
     </footer>
     <!-- Back to top button -->
