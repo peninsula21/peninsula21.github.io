@@ -98,8 +98,32 @@
             padding: 16rem 5% 8rem;
             /* Increased top padding to account for absolute header */
             text-align: center;
-            background: linear-gradient(rgba(0, 23, 255, 0.65), rgba(0, 23, 255, 0.75)), url('https://peninsula21.github.io/hero.png') center/cover no-repeat;
+            background-color: var(--electric-blue);
             position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 115vw; /* Extra width for panning */
+            height: 100%;
+            background: linear-gradient(rgba(0, 23, 255, 0.65), rgba(0, 23, 255, 0.75)), url('https://peninsula21.github.io/hero.png') center/cover no-repeat;
+            z-index: 0;
+            animation: panHero 25s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        .hero-brand, .hero-subtitle, .cta-buttons, .scroll-down {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes panHero {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw - 115vw)); }
         }
 
 
@@ -773,7 +797,7 @@
     <section class="hero" id="home">
         <h1 class="hero-brand">Peninsula<span>21</span> <span class="hero-school-word">School</span></h1>
         <p class="hero-subtitle">
-            Coming soon to Mount Martha, Mornington Peninsula — where students master the digital world within a
+            Coming soon to Mount Martha, Mornington Peninsula - where students master the digital world within a
             nurturing environment that balances hands-on STEM education and core academic excellence. We blend the
             Victorian Digital Technologies Curriculum with critical thinking to develop the next generation of tech
             innovators equipped with essential 21st century skills.
@@ -1247,7 +1271,7 @@
                     submitBtn.disabled = false;
                 }
             } catch (err) {
-                errorEl.textContent = 'Network error — please check your connection and try again.';
+                errorEl.textContent = 'Network error - please check your connection and try again.';
                 errorEl.style.display = 'block';
                 submitBtn.textContent = 'Submit Registration';
                 submitBtn.disabled = false;
