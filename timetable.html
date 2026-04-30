@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Timetable | Peninsula21</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root {
+      --electric-blue: #0017FF;
+      --blue-mid: #0066cc;
+      --blue-light: #66b3ff;
+      --blue-pale: #e8eeff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    header {
+      background: transparent;
+      padding: 1rem 5%;
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; gap: 1rem; }
+    .logo img { height: 156px; width: auto; }
+    .logo-text {
+      color: #ffffff;
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .logo-text em { font-style: normal; color: #66b3ff; }
+    .logo-text span {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8899aa;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #66b3ff; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem;
+      z-index: 1100;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: #ffffff; border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 14rem 5% 7rem;
+      text-align: center;
+      background: linear-gradient(rgba(0,23,255,0.65), rgba(0,23,255,0.80)),
+                  url('https://peninsula21.github.io/hero.png') center/cover no-repeat;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-brand {
+      font-size: 4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .hero-brand span { color: #66b3ff; }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    /* STAT PILLS */
+    .stat-pills {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .stat-pill strong { color: #66b3ff; font-weight: 700; }
+
+    /* SECTIONS */
+    .section {
+      padding: 5rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 3rem;
+      max-width: 740px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* STAFFING CARDS */
+    .staffing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .staff-card {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 20px;
+      border: 2px solid #e5e5e5;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .staff-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--electric-blue);
+    }
+    .staff-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--blue-mid);
+      box-shadow: 0 16px 32px rgba(0,23,255,0.1);
+    }
+    .staff-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--electric-blue);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .staff-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.6rem;
+    }
+    .staff-card p { font-size: 0.95rem; color: #555; line-height: 1.6; }
+
+    /* KLA LEGEND */
+    .legend-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .legend-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 50px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* TIMETABLE */
+    .tt-wrapper {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 2px solid #e5e5e5;
+      margin-bottom: 1rem;
+    }
+    table.tt {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+    table.tt thead th {
+      background: var(--electric-blue);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 1rem 0.75rem;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    table.tt thead th:first-child {
+      text-align: left;
+      border-radius: 14px 0 0 0;
+      width: 120px;
+    }
+    table.tt thead th:last-child { border-radius: 0 14px 0 0; }
+    table.tt tbody tr { transition: background 0.15s; }
+    table.tt tbody td {
+      padding: 0;
+      border-bottom: 1px solid #f0f0f0;
+      border-right: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    table.tt tbody td:last-child { border-right: none; }
+    table.tt tbody tr:last-child td { border-bottom: none; }
+    .time-cell {
+      padding: 0.75rem;
+      font-size: 0.78rem;
+      color: #888;
+      font-weight: 600;
+      background: #fafafa;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .break-cell {
+      padding: 0.6rem 1rem;
+      background: #f8f9fa;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #888;
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .session-cell {
+      padding: 0.7rem 0.85rem;
+      cursor: pointer;
+      transition: filter 0.15s;
+      vertical-align: top;
+    }
+    .session-cell:hover { filter: brightness(0.93); }
+    .session-tag {
+      display: inline-block;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .session-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .session-sub {
+      font-size: 0.75rem;
+      margin-top: 2px;
+      opacity: 0.75;
+    }
+
+    /* DIFF PANEL */
+    .diff-panel {
+      display: none;
+      border: 2px solid #e5e5e5;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 1.5rem;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+    .diff-header {
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .diff-label { font-size: 1rem; font-weight: 700; }
+    .diff-day { font-size: 0.85rem; color: #666; margin-top: 2px; }
+    .diff-close {
+      background: transparent;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: #555;
+    }
+    .diff-close:hover { background: #f0f0f0; }
+    .diff-body {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 2px solid #e5e5e5;
+    }
+    .diff-col {
+      padding: 1.25rem;
+      border-right: 1px solid #e5e5e5;
+    }
+    .diff-col:last-child { border-right: none; }
+    .diff-class {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .diff-text { font-size: 0.9rem; color: #444; line-height: 1.6; }
+
+    /* PERSONALISED LEARNING SECTION */
+    .learn-section { background: #f8f9fa; padding: 5rem 5%; }
+    .learn-inner { max-width: 1400px; margin: 0 auto; }
+    .learn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .learn-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 2px solid #e5e5e5;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .learn-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: #0066cc;
+    }
+    .learn-card h3 { font-size: 1.5rem; color: #0066cc; margin-bottom: 1rem; }
+    .learn-card p { color: #555; line-height: 1.8; margin-bottom: 0.75rem; }
+    .learn-card ul { list-style: none; padding: 0; }
+    .learn-card ul li {
+      color: #444;
+      padding: 0.4rem 0;
+      padding-left: 1.4rem;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .learn-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 6px; height: 6px;
+      background: var(--electric-blue);
+      border-radius: 50%;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--electric-blue);
+      padding: 4rem 5% 2rem;
+      color: #ffffff;
+    }
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .footer-brand { font-size: 1.8rem; font-weight: 800; }
+    .footer-brand span { color: #99aaff; }
+    .footer-divider { width: 60px; height: 2px; background: #fff; border-radius: 2px; }
+    .footer-meta { font-size: 0.95rem; color: rgba(255,255,255,0.85); text-align: center; line-height: 1.8; }
+    .footer-links a {
+      color: #fff; text-decoration: none;
+      font-size: 1rem; font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 0.8; }
+    .footer-copy {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      width: 100%;
+      text-align: center;
+    }
+    .btn {
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #ffffff;
+      color: #ffffff;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* VRQA NOTE */
+    .vrqa-note {
+      background: var(--blue-pale);
+      border: 2px solid #b3c6ff;
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #1a2a6c;
+      line-height: 1.6;
+    }
+    .vrqa-note strong { font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .staffing-grid { grid-template-columns: 1fr 1fr; }
+      .learn-grid { grid-template-columns: 1fr; }
+      .diff-body { grid-template-columns: 1fr; }
+      .diff-col { border-right: none; border-bottom: 1px solid #e5e5e5; }
+      .hero-brand { font-size: 2.8rem; }
+      .hamburger { display: flex; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .staffing-grid { grid-template-columns: 1fr; }
+      .hero-brand { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <img src="https://peninsula21.github.io/P21logo.png" alt="Peninsula21 logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#learning">Learning</a></li>
+      <li><a href="timetable.html" style="color:#66b3ff;">Timetable</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Our School Day</div>
+  <h1 class="hero-brand">A Day at <span>Peninsula21</span></h1>
+  <p class="hero-subtitle">Every student gets a personalised learning experience — deeply supported by expert staff, grounded in the Victorian Curriculum, and alive with STEM and digital discovery all afternoon.</p>
+  <div class="stat-pills">
+    <div class="stat-pill">
+      <strong>1</strong> VIT-registered teacher, F&ndash;6
+    </div>
+    <div class="stat-pill">
+      <strong>2</strong> education support staff
+    </div>
+    <div class="stat-pill">
+      <strong>21</strong> students total
+    </div>
+    <div class="stat-pill">
+      <strong>7:1</strong> student to staff ratio
+    </div>
+    <div class="stat-pill">
+      <strong>25 hrs</strong> instruction per week
+    </div>
+  </div>
+</section>
+
+<!-- STAFFING -->
+<section class="section">
+  <h2 class="section-title">Our Staffing Model</h2>
+  <p class="section-subtitle">A small, intentional school means every child is known deeply. Our staffing structure is designed to make genuinely personalised learning possible every single day.</p>
+
+  <div class="staffing-grid">
+    <div class="staff-card">
+      <div class="staff-number">1</div>
+      <h3>VIT-Registered Lead Teacher</h3>
+      <p>A single qualified teacher leads learning across all year levels Foundation to Year 6, holding full responsibility for curriculum delivery, planning and reporting against Victorian Curriculum F&ndash;10 achievement standards.</p>
+    </div>
+    <div class="staff-card">
+      <div class="staff-number">2</div>
+      <h3>Education Support Staff</h3>
+      <p>Two dedicated education support staff work alongside the teacher every day, each taking a primary class group during STEM and digital literacy sessions and circulating during morning KLA blocks to provide targeted small-group and individual support.</p>
+    </div>
+    <div class="staff-card">
+      <div class="staff-number">7:1</div>
+      <h3>Student&ndash;to&ndash;Staff Ratio</h3>
+      <p>With 21 students and 3 staff members on the floor each day (1 teacher + 2 ES), we maintain a 7:1 ratio — well below typical Victorian primary class sizes and the foundation of genuinely personalised learning for every student.</p>
+    </div>
+  </div>
+
+  <div class="vrqa-note">
+    <strong>Curriculum compliance:</strong> All 8 Key Learning Areas of the Victorian Curriculum F&ndash;10 Version 2.0 are substantially addressed each week in line with VRQA minimum standards for school registration. Languages is delivered by the VIT-registered teacher. A minimum of 25 minutes of systematic synthetic phonics is embedded in the daily literacy block (Prep&ndash;Year 2). Time allocations meet or exceed all mandated requirements including Health &amp; Physical Education. <em>Subject to VRQA approval.</em>
+  </div>
+</section>
+
+<!-- TIMETABLE -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">Weekly Timetable</h2>
+  <p class="section-subtitle">All KLAs are addressed in the morning session. Afternoons are dedicated to STEM project work and Digital Literacy. Click any session to see how content is differentiated across composite classes.</p>
+
+  <!-- CLASS BADGES -->
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem;">
+    <span style="font-size:0.85rem;color:#666;font-weight:600;">Composite classes:</span>
+    <span style="background:#FFF0EB;border:2px solid #D85A30;color:#993C1D;font-size:0.8rem;font-weight:700;padding:3px 12px;border-radius:50px;">Prep/Year 1</span>
+    <span style="background:#EBF3FF;border:2px solid #378ADD;color:#0C447C;font-size:0.8rem;font-weight:700;padding:3px 12px;border-radius:50px;">Year 2/3</span>
+    <span style="background:#EBF7E6;border:2px solid #639922;color:#27500A;font-size:0.8rem;font-weight:700;padding:3px 12px;border-radius:50px;">Year 4/5</span>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend-grid" id="legend"></div>
+
+  <!-- TIMETABLE TABLE -->
+  <div class="tt-wrapper">
+    <table class="tt">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+        </tr>
+      </thead>
+      <tbody id="ttbody"></tbody>
+    </table>
+  </div>
+
+  <!-- DIFF PANEL -->
+  <div class="diff-panel" id="diffpanel">
+    <div class="diff-header" id="diffhdr">
+      <div>
+        <div class="diff-label" id="difflabel"></div>
+        <div class="diff-day" id="diffday"></div>
+      </div>
+      <button class="diff-close" onclick="closeDiff()">Close</button>
+    </div>
+    <div class="diff-body">
+      <div class="diff-col">
+        <div class="diff-class" style="color:#993C1D;">Prep/Year 1</div>
+        <div class="diff-text" id="d0"></div>
+      </div>
+      <div class="diff-col">
+        <div class="diff-class" style="color:#0C447C;">Year 2/3</div>
+        <div class="diff-text" id="d1"></div>
+      </div>
+      <div class="diff-col">
+        <div class="diff-class" style="color:#27500A;">Year 4/5</div>
+        <div class="diff-text" id="d2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONALISED LEARNING -->
+<section class="learn-section">
+  <div class="learn-inner">
+    <h2 class="section-title">Personalised Learning at Peninsula21</h2>
+    <p class="section-subtitle">Our composite class structure is a feature, not a constraint. It mirrors the real world and creates a rich multi-age learning environment where older students lead and younger students aspire.</p>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <h3>How personalisation works</h3>
+        <p>Each student has a learning profile that is built with their family and updated each term. The lead teacher uses Victorian Curriculum achievement levels — not year levels — to plan targeted learning programs for every child.</p>
+        <ul>
+          <li>Individual learning goals set with families each term</li>
+          <li>Curriculum delivered at the student's actual achievement level</li>
+          <li>Education support staff circulate to provide 1:1 and small-group support</li>
+          <li>Formative assessment embedded daily — not just at report time</li>
+          <li>Digital portfolio tracks each student's learning journey</li>
+        </ul>
+      </div>
+      <div class="learn-card">
+        <h3>The composite class advantage</h3>
+        <p>Multi-age groupings are well-supported by research and are a natural fit for a small school with big ambitions. Peninsula21's three composite classes — Prep/1, Year 2/3, and Year 4/5 — each have roughly 7 students. The teacher and two ES staff rotate across classes throughout the day, ensuring every student receives regular 1:1 and small-group attention.</p>
+        <ul>
+          <li>Older students reinforce their own learning by supporting peers</li>
+          <li>Younger students are exposed to stretch thinking and problem-solving</li>
+          <li>Collaborative STEM and digital projects span year levels naturally</li>
+          <li>Strong relationships built across 2-year cycles with the same teacher</li>
+          <li>Each class group has approximately 7 students — an intimate learning community</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Peninsula<span>21</span></div>
+    <div class="footer-divider"></div>
+    <div class="footer-meta">
+      Consensus 21 Education Ltd &nbsp;&middot;&nbsp; ACN: 696 105 441 &nbsp;&middot;&nbsp;
+      <a href="https://abr.business.gov.au/ABN/View?abn=40696105441" target="_blank" rel="noopener" style="text-decoration:underline;color:inherit;">ABN: 40 696 105 441</a><br>
+      370 Craigie Road, Mount Martha VIC 3934<br>
+      <em>Subject to VRQA approval</em>
+    </div>
+    <div class="footer-links" style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#learning">Learning</a>
+      <a href="timetable.html">Timetable</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
+      <a href="index.html#contact" class="btn btn-secondary">Register Interest</a>
+      <a href="constitution.html" target="_blank" class="btn btn-secondary">View Constitution</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Peninsula21. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const S = {
+  english:   { n:'English & literacy',  tag:'ENG',  ac:'#D85A30', bg:'#FFF0EB', tc:'#993C1D', kla:true },
+  maths:     { n:'Mathematics',         tag:'MATHS', ac:'#378ADD', bg:'#EBF3FF', tc:'#0C447C', kla:true },
+  humanities:{ n:'Humanities',          tag:'HUM',  ac:'#7F77DD', bg:'#F0EFFE', tc:'#3C3489', kla:true },
+  science:   { n:'Science',             tag:'SCI',  ac:'#639922', bg:'#EBF7E6', tc:'#27500A', kla:true },
+  hpe:       { n:'Health & PE',         tag:'HPE',  ac:'#BA7517', bg:'#FEF5E6', tc:'#633806', kla:true },
+  arts:      { n:'The arts',            tag:'ARTS', ac:'#D4537E', bg:'#FBF0F5', tc:'#72243E', kla:true },
+  languages: { n:'Languages (LOTE)',    tag:'LANG', ac:'#1D9E75', bg:'#EAF7F3', tc:'#085041', kla:true },
+  stem:      { n:'STEM project',        tag:'STEM', ac:'#0066cc', bg:'#EBF3FF', tc:'#003d80', kla:false },
+  digital:   { n:'Digital literacy',    tag:'DIG',  ac:'#0017FF', bg:'#EAECFF', tc:'#000d99', kla:false },
+  showcase:  { n:'STEM showcase',       tag:'SHOW', ac:'#0066cc', bg:'#EBF3FF', tc:'#003d80', kla:false },
+  portfolio: { n:'Digital portfolio',   tag:'PORT', ac:'#0017FF', bg:'#EAECFF', tc:'#000d99', kla:false },
+};
+
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+
+const SCH = [
+  // Monday
+  [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
+   {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
+   {t:'10:00 – 11:00',s:'humanities',l:'Humanities', sub:'History & geography'},
+   {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
+   {t:'11:30 – 1:00', s:'stem',      l:'STEM project', sub:'Hands-on making & design'},
+   {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
+   {t:'1:45 – 3:30',  s:'digital',   l:'Digital literacy', sub:'Coding & networks'}],
+  // Tuesday
+  [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
+   {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
+   {t:'10:00 – 11:00',s:'science',   l:'Science', sub:'Inquiry & investigation'},
+   {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
+   {t:'11:30 – 1:00', s:'stem',      l:'STEM project', sub:'Design thinking'},
+   {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
+   {t:'1:45 – 3:30',  s:'digital',   l:'Digital literacy', sub:'Algorithms & coding'}],
+  // Wednesday
+  [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
+   {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
+   {t:'10:00 – 11:00',s:'hpe',       l:'Health & PE', sub:'Physical education'},
+   {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
+   {t:'11:30 – 1:00', s:'stem',      l:'STEM project', sub:'Science & engineering'},
+   {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
+   {t:'1:45 – 3:30',  s:'digital',   l:'Digital literacy', sub:'Data & systems'}],
+  // Thursday
+  [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
+   {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
+   {t:'10:00 – 11:00',s:'arts',      l:'The arts', sub:'Visual art & drama'},
+   {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
+   {t:'11:30 – 1:00', s:'stem',      l:'STEM project', sub:'Prototype & test'},
+   {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
+   {t:'1:45 – 3:30',  s:'digital',   l:'Digital literacy', sub:'AI & robotics'}],
+  // Friday
+  [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
+   {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
+   {t:'10:00 – 11:00',s:'languages', l:'Languages', sub:'LOTE program'},
+   {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
+   {t:'11:30 – 1:00', s:'showcase',  l:'STEM showcase', sub:'Present & reflect'},
+   {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
+   {t:'1:45 – 3:30',  s:'portfolio', l:'Digital portfolio', sub:'Document & share'}],
+];
+
+const DIFF = {
+  english:   ['Systematic phonics (25 min), shared reading, oral language, letter formation','Decoding fluency, guided reading groups, sentence-level writing','Comprehension strategies, author\'s craft, extended & persuasive writing'],
+  maths:     ['Number sense, counting, patterns, early addition & subtraction','Place value, multiplication concepts, measurement & time','Fractions & decimals, area & perimeter, data analysis'],
+  humanities:['My place & community, family history, simple maps','Local & Australian history, landscapes, basic timelines','Australia past & present, civics, citizenship & geographic regions'],
+  science:   ['Living things, weather, materials — explore & wonder','Forces, life cycles, simple fair-test investigations','Ecosystems, energy transfer, earth & space science'],
+  hpe:       ['Fundamental movement skills, body awareness, cooperative games','Team games intro, swimming readiness, healthy lifestyle choices','Sport-specific skills, fitness concepts, mental health literacy'],
+  arts:      ['Explore & respond — drawing, music, dramatic play','Create & present — printmaking, song-writing, movement sequences','Refine & critique — visual portfolio, drama & performance'],
+  languages: ['Greetings, numbers, colours & songs in target language','Simple conversations, classroom instructions, short stories','Extended communication, cultural exploration, reading & simple writing'],
+  stem:      ['Hands-on building (blocks/LEGO), BeeBot sequencing, ScratchJr','Design process, Scratch coding, robotics intro (mBot/Sphero)','Engineering challenges, Scratch projects, Minecraft Education'],
+  digital:   ['Digital citizenship, BeeBot, mouse & keyboard basics','Coding concepts, data & binary intro, internet safety','Networks, cybersecurity foundations, algorithms, Minecraft Education'],
+  showcase:  ['Show-and-tell — explain my project with teacher support','Structured sharing — what I made, learned, and what\'s next','Formal presentation: design brief, challenges & solutions'],
+  portfolio: ['Drawing & dictation saved to digital portfolio','Photo documentation + voice recording of learning journey','Written reflection, screenshots & peer feedback in digital portfolio'],
+};
+
+let activeKey = null;
+
+function buildTable() {
+  const tbody = document.getElementById('ttbody');
+  SCH[0].forEach((s0, si) => {
+    const tr = document.createElement('tr');
+    // Time cell
+    const tdT = document.createElement('td');
+    tdT.className = 'time-cell';
+    tdT.textContent = s0.t;
+    tr.appendChild(tdT);
+
+    if (s0.br) {
+      const td = document.createElement('td');
+      td.colSpan = 5;
+      td.className = 'break-cell';
+      td.textContent = s0.l;
+      tr.appendChild(td);
+    } else {
+      DAYS.forEach((_, di) => {
+        const slot = SCH[di][si];
+        const sub = S[slot.s];
+        const td = document.createElement('td');
+        td.className = 'session-cell';
+        td.style.background = sub.bg;
+        td.innerHTML =
+          `<span class="session-tag" style="background:${sub.ac}">${sub.tag}</span>` +
+          `<div class="session-name" style="color:${sub.tc}">${slot.l}</div>` +
+          (slot.sub ? `<div class="session-sub" style="color:${sub.ac}">${slot.sub}</div>` : '');
+        const key = `${di}-${si}`;
+        td.addEventListener('click', () => {
+          if (activeKey === key) { closeDiff(); return; }
+          activeKey = key;
+          showDiff(di, si, slot, sub);
+        });
+        tr.appendChild(td);
+      });
+    }
+    tbody.appendChild(tr);
+  });
+}
+
+function showDiff(di, si, slot, sub) {
+  document.getElementById('difflabel').textContent = slot.l + (slot.sub ? ' — ' + slot.sub : '');
+  document.getElementById('difflabel').style.color = sub.ac;
+  document.getElementById('diffday').textContent = DAYS[di];
+  document.getElementById('diffhdr').style.background = sub.bg;
+  const diffs = DIFF[slot.s] || [];
+  [0,1,2].forEach(i => {
+    document.getElementById('d'+i).textContent = diffs[i] || 'See curriculum planning documents.';
+  });
+  const panel = document.getElementById('diffpanel');
+  panel.style.display = 'block';
+  setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'nearest' }), 50);
+}
+
+function closeDiff() {
+  document.getElementById('diffpanel').style.display = 'none';
+  activeKey = null;
+}
+
+function buildLegend() {
+  const leg = document.getElementById('legend');
+  const label = (txt) => {
+    const s = document.createElement('span');
+    s.style.cssText = 'font-size:0.8rem;font-weight:700;color:#888;align-self:center;margin-right:4px;';
+    s.textContent = txt;
+    leg.appendChild(s);
+  };
+  label('KLAs:');
+  ['english','maths','humanities','science','hpe','arts','languages'].forEach(k => {
+    const sub = S[k];
+    const p = document.createElement('div');
+    p.className = 'legend-pill';
+    p.style.cssText = `background:${sub.bg};border:2px solid ${sub.ac}55;`;
+    p.innerHTML = `<div class="legend-dot" style="background:${sub.ac}"></div><span style="color:${sub.tc};font-size:0.78rem;font-weight:700;">${sub.n}</span>`;
+    leg.appendChild(p);
+  });
+  label('Afternoon:');
+  ['stem','digital'].forEach(k => {
+    const sub = S[k];
+    const p = document.createElement('div');
+    p.className = 'legend-pill';
+    p.style.cssText = `background:${sub.bg};border:2px solid ${sub.ac}55;`;
+    p.innerHTML = `<div class="legend-dot" style="background:${sub.ac}"></div><span style="color:${sub.tc};font-size:0.78rem;font-weight:700;">${sub.n}</span>`;
+    leg.appendChild(p);
+  });
+}
+
+buildTable();
+buildLegend();
+
+// Hamburger
+document.getElementById('hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+});
+</script>
+</body>
+</html>
