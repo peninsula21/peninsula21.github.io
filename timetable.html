@@ -465,8 +465,30 @@
     }
     .vrqa-note strong { font-weight: 700; }
 
-    @media (max-width: 900px) {
-      .staffing-grid { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; }
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1050;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: #66b3ff; }
       .learn-grid { grid-template-columns: 1fr; }
       .diff-body { grid-template-columns: 1fr; }
       .diff-col { border-right: none; border-bottom: 1px solid #e5e5e5; }
@@ -485,20 +507,38 @@
 <header>
   <nav>
     <div class="logo">
-      <img src="https://peninsula21.github.io/P21logo.png" alt="Peninsula21 logo">
+      <img src="images/Logo.png" alt="Peninsula21 Logo">
     </div>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#home">Home</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#learning">Learning</a></li>
+      <li><a href="index.html#student-life">Student Life</a></li>
+      <li><a href="index.html#enrolment">Enrolment</a></li>
+      <li><a href="index.html#parents">Parents</a></li>
+      <li><a href="index.html#news">News &amp; Events</a></li>
+      <li><a href="index.html#community">Community</a></li>
       <li><a href="timetable.html" style="color:#66b3ff;">Timetable</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html#contact" class="btn btn-primary" style="padding:0.5rem 1.5rem;color:var(--electric-blue);font-size:0.85rem;margin-left:1rem;font-weight:700;">Contact Us</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 </header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html#home" onclick="closeMobileMenu()">Home</a>
+  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
+  <a href="index.html#learning" onclick="closeMobileMenu()">Learning</a>
+  <a href="index.html#student-life" onclick="closeMobileMenu()">Student Life</a>
+  <a href="index.html#enrolment" onclick="closeMobileMenu()">Enrolment</a>
+  <a href="index.html#parents" onclick="closeMobileMenu()">Parents</a>
+  <a href="index.html#news" onclick="closeMobileMenu()">News &amp; Events</a>
+  <a href="index.html#community" onclick="closeMobileMenu()">Community</a>
+  <a href="timetable.html" style="color:#66b3ff;" onclick="closeMobileMenu()">Timetable</a>
+  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -655,10 +695,14 @@
       <em>Subject to VRQA approval</em>
     </div>
     <div class="footer-links" style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;">
-      <a href="index.html">Home</a>
+      <a href="index.html#home">Home</a>
       <a href="index.html#about">About</a>
       <a href="index.html#learning">Learning</a>
-      <a href="timetable.html">Timetable</a>
+      <a href="index.html#student-life">Student Life</a>
+      <a href="index.html#enrolment">Enrolment</a>
+      <a href="index.html#parents">Parents</a>
+      <a href="index.html#community">Community</a>
+      <a href="timetable.html" style="color:#99aaff;">Timetable</a>
       <a href="index.html#contact">Contact</a>
     </div>
     <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
@@ -836,9 +880,16 @@ buildTable();
 buildLegend();
 
 // Hamburger
-document.getElementById('hamburger').addEventListener('click', function() {
-  this.classList.toggle('open');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
 });
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
 </script>
 </body>
 </html>
