@@ -465,30 +465,8 @@
     }
     .vrqa-note strong { font-weight: 700; }
 
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-links { display: none; }
-    }
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 1050;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1.5rem;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: #66b3ff; }
+    @media (max-width: 900px) {
+      .staffing-grid { grid-template-columns: 1fr 1fr; }
       .learn-grid { grid-template-columns: 1fr; }
       .diff-body { grid-template-columns: 1fr; }
       .diff-col { border-right: none; border-bottom: 1px solid #e5e5e5; }
@@ -507,38 +485,20 @@
 <header>
   <nav>
     <div class="logo">
-      <img src="images/Logo.png" alt="Peninsula21 Logo">
+      <img src="https://peninsula21.github.io/P21logo.png" alt="Peninsula21 logo">
     </div>
     <ul class="nav-links">
-      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#learning">Learning</a></li>
-      <li><a href="index.html#student-life">Student Life</a></li>
-      <li><a href="index.html#enrolment">Enrolment</a></li>
-      <li><a href="index.html#parents">Parents</a></li>
-      <li><a href="index.html#news">News &amp; Events</a></li>
-      <li><a href="index.html#community">Community</a></li>
       <li><a href="timetable.html" style="color:#66b3ff;">Timetable</a></li>
-      <li><a href="index.html#contact" class="btn btn-primary" style="padding:0.5rem 1.5rem;color:var(--electric-blue);font-size:0.85rem;margin-left:1rem;font-weight:700;">Contact Us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 </header>
-
-<nav class="mobile-menu" id="mobile-menu">
-  <a href="index.html#home" onclick="closeMobileMenu()">Home</a>
-  <a href="index.html#about" onclick="closeMobileMenu()">About</a>
-  <a href="index.html#learning" onclick="closeMobileMenu()">Learning</a>
-  <a href="index.html#student-life" onclick="closeMobileMenu()">Student Life</a>
-  <a href="index.html#enrolment" onclick="closeMobileMenu()">Enrolment</a>
-  <a href="index.html#parents" onclick="closeMobileMenu()">Parents</a>
-  <a href="index.html#news" onclick="closeMobileMenu()">News &amp; Events</a>
-  <a href="index.html#community" onclick="closeMobileMenu()">Community</a>
-  <a href="timetable.html" style="color:#66b3ff;" onclick="closeMobileMenu()">Timetable</a>
-  <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
-</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -550,13 +510,10 @@
       <strong>1</strong> VIT-registered teacher, F&ndash;6
     </div>
     <div class="stat-pill">
-      <strong>2</strong> education support staff
-    </div>
-    <div class="stat-pill">
       <strong>21</strong> students total
     </div>
     <div class="stat-pill">
-      <strong>7:1</strong> student to staff ratio
+      <strong>6:1</strong> student to staff ratio
     </div>
     <div class="stat-pill">
       <strong>25 hrs</strong> instruction per week
@@ -576,14 +533,14 @@
       <p>A single qualified teacher leads learning across all year levels Foundation to Year 6, holding full responsibility for curriculum delivery, planning and reporting against Victorian Curriculum F&ndash;10 achievement standards.</p>
     </div>
     <div class="staff-card">
-      <div class="staff-number">2</div>
+      <div class="staff-number">3</div>
       <h3>Education Support Staff</h3>
-      <p>Two dedicated education support staff work alongside the teacher every day, each taking a primary class group during STEM and digital literacy sessions and circulating during morning KLA blocks to provide targeted small-group and individual support.</p>
+      <p>Three dedicated education support staff work alongside the teacher across all composite classes, providing hands-on support during personalised learning blocks and afternoon STEM sessions.</p>
     </div>
     <div class="staff-card">
-      <div class="staff-number">7:1</div>
+      <div class="staff-number">6:1</div>
       <h3>Student&ndash;to&ndash;Staff Ratio</h3>
-      <p>With 21 students and 3 staff members on the floor each day (1 teacher + 2 ES), we maintain a 7:1 ratio — well below typical Victorian primary class sizes and the foundation of genuinely personalised learning for every student.</p>
+      <p>With 21 students and 4 staff members on the floor each day, we maintain an exceptional 6:1 ratio — far exceeding standard primary benchmarks and enabling truly responsive, individualised attention.</p>
     </div>
   </div>
 
@@ -670,7 +627,7 @@
       </div>
       <div class="learn-card">
         <h3>The composite class advantage</h3>
-        <p>Multi-age groupings are well-supported by research and are a natural fit for a small school with big ambitions. Peninsula21's three composite classes — Prep/1, Year 2/3, and Year 4/5 — each have roughly 7 students. The teacher and two ES staff rotate across classes throughout the day, ensuring every student receives regular 1:1 and small-group attention.</p>
+        <p>Multi-age groupings are well-supported by research and are a natural fit for a small school with big ambitions. Peninsula21's three composite classes — Prep/1, Year 2/3, and Year 4/5 — each have roughly 7 students with at least one dedicated support staff member at all times.</p>
         <ul>
           <li>Older students reinforce their own learning by supporting peers</li>
           <li>Younger students are exposed to stretch thinking and problem-solving</li>
@@ -695,14 +652,10 @@
       <em>Subject to VRQA approval</em>
     </div>
     <div class="footer-links" style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;">
-      <a href="index.html#home">Home</a>
+      <a href="index.html">Home</a>
       <a href="index.html#about">About</a>
       <a href="index.html#learning">Learning</a>
-      <a href="index.html#student-life">Student Life</a>
-      <a href="index.html#enrolment">Enrolment</a>
-      <a href="index.html#parents">Parents</a>
-      <a href="index.html#community">Community</a>
-      <a href="timetable.html" style="color:#99aaff;">Timetable</a>
+      <a href="timetable.html">Timetable</a>
       <a href="index.html#contact">Contact</a>
     </div>
     <div style="display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;">
@@ -744,9 +697,9 @@ const SCH = [
    {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
    {t:'10:00 – 11:00',s:'science',   l:'Science', sub:'Inquiry & investigation'},
    {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
-   {t:'11:30 – 1:00', s:'stem',      l:'STEM project', sub:'Design thinking'},
+   {t:'11:30 – 1:00', s:'digital',   l:'Digital literacy', sub:'Algorithms & coding'},
    {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
-   {t:'1:45 – 3:30',  s:'digital',   l:'Digital literacy', sub:'Algorithms & coding'}],
+   {t:'1:45 – 3:30',  s:'stem',      l:'STEM project', sub:'Design thinking'}],
   // Wednesday
   [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
    {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
@@ -760,9 +713,9 @@ const SCH = [
    {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
    {t:'10:00 – 11:00',s:'arts',      l:'The arts', sub:'Visual art & drama'},
    {t:'11:00 – 11:30',s:null,        l:'Recess', br:true},
-   {t:'11:30 – 1:00', s:'stem',      l:'STEM project', sub:'Prototype & test'},
+   {t:'11:30 – 1:00', s:'digital',   l:'Digital literacy', sub:'AI & robotics'},
    {t:'1:00 – 1:45',  s:null,        l:'Lunch', br:true},
-   {t:'1:45 – 3:30',  s:'digital',   l:'Digital literacy', sub:'AI & robotics'}],
+   {t:'1:45 – 3:30',  s:'stem',      l:'STEM project', sub:'Prototype & test'}],
   // Friday
   [{t:'9:00 – 9:30',  s:'english',   l:'Literacy & phonics'},
    {t:'9:30 – 10:00', s:'maths',     l:'Mathematics'},
@@ -880,16 +833,9 @@ buildTable();
 buildLegend();
 
 // Hamburger
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', function() {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
+document.getElementById('hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
 });
-function closeMobileMenu() {
-  hamburger.classList.remove('open');
-  mobileMenu.classList.remove('open');
-}
 </script>
 </body>
 </html>
